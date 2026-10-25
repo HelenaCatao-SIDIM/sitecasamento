@@ -1,0 +1,763 @@
+<title>Helena &amp; Ítalo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&display=swap">
+<style>
+/* Layout: uma coluna estreita de documento oficial; o Pedido é a única peça que ocupa a largura toda.
+   Visual provisório até chegarem as ilustrações do Save the Date. */
+:root {
+  --paper: #EEEEE9;      /* papel timbrado, levemente frio */
+  --surface: #F7F7F3;    /* cartão, ficha, convite */
+  --ink: #241D18;        /* tinta de impressão; também a tarja */
+  --muted: #6D655E;      /* legenda, rodapé */
+  --line: #D3D0C7;       /* fio, borda de campo */
+  --tint: #E2E0D8;       /* espaço reservado para foto e vídeo */
+  --pen: #7A4828;        /* caneta da correção à mão, marrom */
+
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --hand: "Nothing You Could Do", "Segoe Script", "Bradley Hand", cursive;
+
+  --col: 38rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14110E; --surface: #1C1815; --ink: #ECE6DE; --muted: #A1988E;
+    --line: #39322C; --tint: #241F1B; --pen: #D69C6C; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14110E; --surface: #1C1815; --ink: #ECE6DE; --muted: #A1988E;
+  --line: #39322C; --tint: #241F1B; --pen: #D69C6C; color-scheme: dark;
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--paper);
+}
+.wrap {
+  max-width: var(--col); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: content-box;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
+section { scroll-margin-top: 4rem; }
+
+.label {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+}
+.foot { font-family: var(--body); font-size: 0.85rem; font-style: italic; color: var(--muted); }
+
+/* Topo */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--paper);
+}
+.top .wrap {
+  max-width: 64rem; display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding-block: 0.9rem;
+}
+.mono { font-family: var(--display); font-size: 1.05rem; text-decoration: none; color: var(--ink); }
+.nav { display: flex; gap: 0.35rem 1.1rem; flex-wrap: wrap; justify-content: flex-end; }
+.nav a { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none; padding-block: 0.2rem; }
+.nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 26rem) { .mono { display: none; } .top .wrap { justify-content: center; } .nav { justify-content: center; gap: 0.3rem 0.9rem; } .nav a { font-size: 0.66rem; } }
+
+/* 01 Home */
+.home { padding-block: clamp(4.5rem, 16vh, 9rem) clamp(4rem, 12vh, 7rem); text-align: center; }
+.home h1 {
+  font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 11vw, 5rem);
+  letter-spacing: 0.06em; line-height: 1; margin: 0;
+}
+.home h1 .amp { font-style: italic; font-weight: 400; }
+.thesis {
+  font-family: var(--body); font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.45;
+  max-width: 26ch; margin: 2.2rem auto 0; text-wrap: balance;
+}
+.redact {
+  display: inline; padding: 0 0.05em; border: 0; border-radius: 0; cursor: pointer;
+  background: var(--ink); color: transparent; font: inherit; line-height: inherit;
+  transition: background-color .5s ease, color .5s ease;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.redact.open { background: transparent; color: var(--ink); cursor: default; }
+[hidden] { display: none !important; }
+.redact .star, .omit-note { visibility: hidden; }
+.redact.open .star { visibility: visible; }
+.omit-note { margin: 1.1rem auto 0; opacity: 0; transition: opacity .6s ease .3s; }
+.omit-note.show { visibility: visible; opacity: 1; }
+.when { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.16em; margin-top: 2.4rem; }
+.enter {
+  display: inline-block; margin-top: 2.6rem; padding: 0.85rem 2.4rem;
+  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.24em; text-transform: uppercase;
+  background: var(--ink); color: var(--paper); border: 0; cursor: pointer; text-decoration: none;
+}
+.enter:hover { opacity: .88; }
+
+/* Blocos */
+.block { padding-block: 4.5rem; }
+.block + .block { border-top: 1px solid var(--line); }
+.block h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 7vw, 2.8rem); margin: 0; line-height: 1.1; text-wrap: balance; }
+.lede { font-style: italic; font-size: 1.25rem; margin: 0.5rem 0 0; color: var(--muted); }
+
+.ph {
+  position: relative; display: grid; place-items: center; text-align: center;
+  background: var(--tint); color: var(--muted); aspect-ratio: 4 / 3; max-width: 100%;
+  margin: 2rem 0 0; padding: 1rem; box-sizing: border-box;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--line) 55%, transparent) 14px 15px);
+}
+.ph.tall { aspect-ratio: 4 / 5; }
+.ph.wide { aspect-ratio: 16 / 9; }
+.ph.vid::after {
+  content: "▶"; position: absolute; left: 1rem; bottom: 0.9rem; font-size: 0.9rem; letter-spacing: 0;
+}
+figcaption { margin-top: 0.6rem; }
+
+/* 02 Anel */
+.ring-line { font-family: var(--body); font-size: clamp(1.35rem, 5vw, 1.7rem); line-height: 1.5; margin: 2.2rem 0 0; padding-top: 1.2rem; text-wrap: balance; }
+.name-fix { position: relative; display: inline-block; }
+.name-btn { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink); }
+.name-btn sup { font-size: 0.6em; margin-left: 0.05em; }
+.name-fix.fixed .name-btn { cursor: default; text-decoration: line-through; text-decoration-color: var(--pen); text-decoration-thickness: 2px; }
+.name-fix.fixed .name-btn sup { display: none; }
+.hand {
+  position: absolute; left: 0.1em; bottom: 72%; transform: rotate(-4deg); transform-origin: left bottom;
+  font-family: var(--hand); color: var(--pen); font-size: 1.15em; white-space: nowrap;
+  opacity: 0; transition: opacity .5s ease .25s; pointer-events: none;
+}
+.name-fix.fixed .hand { opacity: 1; }
+.after-fix { opacity: 0; transition: opacity .6s ease .7s; visibility: hidden; }
+.after-fix.show { opacity: 1; visibility: visible; }
+.after-fix .foot { margin-top: 1rem; }
+
+/* 03 Cape Town */
+.record { margin-top: 3.2rem; }
+.record .who { margin-bottom: 0.8rem; }
+.quote { font-family: var(--display); font-size: clamp(1.45rem, 5.4vw, 1.9rem); line-height: 1.3; margin: 0; text-wrap: balance; }
+.quote.loud { font-family: var(--body); font-weight: 600; letter-spacing: 0.01em; }
+.verdict { margin-top: 3.2rem; max-width: 30ch; }
+.verdict p { margin: 0; }
+.verdict .foot { margin-top: 0.4rem; }
+
+.rise-wait { opacity: 0; transform: translateY(14px); }
+.rise { transition: opacity .7s ease, transform .7s ease; }
+
+/* Achados (ponte) */
+.egg-row { display: flex; justify-content: flex-end; padding-block: 0.5rem; }
+.egg {
+  background: none; border: 0; padding: 0.4rem; cursor: pointer; color: var(--muted);
+  transition: color .3s ease, transform .3s ease;
+}
+.egg:hover { color: var(--ink); transform: translateY(-2px); }
+.egg svg { display: block; width: 7.5rem; height: auto; }
+
+/* 04 Muro */
+.ficha { margin-top: 1.2rem; display: grid; gap: 0.25rem; }
+.ficha .title { font-family: var(--display); font-size: 1.35rem; line-height: 1.25; }
+.ficha .sub { color: var(--muted); }
+.vote { margin-top: 2.8rem; }
+.vote h3 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; margin: 0 0 1rem; }
+.choices { display: grid; gap: 0.6rem; }
+.choice {
+  display: block; width: 100%; text-align: left; cursor: pointer;
+  padding: 0.9rem 1rem; background: transparent; border: 1px solid var(--ink);
+  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.choice:hover { background: var(--ink); color: var(--paper); }
+.choice:disabled { opacity: .5; cursor: wait; }
+.results { display: grid; gap: 0.9rem; }
+.res { display: grid; grid-template-columns: 3.4rem 1fr; gap: 0.2rem 0.8rem; align-items: baseline; }
+.res .pct { font-family: var(--display); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.res .lbl { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.res .lbl em { font-style: normal; color: var(--pen); margin-left: 0.5rem; letter-spacing: 0.06em; }
+.res .bar { grid-column: 2; height: 3px; background: var(--line); }
+.res .bar i { display: block; height: 100%; background: var(--ink); width: 0; transition: width .9s ease; }
+.reaction { margin-top: 1.6rem; font-size: 1.2rem; font-style: italic; }
+.vote-err { margin-top: 0.8rem; color: var(--pen); font-size: 0.95rem; }
+
+/* 05 Pedido */
+.pedido { padding-block: 6rem 0; }
+.full { width: 100%; margin: 0; }
+.full .ph { margin: 0; aspect-ratio: 3 / 2; max-height: 82vh; width: 100%; }
+@media (max-width: 40rem) { .full .ph { aspect-ratio: 4 / 5; } }
+.pedido-text { padding-block: 3rem 0; text-align: center; }
+.pedido-text .place { font-family: var(--display); font-size: clamp(1.6rem, 6vw, 2.2rem); margin: 0; }
+.pedido-text .date { margin-top: 0.4rem; }
+.pedido-text .here { font-family: var(--display); font-style: italic; font-size: clamp(2rem, 8vw, 3rem); margin: 3rem 0 0; }
+.pedido-text .foot { margin-top: 0.8rem; }
+.earlier-row { padding-block: 70vh 4rem; text-align: right; }
+.earlier { background: none; border: 0; padding: 0.4rem 0; cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); }
+.earlier:hover { color: var(--ink); }
+
+/* 06 Casamento */
+.wedding { background: var(--surface); padding-block: 5rem 4rem; }
+.wedding h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 8vw, 3rem); margin: 0; }
+.facts { margin-top: 2rem; display: grid; gap: 0.3rem; }
+.facts .big { font-family: var(--display); font-size: 1.45rem; line-height: 1.3; }
+.facts .muted { color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.7rem 1rem; border: 1px solid var(--ink); background: transparent; color: var(--ink);
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--ink); color: var(--surface); }
+.btn.primary { background: var(--ink); color: var(--surface); }
+.btn.primary:hover { opacity: .88; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn:disabled:hover { background: var(--ink); color: var(--surface); }
+.part { margin-top: 3.6rem; scroll-margin-top: 4.5rem; }
+.part h3 { font-family: var(--display); font-weight: 400; font-size: 1.7rem; margin: 0 0 0.6rem; }
+.part p { margin: 0.3rem 0 0; }
+.todo { color: var(--muted); }
+
+/* Confirmação */
+.rsvp-search { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
+.field {
+  flex: 1 1 14rem; min-width: 0; padding: 0.75rem 0.9rem; border: 1px solid var(--line);
+  background: transparent; color: var(--ink); font: inherit; font-size: 1.05rem; border-radius: 0;
+}
+.field:focus { border-color: var(--ink); outline: none; }
+.field::placeholder { color: var(--muted); }
+.rsvp-out { margin-top: 1.6rem; }
+.invite { background: var(--paper); padding: 1.4rem 1.2rem; }
+.invite .name { font-family: var(--display); font-size: 1.6rem; margin: 0.3rem 0 0; line-height: 1.2; }
+.invite .by { margin-top: 1rem; font-style: italic; color: var(--muted); }
+.guests { list-style: none; margin: 0.8rem 0 0; padding: 0; display: grid; }
+.guest { padding-block: 0.9rem; border-top: 1px solid var(--line); display: grid; gap: 0.6rem; }
+.guest .gname { font-size: 1.1rem; }
+.seg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.seg button {
+  padding: 0.5rem 0.8rem; border: 1px solid var(--line); background: transparent; cursor: pointer;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.add-diet { background: none; border: 0; padding: 0; cursor: pointer; justify-self: start; color: var(--muted); font-size: 0.95rem; text-decoration: underline; text-underline-offset: 3px; }
+.diet { font-size: 0.98rem; flex: none; width: 100%; box-sizing: border-box; }
+.rsvp-actions { margin-top: 1.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.hint { color: var(--muted); font-size: 0.95rem; }
+.pick { display: grid; gap: 0.5rem; margin-top: 0.8rem; }
+.pick button { text-align: left; padding: 0.8rem 1rem; border: 1px solid var(--line); background: transparent; cursor: pointer; }
+.pick button:hover { border-color: var(--ink); }
+.pick small { display: block; color: var(--muted); font-size: 0.9rem; }
+.done h4 { font-family: var(--display); font-weight: 400; font-size: 1.7rem; margin: 0; }
+.done .see { margin: 0.2rem 0 0; font-size: 1.15rem; }
+.done ul { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.3rem; color: var(--muted); }
+.link-btn { background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.notfound { background: var(--paper); padding: 1.2rem; }
+
+details { border-top: 1px solid var(--line); padding-block: 0.9rem; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--mono); color: var(--muted); }
+details[open] summary::after { content: "−"; }
+details p { color: var(--muted); }
+
+.end { text-align: center; padding-block: 3rem 5rem; }
+
+/* Janela dos achados */
+.modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--paper) 80%, transparent); backdrop-filter: blur(6px);
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.modal[hidden] { display: none; }
+.modal-card { background: var(--surface); width: min(30rem, 100%); max-height: 100%; overflow: auto; padding: 1.4rem; box-sizing: border-box; }
+.modal-card .ph { margin-top: 1rem; }
+.modal-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.x { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.3rem; }
+.x:hover { color: var(--ink); }
+.modal-card .big { font-family: var(--display); font-size: 1.5rem; margin: 0.8rem 0 0; line-height: 1.3; }
+
+/* Marca do protótipo */
+.proto {
+  position: fixed; z-index: 15; left: max(10px, env(safe-area-inset-left, 0px)); bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 0.7rem; align-items: center; padding: 0.4rem 0.7rem;
+  background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.proto button { background: none; border: 0; padding: 0; cursor: pointer; color: var(--paper); text-decoration: underline; text-underline-offset: 3px; font: inherit; letter-spacing: inherit; text-transform: inherit; }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mono" href="#inicio">H &amp; Í</a>
+    <nav class="nav" aria-label="Atalhos">
+      <a href="#casamento">Evento</a>
+      <a href="#confirmar">Confirmar presença</a>
+      <a href="#presentes">Presentes</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- 01 · Home -->
+  <section class="home" id="inicio">
+    <div class="wrap">
+      <h1>HELENA <span class="amp">&amp;</span>&nbsp;ÍTALO</h1>
+      <p class="thesis">Depois de tantos lugares, chegamos à versão <button class="redact" id="redact" type="button" aria-label="Palavra omitida. Toque para revelar.">oficial<span class="star">*</span></button> da história.</p>
+      <p class="foot omit-note" id="omitNote">*Algumas informações foram omitidas desta versão.</p>
+      <p class="when">23.01.2027 · SABARÁ, MG</p>
+      <a class="enter" href="#anel" id="enter">Entrar</a>
+    </div>
+  </section>
+
+  <!-- 02 · Anel -->
+  <section class="block" id="anel">
+    <div class="wrap">
+      <figure class="ph tall" style="margin-top:0" aria-label="Foto do anel de noivado">Foto · anel de noivado</figure>
+      <p class="ring-line">
+        <span class="name-fix" id="nameFix"><button class="name-btn" id="nameBtn" type="button" aria-label="Ítalo. Toque para ver a correção.">Ítalo<sup>*</sup></button><span class="hand" aria-hidden="true">Helena</span></span>
+        escolheu cuidadosamente o anel de noivado.
+      </p>
+      <div class="after-fix" id="afterFix" aria-live="polite">
+        <p class="foot">Informação que pode alterar sua percepção sobre o noivo.</p>
+        <figure class="ph wide" aria-label="Print da conversa em que Helena manda o anel">Prova · print do anel enviado por Helena</figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Cape Town -->
+  <section class="block" id="capetown">
+    <div class="wrap">
+      <h2>Cape Town</h2>
+      <p class="lede">Um encontro sereno com a vida selvagem.</p>
+      <figure class="ph" aria-label="Foto bonita do safári">Foto · safári</figure>
+
+      <div class="record rise">
+        <p class="label who">Ítalo</p>
+        <p class="quote">“Não tem problema morrer se eu vir a leoa de perto.”</p>
+        <figure class="ph vid" aria-label="Vídeo de Ítalo chegando perto da leoa">Vídeo · Ítalo chegando perto</figure>
+      </div>
+
+      <div class="record rise">
+        <p class="label who">Helena</p>
+        <figure class="ph vid tall" style="margin-top:0" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto<br>até 20 s</figure>
+        <figcaption><p class="quote loud">“Não olha no olho dela. Se olhar, ela ataca.”</p></figcaption>
+      </div>
+
+      <div class="verdict rise">
+        <p>Helena também sustenta que o veículo foi estrategicamente posicionado como isca.</p>
+        <p class="foot">Não há provas conclusivas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achado: a ponte -->
+  <div class="wrap egg-row">
+    <button class="egg" type="button" data-open="ponte" aria-label="Ponte">
+      <svg viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 30 H116" />
+        <path d="M30 30 V8 M90 30 V8" />
+        <path d="M4 26 Q30 8 30 8 Q60 28 90 8 Q90 8 116 26" />
+        <path d="M40 30 V15 M50 30 V20 M60 30 V22 M70 30 V20 M80 30 V15 M16 30 V22 M104 30 V22" stroke-width="0.8" />
+        <path d="M2 36 Q12 33 22 36 T42 36 T62 36 T82 36 T102 36 T118 36" stroke-width="0.8" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- 04 · Muro de Berlim -->
+  <section class="block" id="muro" style="border-top:0">
+    <div class="wrap">
+      <figure class="ph tall" style="margin-top:0" aria-label="Foto do fragmento do muro">Foto · fragmento do muro</figure>
+      <div class="ficha">
+        <span class="title">Fragmento original do Muro de Berlim</span>
+        <span class="sub">Acervo pessoal de Ítalo.</span>
+        <span class="foot">Autenticidade declarada pelo proprietário.</span>
+      </div>
+      <div class="vote" id="vote" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 05 · Pedido -->
+  <section class="pedido block" id="pedido">
+    <figure class="full"><div class="ph" aria-label="Foto do pedido">Foto · o pedido</div></figure>
+    <div class="wrap pedido-text">
+      <p class="place">[Lugar, país]</p>
+      <p class="label date">[dia de mês de ano]</p>
+      <p class="here">Foi aqui.</p>
+      <p class="foot">Nada foi omitido desta versão.</p>
+    </div>
+    <div class="wrap earlier-row">
+      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local →</button>
+    </div>
+  </section>
+
+  <!-- 06 · Casamento -->
+  <section class="wedding" id="casamento">
+    <div class="wrap">
+      <h2>O casamento</h2>
+      <div class="facts">
+        <span class="big">Sábado, 23 de janeiro de 2027 · <span class="todo">[horário]</span></span>
+        <span class="todo">[Local]</span>
+        <span class="muted"><span class="todo">[Endereço]</span>, Sabará, MG</span>
+      </div>
+      <div class="links">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn" href="https://waze.com/ul?q=Sabar%C3%A1%20MG" target="_blank" rel="noopener">Abrir no Waze</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Casamento%20Helena%20%26%20%C3%8Dtalo&amp;dates=20270123/20270124&amp;location=Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
+      </div>
+
+      <div class="part" id="confirmar">
+        <h3>Confirmar presença</h3>
+        <p>Confirme até <span class="todo">[data limite]</span>.</p>
+        <form class="rsvp-search" id="rsvpForm" autocomplete="off">
+          <label class="label" for="rsvpName" style="flex-basis:100%">Seu nome</label>
+          <input class="field" id="rsvpName" name="nome" type="text" placeholder="Nome e sobrenome" enterkeyhint="search">
+          <button class="btn primary" type="submit">Buscar convite</button>
+        </form>
+        <div class="rsvp-out" id="rsvpOut" aria-live="polite"></div>
+      </div>
+
+      <div class="part">
+        <h3>Traje</h3>
+        <p class="todo">[Traje]. [Uma frase objetiva, se precisar.]</p>
+      </div>
+
+      <div class="part" id="presentes">
+        <h3>Presentes</h3>
+        <p class="todo">[Uma frase direta, com Pix e/ou lista.]</p>
+      </div>
+
+      <div class="part">
+        <h3>Como chegar e onde ficar</h3>
+        <p class="todo">[De onde vem a maioria dos convidados, aeroporto, transporte, hospedagem.]</p>
+      </div>
+
+      <div class="part">
+        <h3>Perguntas frequentes</h3>
+        <details><summary>Posso levar criança?</summary><p>[resposta]</p></details>
+        <details><summary>Tem estacionamento?</summary><p>[resposta]</p></details>
+        <details><summary>A cerimônia e a festa são no mesmo lugar?</summary><p>[resposta]</p></details>
+        <details><summary>Até que horas vai?</summary><p>[resposta]</p></details>
+        <details><summary>Tem transporte de volta para BH?</summary><p>[resposta]</p></details>
+        <details><summary>E se chover?</summary><p>[resposta]</p></details>
+      </div>
+
+      <div class="part">
+        <h3>Dúvidas</h3>
+        <p><span class="todo">[Nome]</span> · WhatsApp <span class="todo">[número]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="end">
+    <p class="label">Helena &amp; Ítalo · 23.01.2027 · Sabará, MG</p>
+  </footer>
+</main>
+
+<!-- Janela dos achados -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <span class="label" id="modalTitle"></span>
+      <button class="x" type="button" id="modalClose">Fechar</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="proto" role="note">
+  <span>Protótipo · dados fictícios</span>
+  <button type="button" id="reset">Recomeçar</button>
+</div>
+
+<script>
+(() => {
+  // ---------- armazenamento local (protótipo: tudo fica neste aparelho) ----------
+  const KEY = "hi-prototipo-v1";
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
+  let state = load();
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- 01 · tarja ----------
+  const redact = document.getElementById("redact");
+  const omitNote = document.getElementById("omitNote");
+  const openRedact = () => {
+    redact.classList.add("open");
+    redact.removeAttribute("aria-label");
+    redact.setAttribute("aria-disabled", "true");
+    omitNote.classList.add("show");
+  };
+  redact.addEventListener("click", () => {
+    if (redact.classList.contains("open")) return;
+    openRedact(); state.tarja = true; save();
+  });
+  if (state.tarja) openRedact();
+
+  // ---------- 02 · anel ----------
+  const nameFix = document.getElementById("nameFix");
+  const nameBtn = document.getElementById("nameBtn");
+  const afterFix = document.getElementById("afterFix");
+  const fixName = () => {
+    nameFix.classList.add("fixed");
+    nameBtn.setAttribute("aria-label", "Ítalo, riscado. Corrigido à mão: Helena.");
+    nameBtn.setAttribute("aria-disabled", "true");
+    afterFix.classList.add("show");
+  };
+  nameBtn.addEventListener("click", () => {
+    if (nameFix.classList.contains("fixed")) return;
+    fixName(); state.anel = true; save();
+  });
+  if (state.anel) fixName();
+
+  // ---------- 03 · registros entram ao rolar ----------
+  if ("IntersectionObserver" in window && !reduce) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.remove("rise-wait"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll(".rise").forEach((el) => {
+      if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("rise-wait"); io.observe(el); }
+    });
+  }
+
+  // ---------- 04 · votação do muro ----------
+  const OPTIONS = [
+    { id: "muro", label: "É o muro", reaction: "Ítalo agradece por ainda existirem pessoas razoáveis neste país." },
+    { id: "reboco", label: "É reboco", reaction: "Seu voto foi registrado. Ítalo discorda formalmente." },
+    { id: "neutro", label: "Prefiro não me envolver", reaction: "Decisão sensata. As relações diplomáticas agradecem." },
+  ];
+  // Protótipo: votos de demonstração. No site real, o total vem do servidor e começa do zero.
+  const DEMO = { muro: 38, reboco: 17, neutro: 5 };
+  const voteEl = document.getElementById("vote");
+
+  const percents = (counts) => {
+    const total = OPTIONS.reduce((s, o) => s + counts[o.id], 0) || 1;
+    const raw = OPTIONS.map((o) => (counts[o.id] * 100) / total);
+    const base = raw.map(Math.floor);
+    let left = 100 - base.reduce((a, b) => a + b, 0);
+    raw.map((v, i) => [v - base[i], i]).sort((a, b) => b[0] - a[0]).forEach(([, i]) => { if (left-- > 0) base[i]++; });
+    return base;
+  };
+
+  const renderVote = () => {
+    const mine = state.voto;
+    if (!mine) {
+      voteEl.innerHTML = `<h3>Você acredita?</h3><div class="choices">${
+        OPTIONS.map((o) => `<button class="choice" type="button" data-vote="${o.id}">${o.label}</button>`).join("")
+      }</div><div class="vote-err" id="voteErr" hidden>Não conseguimos registrar seu voto. Tente de novo.</div>`;
+      return;
+    }
+    const counts = { ...DEMO }; counts[mine] += 1;
+    const pct = percents(counts);
+    const chosen = OPTIONS.find((o) => o.id === mine);
+    voteEl.innerHTML = `<h3>Você acredita?</h3><div class="results">${
+      OPTIONS.map((o, i) => `<div class="res"><span class="pct">${pct[i]}%</span><span class="lbl">${o.label}${o.id === mine ? "<em>seu voto</em>" : ""}</span><span class="bar"><i data-w="${pct[i]}"></i></span></div>`).join("")
+    }</div><p class="reaction">${chosen.reaction}</p>`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      voteEl.querySelectorAll(".bar i").forEach((b) => { b.style.width = b.dataset.w + "%"; });
+    }));
+  };
+  voteEl.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-vote]");
+    if (!b || state.voto) return;
+    voteEl.querySelectorAll(".choice").forEach((c) => (c.disabled = true));
+    // No site real aqui entra a chamada ao servidor; em caso de falha, reabilita e mostra #voteErr.
+    setTimeout(() => { state.voto = b.dataset.vote; save(); renderVote(); }, 350);
+  });
+  renderVote();
+
+  // ---------- achados: ponte e macaco ----------
+  const EGGS = {
+    ponte: {
+      title: "Registro de viagem",
+      html: `<p class="big">600 km até a ponte.<br>Ítalo não atravessou.</p>
+             <figure class="ph vid">Vídeo · Ítalo na ponte pequena</figure>
+             <figcaption class="foot">Ponte menor, mesma viagem.</figcaption>`,
+    },
+    macaco: {
+      title: "Registro anterior · mesmo local",
+      html: `<figure class="ph vid tall">Vídeo · o macaco abrindo a porta do carro</figure>
+             <figcaption class="foot">[Lugar], [data anterior].</figcaption>`,
+    },
+  };
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalBody = document.getElementById("modalBody");
+  const modalClose = document.getElementById("modalClose");
+  let lastFocus = null;
+  const openModal = (key) => {
+    const egg = EGGS[key]; if (!egg) return;
+    lastFocus = document.activeElement;
+    modalTitle.textContent = egg.title;
+    modalBody.innerHTML = egg.html;
+    modal.hidden = false;
+    modalClose.focus();
+  };
+  const closeModal = () => { modal.hidden = true; if (lastFocus) lastFocus.focus(); };
+  document.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", () => openModal(b.dataset.open)));
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+
+  // ---------- 06 · confirmação por lista de convidados ----------
+  // Protótipo: convites fictícios. No site real a lista vem da planilha de convidados.
+  const INVITES = [
+    { id: "andrade", name: "Família Andrade", by: "Helena",
+      guests: [{ id: "a1", name: "Carla Andrade" }, { id: "a2", name: "Rafael Andrade" }, { id: "a3", name: "Lia Andrade", child: true }, { id: "a4", name: "Tomás Andrade", child: true }] },
+    { id: "prado", name: "Joana Prado", by: "Ítalo", guests: [{ id: "p1", name: "Joana Prado" }] },
+    { id: "lopes", name: "Pedro e Marina", by: "Helena e Ítalo", guests: [{ id: "l1", name: "Pedro Lopes" }, { id: "l2", name: "Marina Lopes" }] },
+    { id: "costa", name: "Marina Costa", by: "Ítalo", guests: [{ id: "c1", name: "Marina Costa" }] },
+  ];
+  const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const out = document.getElementById("rsvpOut");
+  const form = document.getElementById("rsvpForm");
+  const nameInput = document.getElementById("rsvpName");
+  state.rsvp = state.rsvp || {};
+
+  const find = (q) => {
+    const words = norm(q).split(/\s+/).filter((w) => w.length >= 2);
+    if (!words.length) return [];
+    return INVITES.filter((inv) => {
+      const hay = norm([inv.name, ...inv.guests.map((g) => g.name)].join(" "));
+      return words.every((w) => hay.split(/\s+/).some((t) => t.startsWith(w)));
+    });
+  };
+
+  const byLine = (inv) => `${inv.by} ${inv.by.includes(" e ") ? "convidaram" : "convidou"}:`;
+
+  let draft = null; // { inviteId, answers: { guestId: { go: true|false, diet: "" , showDiet } } }
+
+  const renderInvite = (inv) => {
+    const saved = state.rsvp[inv.id];
+    if (!draft || draft.inviteId !== inv.id) {
+      draft = { inviteId: inv.id, answers: JSON.parse(JSON.stringify(saved?.answers || {})) };
+    }
+    const a = draft.answers;
+    const allAnswered = inv.guests.every((g) => a[g.id] && typeof a[g.id].go === "boolean");
+    out.innerHTML = `<div class="invite">
+      <p class="label">Encontramos seu convite</p>
+      <p class="name">${esc(inv.name)}</p>
+      <p class="by">${esc(byLine(inv))}</p>
+      <ul class="guests">${inv.guests.map((g) => {
+        const ans = a[g.id] || {};
+        const diet = ans.go === true
+          ? (ans.showDiet || ans.diet
+              ? `<label class="label" for="diet-${g.id}">Restrição alimentar</label><input class="field diet" id="diet-${g.id}" data-diet="${g.id}" type="text" value="${esc(ans.diet || "")}" placeholder="Ex.: vegetariana, alergia a camarão">`
+              : `<button class="add-diet" type="button" data-showdiet="${g.id}">Adicionar restrição alimentar</button>`)
+          : "";
+        return `<li class="guest"><span class="gname">${esc(g.name)}</span>
+          <div class="seg" role="group" aria-label="Resposta de ${esc(g.name)}">
+            <button type="button" data-ans="${g.id}" data-go="1" aria-pressed="${ans.go === true}">Vou</button>
+            <button type="button" data-ans="${g.id}" data-go="0" aria-pressed="${ans.go === false}">Não vou conseguir</button>
+          </div>${diet}</li>`;
+      }).join("")}</ul>
+      <div class="rsvp-actions">
+        <button class="btn primary" type="button" id="confirmBtn" ${allAnswered ? "" : "disabled"}>Confirmar</button>
+        ${allAnswered ? "" : `<span class="hint">Marque a resposta de cada pessoa.</span>`}
+      </div>
+    </div>`;
+  };
+
+  const renderDone = (inv) => {
+    const ans = state.rsvp[inv.id].answers;
+    const going = inv.guests.filter((g) => ans[g.id]?.go);
+    const notGoing = inv.guests.filter((g) => ans[g.id]?.go === false);
+    const head = going.length
+      ? `<h4>${going.length > 1 ? "Presenças confirmadas." : "Presença confirmada."}</h4><p class="see">Até 23 de janeiro. 🤎</p>`
+      : `<h4>Que pena.</h4><p class="see">Obrigado por avisar.</p>`;
+    const list = inv.guests.length > 1
+      ? `<ul>${going.map((g) => `<li>${esc(g.name)} · vai${ans[g.id].diet ? ` · ${esc(ans[g.id].diet)}` : ""}</li>`).join("")}${notGoing.map((g) => `<li>${esc(g.name)} · não vai</li>`).join("")}</ul>`
+      : "";
+    out.innerHTML = `<div class="invite done">${head}${list}
+      <div class="rsvp-actions"><button class="link-btn" type="button" id="changeBtn">Alterar resposta</button></div></div>`;
+  };
+
+  let current = null; // convite na tela, para o "Alterar resposta"
+  const show = (inv) => { current = inv.id; draft = null; state.rsvp[inv.id]?.done ? renderDone(inv) : renderInvite(inv); };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = nameInput.value;
+    if (norm(q).length < 3) {
+      out.innerHTML = `<p class="hint">Digite seu nome para buscarmos o convite.</p>`;
+      return;
+    }
+    const found = find(q);
+    if (found.length === 1) return show(found[0]);
+    if (found.length > 1) {
+      out.innerHTML = `<p>Encontramos mais de um convite com esse nome. Qual é o seu?</p><div class="pick">${
+        found.map((inv) => `<button type="button" data-pick="${inv.id}">${esc(inv.name)}<small>${esc(inv.guests.map((g) => g.name.split(" ")[0]).join(", "))}</small></button>`).join("")
+      }</div>`;
+      return;
+    }
+    out.innerHTML = `<div class="notfound"><p style="margin:0">Não encontramos seu convite. Fale com a gente pelo WhatsApp.</p><p class="hint" style="margin:0.4rem 0 0">[número]</p></div>`;
+  });
+
+  out.addEventListener("click", (e) => {
+    const t = e.target;
+    const pick = t.closest("[data-pick]");
+    if (pick) return show(INVITES.find((i) => i.id === pick.dataset.pick));
+    const inv = draft && INVITES.find((i) => i.id === draft.inviteId);
+    const ansBtn = t.closest("[data-ans]");
+    if (ansBtn && inv) {
+      const id = ansBtn.dataset.ans;
+      draft.answers[id] = { ...(draft.answers[id] || {}), go: ansBtn.dataset.go === "1" };
+      renderInvite(inv);
+      out.querySelector(`[data-ans="${id}"][data-go="${ansBtn.dataset.go}"]`)?.focus();
+      return;
+    }
+    const sd = t.closest("[data-showdiet]");
+    if (sd && inv) {
+      draft.answers[sd.dataset.showdiet].showDiet = true;
+      renderInvite(inv);
+      document.getElementById("diet-" + sd.dataset.showdiet)?.focus();
+      return;
+    }
+    if (t.id === "confirmBtn" && inv) {
+      Object.values(draft.answers).forEach((x) => { if (!x.go) x.diet = ""; delete x.showDiet; });
+      state.rsvp[inv.id] = { done: true, answers: draft.answers }; save();
+      renderDone(inv);
+      return;
+    }
+    if (t.id === "changeBtn" && current) {
+      const invC = INVITES.find((i) => i.id === current);
+      draft = { inviteId: invC.id, answers: JSON.parse(JSON.stringify(state.rsvp[invC.id].answers)) };
+      renderInvite(invC);
+    }
+  });
+  out.addEventListener("input", (e) => {
+    const d = e.target.dataset.diet;
+    if (d && draft) draft.answers[d].diet = e.target.value;
+  });
+
+  // ---------- links internos e endereço direto ----------
+  document.getElementById("enter").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("anel").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  });
+  const h = location.hash.slice(1);
+  if (h && /^[\w.~-]+$/.test(h) && document.getElementById(h)) {
+    requestAnimationFrame(() => document.getElementById(h).scrollIntoView());
+  }
+
+  // ---------- recomeçar o protótipo ----------
+  document.getElementById("reset").addEventListener("click", () => {
+    try { localStorage.removeItem(KEY); } catch {}
+    state = { rsvp: {} }; draft = null; current = null;
+    redact.classList.remove("open"); redact.setAttribute("aria-label", "Palavra omitida. Toque para revelar."); redact.removeAttribute("aria-disabled");
+    omitNote.classList.remove("show");
+    nameFix.classList.remove("fixed"); nameBtn.setAttribute("aria-label", "Ítalo. Toque para ver a correção."); nameBtn.removeAttribute("aria-disabled");
+    afterFix.classList.remove("show");
+    renderVote(); out.innerHTML = ""; nameInput.value = "";
+    window.scrollTo({ top: 0, behavior: "auto" });
+  });
+})();
+</script>
