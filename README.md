@@ -23,8 +23,9 @@ Confirmação de presença por lista de convidados: a pessoa digita o nome, o si
 
 ## Pendências
 
-- Evento: horário, local, endereço, traje, prazo da confirmação, presentes, hospedagem, contato para dúvidas.
-- Pedido: local, data, foto; data do episódio do macaco.
+- Evento fechado: sábado, 23/01/2027, 15h às 23h, Rua João Batista Campanha, 46, Terra Santa, Sabará. Sem cerimônia (casam na quarta, 20/01; o sábado é comemoração). Traje esporte fino e colorido. Crianças bem-vindas, estacionamento na rua, sem transporte, chuva mantém o local. Dúvidas: Helena.
+- Evento pendente: prazo da confirmação, presentes (Pix, chave e titular), hospedagem, número do WhatsApp conferido.
+- Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
 - Material: fotos e vídeos do anel (e o print), Cape Town, muro, ponte, macaco; ilustrações do Save the Date (definem o visual, hoje provisório).
 - Lista de convidados em planilha.
 - Técnico: hospedagem, domínio e onde ficam confirmações e votos.

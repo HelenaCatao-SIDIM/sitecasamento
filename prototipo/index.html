@@ -209,6 +209,7 @@ figcaption { margin-top: 0.6rem; }
 .facts { margin-top: 2rem; display: grid; gap: 0.3rem; }
 .facts .big { font-family: var(--display); font-size: 1.45rem; line-height: 1.3; }
 .facts .muted { color: var(--muted); }
+.note-ceremony { margin: 1.2rem 0 0; font-style: italic; max-width: 34ch; }
 .links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
@@ -386,8 +387,8 @@ details p { color: var(--muted); }
   <section class="pedido block" id="pedido">
     <figure class="full"><div class="ph" aria-label="Foto do pedido">Foto · o pedido</div></figure>
     <div class="wrap pedido-text">
-      <p class="place">[Lugar, país]</p>
-      <p class="label date">[dia de mês de ano]</p>
+      <p class="place">Cape Town, África do Sul</p>
+      <p class="label date">7 de setembro de 2026</p>
       <p class="here">Foi aqui.</p>
       <p class="foot">Nada foi omitido desta versão.</p>
     </div>
@@ -399,16 +400,17 @@ details p { color: var(--muted); }
   <!-- 06 · Casamento -->
   <section class="wedding" id="casamento">
     <div class="wrap">
-      <h2>O casamento</h2>
+      <h2>A comemoração</h2>
       <div class="facts">
-        <span class="big">Sábado, 23 de janeiro de 2027 · <span class="todo">[horário]</span></span>
-        <span class="todo">[Local]</span>
-        <span class="muted"><span class="todo">[Endereço]</span>, Sabará, MG</span>
+        <span class="big">Sábado, 23 de janeiro de 2027 · 15h às 23h</span>
+        <span>Rua João Batista Campanha, 46</span>
+        <span class="muted">Terra Santa, Sabará, MG</span>
       </div>
+      <p class="note-ceremony">Não vai ter cerimônia. A gente se casa na quarta-feira, dia 20, e no sábado é só comemoração.</p>
       <div class="links">
-        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Abrir no Google Maps</a>
-        <a class="btn" href="https://waze.com/ul?q=Sabar%C3%A1%20MG" target="_blank" rel="noopener">Abrir no Waze</a>
-        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Casamento%20Helena%20%26%20%C3%8Dtalo&amp;dates=20270123/20270124&amp;location=Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn" href="https://waze.com/ul?q=Rua%20Jo%C3%A3o%20Batista%20Campanha%2046%20Sabar%C3%A1%20MG" target="_blank" rel="noopener">Abrir no Waze</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20%C3%8Dtalo&amp;dates=20270123T150000/20270123T230000&amp;ctz=America/Sao_Paulo&amp;location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
       </div>
 
       <div class="part" id="confirmar">
@@ -424,32 +426,32 @@ details p { color: var(--muted); }
 
       <div class="part">
         <h3>Traje</h3>
-        <p class="todo">[Traje]. [Uma frase objetiva, se precisar.]</p>
+        <p>Esporte fino e colorido. Venha com a roupa mais colorida que tiver, em cores fortes, como um campo de flores. Terno não é necessário.</p>
       </div>
 
       <div class="part" id="presentes">
         <h3>Presentes</h3>
-        <p class="todo">[Uma frase direta, com Pix e/ou lista.]</p>
+        <p class="todo">[Em definição: lista com fotos de referência e Pix.]</p>
       </div>
 
       <div class="part">
-        <h3>Como chegar e onde ficar</h3>
-        <p class="todo">[De onde vem a maioria dos convidados, aeroporto, transporte, hospedagem.]</p>
+        <h3>Onde ficar</h3>
+        <p>Em breve, sugestões de hospedagem.</p>
       </div>
 
       <div class="part">
         <h3>Perguntas frequentes</h3>
-        <details><summary>Posso levar criança?</summary><p>[resposta]</p></details>
-        <details><summary>Tem estacionamento?</summary><p>[resposta]</p></details>
-        <details><summary>A cerimônia e a festa são no mesmo lugar?</summary><p>[resposta]</p></details>
-        <details><summary>Até que horas vai?</summary><p>[resposta]</p></details>
-        <details><summary>Tem transporte de volta para BH?</summary><p>[resposta]</p></details>
-        <details><summary>E se chover?</summary><p>[resposta]</p></details>
+        <details><summary>Vai ter cerimônia?</summary><p>Não. A gente se casa na quarta-feira, 20 de janeiro. No sábado é só comemoração.</p></details>
+        <details><summary>Posso levar criança?</summary><p>Crianças são muito bem-vindas. Vai ter espaço e comida para elas.</p></details>
+        <details><summary>Tem estacionamento?</summary><p>Na rua, com espaço suficiente.</p></details>
+        <details><summary>Até que horas vai?</summary><p>Até as 23h.</p></details>
+        <details><summary>Vai ter transporte?</summary><p>Não. Cada convidado vai e volta por conta própria.</p></details>
+        <details><summary>E se chover?</summary><p>A comemoração continua no mesmo lugar.</p></details>
       </div>
 
       <div class="part">
         <h3>Dúvidas</h3>
-        <p><span class="todo">[Nome]</span> · WhatsApp <span class="todo">[número]</span></p>
+        <p>Helena · WhatsApp <span class="todo">[número a confirmar]</span></p>
       </div>
     </div>
   </section>
@@ -584,7 +586,7 @@ details p { color: var(--muted); }
     macaco: {
       title: "Registro anterior · mesmo local",
       html: `<figure class="ph vid tall">Vídeo · o macaco abrindo a porta do carro</figure>
-             <figcaption class="foot">[Lugar], [data anterior].</figcaption>`,
+             <figcaption class="foot">Cape Town, 5 de setembro de 2026.</figcaption>`,
     },
   };
   const modal = document.getElementById("modal");
@@ -698,7 +700,7 @@ details p { color: var(--muted); }
       }</div>`;
       return;
     }
-    out.innerHTML = `<div class="notfound"><p style="margin:0">Não encontramos seu convite. Fale com a gente pelo WhatsApp.</p><p class="hint" style="margin:0.4rem 0 0">[número]</p></div>`;
+    out.innerHTML = `<div class="notfound"><p style="margin:0">Não encontramos seu convite. Fale com a gente pelo WhatsApp.</p><p class="hint" style="margin:0.4rem 0 0">Helena · [número a confirmar]</p></div>`;
   });
 
   out.addEventListener("click", (e) => {
