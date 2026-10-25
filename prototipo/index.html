@@ -121,6 +121,10 @@ section { scroll-margin-top: 4rem; }
   background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--line) 55%, transparent) 14px 15px);
 }
 .ph.tall { aspect-ratio: 4 / 5; }
+.photo { margin: 2rem 0 0; }
+.photo img { display: block; width: 100%; height: auto; background: var(--tint); }
+.photo figcaption { margin-top: 0.6rem; }
+.clip { display: block; width: 100%; max-height: 70vh; margin-top: 1rem; background: var(--tint); object-fit: contain; }
 .ph.wide { aspect-ratio: 16 / 9; }
 .ph.vid::after {
   content: "▶"; position: absolute; left: 1rem; bottom: 0.9rem; font-size: 0.9rem; letter-spacing: 0;
@@ -192,8 +196,8 @@ figcaption { margin-top: 0.6rem; }
 /* 05 Pedido */
 .pedido { padding-block: 6rem 0; }
 .full { width: 100%; margin: 0; }
-.full .ph { margin: 0; aspect-ratio: 3 / 2; max-height: 82vh; width: 100%; }
-@media (max-width: 40rem) { .full .ph { aspect-ratio: 4 / 5; } }
+.full img { display: block; width: 100%; height: auto; margin-inline: auto; background: var(--tint); }
+@media (min-width: 48rem) { .full img { width: auto; max-width: 100%; max-height: 92vh; } }
 .pedido-text { padding-block: 3rem 0; text-align: center; }
 .pedido-text .place { font-family: var(--display); font-size: clamp(1.6rem, 6vw, 2.2rem); margin: 0; }
 .pedido-text .date { margin-top: 0.4rem; }
@@ -319,14 +323,14 @@ details p { color: var(--muted); }
   <!-- 02 · Anel -->
   <section class="block" id="anel">
     <div class="wrap">
-      <figure class="ph tall" style="margin-top:0" aria-label="Foto do anel de noivado">Foto · anel de noivado</figure>
+      <figure class="photo" style="margin-top:0"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
       <p class="ring-line">
         <span class="name-fix" id="nameFix"><button class="name-btn" id="nameBtn" type="button" aria-label="Ítalo. Toque para ver a correção.">Ítalo<sup>*</sup></button><span class="hand" aria-hidden="true">Helena</span></span>
         escolheu cuidadosamente o anel de noivado.
       </p>
       <div class="after-fix" id="afterFix" aria-live="polite">
         <p class="foot">Informação que pode alterar sua percepção sobre o noivo.</p>
-        <figure class="ph wide" aria-label="Print da conversa em que Helena manda o anel">Prova · print do anel enviado por Helena</figure>
+        <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
       </div>
     </div>
   </section>
@@ -336,7 +340,7 @@ details p { color: var(--muted); }
     <div class="wrap">
       <h2>Cape Town</h2>
       <p class="lede">Um encontro sereno com a vida selvagem.</p>
-      <figure class="ph" aria-label="Foto bonita do safári">Foto · safári</figure>
+      <figure class="photo"><img src="midia/safari.jpg" width="1200" height="1600" alt="Guia de safári de chapéu, de costas, olhando a savana"></figure>
 
       <div class="record rise">
         <p class="label who">Ítalo</p>
@@ -385,7 +389,7 @@ details p { color: var(--muted); }
 
   <!-- 05 · Pedido -->
   <section class="pedido block" id="pedido">
-    <figure class="full"><div class="ph" aria-label="Foto do pedido">Foto · o pedido</div></figure>
+    <figure class="full"><img src="midia/pedido.jpg" width="1200" height="1600" alt="A mão de Helena com o anel, contra o pôr do sol"></figure>
     <div class="wrap pedido-text">
       <p class="place">Cape Town, África do Sul</p>
       <p class="label date">7 de setembro de 2026</p>
@@ -580,12 +584,13 @@ details p { color: var(--muted); }
     ponte: {
       title: "Registro de viagem",
       html: `<p class="big">600 km até a ponte.<br>Ítalo não atravessou.</p>
+             <figure class="photo" style="margin-top:1rem"><img src="midia/ponte.jpg" width="1200" height="1600" alt="Ponte suspensa sobre o rio, entre montanhas"></figure>
              <figure class="ph vid">Vídeo · Ítalo na ponte pequena</figure>
              <figcaption class="foot">Ponte menor, mesma viagem.</figcaption>`,
     },
     macaco: {
       title: "Registro anterior · mesmo local",
-      html: `<figure class="ph vid tall">Vídeo · o macaco abrindo a porta do carro</figure>
+      html: `<video class="clip" src="midia/macaco.mp4" poster="midia/macaco-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: um babuíno abre a porta de um carro"></video>
              <figcaption class="foot">Cape Town, 5 de setembro de 2026.</figcaption>`,
     },
   };
@@ -602,7 +607,7 @@ details p { color: var(--muted); }
     modal.hidden = false;
     modalClose.focus();
   };
-  const closeModal = () => { modal.hidden = true; if (lastFocus) lastFocus.focus(); };
+  const closeModal = () => { modalBody.querySelectorAll("video").forEach((v) => v.pause()); modal.hidden = true; if (lastFocus) lastFocus.focus(); };
   document.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", () => openModal(b.dataset.open)));
   modalClose.addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
