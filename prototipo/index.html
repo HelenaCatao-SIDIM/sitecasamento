@@ -353,7 +353,11 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .vs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
 .vs-names .label { margin: 0; }
 .vs-media { position: relative; margin-top: 0.6rem; }
-.vs-media .ph { margin: 0; }
+.vs-media .ph, .vs-media .photo { margin: 0; }
+.vs-media img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.vs-clip { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.vs-clip video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--tint); }
+.vs-clip::after { content: "▶"; position: absolute; left: 0.5rem; top: 0.5rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--paper) 85%, transparent); color: var(--ink); font-size: 0.7rem; }
 .vs-x { position: absolute; left: 50%; top: 50%; width: 26%; max-width: 6.5rem; height: auto; stroke: var(--pen); transform: translate(-50%, -50%) rotate(-6deg); pointer-events: none; }
 .vs-quotes p { margin: 0.8rem 0 0; font-family: var(--display); font-size: clamp(1.05rem, 3.8vw, 1.35rem); line-height: 1.3; }
 .vs-quotes .loud { font-family: var(--body); font-weight: 600; }
@@ -717,8 +721,8 @@ details p { color: var(--muted); }
         <div class="versus rise">
           <div class="vs-row vs-names"><p class="label">Italo</p><p class="label">Helena</p></div>
           <div class="vs-row vs-media">
-            <figure class="ph vid tall" aria-label="Vídeo de Italo chegando perto da leoa">Vídeo · Italo chegando perto</figure>
-            <figure class="ph vid tall" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto</figure>
+            <figure class="photo"><img src="midia/leoa-italo.jpg" width="480" height="600" alt="Duas leoas de boca aberta na savana, bem perto do carro"></figure>
+            <button class="vs-clip" type="button" data-open="leoa" aria-label="Ver com som o vídeo de Helena escondida no safári"><video src="midia/leoa-helena.mp4" poster="midia/leoa-helena-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video></button>
             <svg class="vs-x" viewBox="0 0 100 100" fill="none" stroke-linecap="round" aria-hidden="true">
               <path d="M18 14 C 36 34, 58 58, 84 88" stroke-width="7" />
               <path d="M82 12 C 64 36, 40 60, 14 86" stroke-width="7" />
@@ -947,7 +951,7 @@ details p { color: var(--muted); }
   }
 
   // vídeo pequeno do 7 de janeiro: parado para quem pediu menos movimento
-  if (reduce) document.querySelectorAll(".boat video").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); });
+  if (reduce) document.querySelectorAll(".boat video, .vs-clip video").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); });
 
   // ---------- Cape Town: registros entram ao rolar ----------
   if ("IntersectionObserver" in window && !reduce) {
@@ -1042,6 +1046,11 @@ details p { color: var(--muted); }
       title: "Condições adversas",
       html: `<video class="clip" src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: Italo dirige pela rua alagada e diz: Vamos nadar."></video>
              <p class="foot" style="margin-top:0.6rem">Voltando para casa, 7 de janeiro de 2022.</p>`,
+    },
+    leoa: {
+      title: "Hoedspruit · Kruger",
+      html: `<video class="clip" src="midia/leoa-helena.mp4" poster="midia/leoa-helena-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: Helena se esconde no carro do safári enquanto a câmera mostra as leoas"></video>
+             <p class="foot" style="margin-top:0.6rem">“Não pode olhar pra leoa, só pelo celular.”</p>`,
     },
     roda: {
       title: "Na volta",
