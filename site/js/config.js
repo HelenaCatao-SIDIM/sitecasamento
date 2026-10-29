@@ -9,7 +9,7 @@ window.SITE_CONFIG = {
   prazoConfirmacao: "",
 
   // Só números, com DDI e DDD: ex. "5531999999999"
-  whatsapp: "",
+  whatsapp: "5531999493059",
 
   // Link da lista de presentes (ex.: lista da Amazon). Vazio = aparece "em breve".
   listaPresentes: "",
