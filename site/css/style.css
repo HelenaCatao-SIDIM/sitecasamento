@@ -599,6 +599,6 @@ details p { color: var(--muted); }
 .pix-card { margin-top: 1.4rem; padding: 1.2rem; background: var(--surface); display: grid; gap: 0.5rem; }
 .pix-type { font-size: 0.95rem; color: var(--muted); }
 .pix-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; }
-.pix-key { font-family: var(--mono); font-size: 1.05rem; letter-spacing: 0.04em; word-break: break-all; }
+.pix-key { font-family: var(--mono); font-size: clamp(0.66rem, 3.2vw, 0.95rem); letter-spacing: 0; white-space: nowrap; }
 .pix-name { font-size: 0.98rem; }
 .gift-end { margin: 1.8rem 0 0; font-family: var(--hand); color: var(--pen); font-size: clamp(1.5rem, 5.6vw, 1.9rem); line-height: 1.3; transform: rotate(-2deg); transform-origin: left center; }
