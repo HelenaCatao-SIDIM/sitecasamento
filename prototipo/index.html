@@ -172,6 +172,26 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
   border: 0; background: none; cursor: pointer; transform-origin: 50% 100%;
   animation: rock 4.5s ease-in-out infinite;
 }
+.boat .ph { display: grid; aspect-ratio: 9 / 16; margin: 0; padding: 0.6rem; border-radius: 1rem; font-size: 0.6rem; }
+.boat.left { float: left; margin: 0.2rem 1.1rem 1rem 0; }
+.boat.left .boat-tag { left: auto; right: -1.2rem; }
+.night { clear: both; padding-top: 2.4rem; }
+.night p { margin: 0; }
+.night p + p { margin-top: 0.6rem; }
+.night .program-link { margin-top: 0.8rem; margin-left: -0.3rem; }
+.clarice { font-family: var(--display); font-style: italic; font-size: 1.3rem; line-height: 1.3; margin-top: 1.2rem !important; }
+.clarice span { display: block; margin-top: 0.3rem; font-family: var(--mono); font-style: normal; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.clarice span::before { content: "— "; }
+/* 19/12: etiqueta menor, à esquerda */
+.baby-row { display: flex; justify-content: flex-start; margin-top: 1rem; padding-left: 0.4rem; }
+.baby-tag {
+  position: relative; font-family: var(--hand); color: var(--pen); font-size: 1.05rem;
+  background: var(--surface); padding: 0.3rem 0.8rem; border-radius: 1.2rem;
+  transform: rotate(-4deg); animation: babybob 3.6s ease-in-out infinite;
+}
+.baby-tag::before { content: ""; position: absolute; left: 1.2rem; top: -0.45rem; border: 0.5rem solid transparent; border-bottom-color: var(--surface); border-top: 0; }
+@keyframes babybob { 0%, 100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .baby-tag { animation: none; } }
 .boat video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 1rem; background: var(--tint); }
 .boat-tag {
   position: absolute; left: -1.4rem; bottom: -0.9rem; padding: 0.1rem 0.55rem;
@@ -539,6 +559,7 @@ details p { color: var(--muted); }
             <path d="M48 79 C 23 58, 7 40, 12 23 C 18 11, 37 9, 49 25 C 60 8, 84 11, 88 26 C 93 45, 75 60, 53 80" stroke-width="1.4" opacity=".7" />
           </svg>
         </div>
+        <div class="baby-row"><span class="baby-tag">olha as carinhas de bebê</span></div>
       </div>
 
       <div class="entry">
@@ -552,25 +573,22 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <span class="label">7 de janeiro de 2022</span>
-        <button class="boat" type="button" data-open="nadar" aria-label="Ver com som o vídeo de Italo na rua alagada">
-          <video src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
-          <span class="boat-tag">“Vamos nadar.”</span>
+        <button class="boat" type="button" data-open="pai" aria-label="Ver o vídeo do pai da Helena com a caixa de som">
+          <span class="ph vid">Vídeo · o pai e a caixa de som</span>
+          <span class="boat-tag">e o pai dela.</span>
         </button>
-        <p class="official">Segundo encontro, em Sabará. Italo atravessou Belo Horizonte para ver Helena.</p>
-        <p class="foot" style="margin:0.4rem 0 0">Sabará estava, tecnicamente, debaixo d’água.</p>
-                <div class="program">
-          <p class="program-title">Programação especial da noite</p>
-          <div class="program-item">
-            <span class="label">Atração surpresa</span>
-            <p>Pai da Helena · caixa de som · apresentação na rua</p>
-            <button class="program-link" type="button" data-open="pai">ver apresentação →</button>
-          </div>
-          <div class="program-item">
-            <span class="label">Encerramento</span>
-            <p>A roda do carro do Italo quebrou na volta.</p>
-            <p class="foot">E, por algum motivo, ele marcou um terceiro encontro.</p>
-            <button class="program-link" type="button" data-open="roda">ver registro →</button>
-          </div>
+        <p class="official">Segundo encontro foi em Sabará.</p>
+        <p class="official" style="margin-top:0.6rem">Italo atravessou Belo Horizonte para ver Helena.</p>
+
+        <div class="night">
+          <button class="boat left" type="button" data-open="nadar" aria-label="Ver com som o vídeo de Italo na rua alagada">
+            <video src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+            <span class="boat-tag">“Vamos nadar.”</span>
+          </button>
+          <p>Para melhorar a noite, Sabará estava, tecnicamente, debaixo d’água.</p>
+          <p>E a roda do carro do Italo quebrou na volta.</p>
+          <p class="clarice">“O amor custa caro.”<span>Clarice Lispector</span></p>
+          <button class="program-link" type="button" data-open="roda">ver registro →</button>
         </div>
       </div>
 
@@ -938,7 +956,7 @@ details p { color: var(--muted); }
              <figure class="photo"><img src="midia/ponte.jpg" width="1200" height="1600" alt="Ponte suspensa sobre o rio, entre montanhas"></figure>`,
     },
     pai: {
-      title: "Atração surpresa",
+      title: "E o pai dela",
       html: `<figure class="ph vid tall" style="margin-top:1rem">Vídeo · o pai da Helena e a caixa de som</figure>
              <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
     },
@@ -951,10 +969,10 @@ details p { color: var(--muted); }
     nadar: {
       title: "Condições adversas",
       html: `<video class="clip" src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: Italo dirige pela rua alagada e diz: Vamos nadar."></video>
-             <p class="foot" style="margin-top:0.6rem">A caminho de Sabará, 7 de janeiro de 2022.</p>`,
+             <p class="foot" style="margin-top:0.6rem">Voltando para casa, 7 de janeiro de 2022.</p>`,
     },
     roda: {
-      title: "Encerramento",
+      title: "Na volta",
       html: `<figure class="photo"><img src="midia/roda.jpg" width="900" height="1600" alt="Roda do carro de Italo quebrada, com o pneu solto do aro"></figure>
              <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
     },
