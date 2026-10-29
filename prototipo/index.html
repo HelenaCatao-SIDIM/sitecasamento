@@ -404,8 +404,8 @@ details p { color: var(--muted); }
         <span class="label">7 de janeiro de 2022</span>
         <p class="official">Segundo encontro, em Sabará. Italo atravessou Belo Horizonte para ver Helena.</p>
         <p class="foot" style="margin:0.4rem 0 0">Sabará estava, tecnicamente, debaixo d’água.</p>
-        <figure class="ph vid" style="margin-top:1.4rem">Vídeo · Italo no carro</figure>
-        <p class="said" style="margin:0.5rem 0 0">“Tô nadando.”</p>
+        <video class="clip" style="margin-top:1.4rem" src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo de Italo dirigindo pela rua alagada"></video>
+        <p class="said" style="margin:0.5rem 0 0">“Vamos nadar.”</p>
         <div class="program">
           <p class="program-title">Programação especial da noite</p>
           <div class="program-item">
@@ -417,6 +417,7 @@ details p { color: var(--muted); }
             <span class="label">Encerramento</span>
             <p>A roda do carro do Italo quebrou na volta.</p>
             <p class="foot">E, por algum motivo, ele marcou um terceiro encontro.</p>
+            <button class="program-link" type="button" data-open="roda">ver registro →</button>
           </div>
         </div>
       </div>
@@ -749,6 +750,11 @@ details p { color: var(--muted); }
     pai: {
       title: "Atração surpresa",
       html: `<figure class="ph vid tall" style="margin-top:1rem">Vídeo · o pai da Helena e a caixa de som</figure>
+             <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
+    },
+    roda: {
+      title: "Encerramento",
+      html: `<figure class="photo"><img src="midia/roda.jpg" width="900" height="1600" alt="Roda do carro de Italo quebrada, com o pneu solto do aro"></figure>
              <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
     },
     macaco: {

@@ -9,7 +9,7 @@ Cada memória tem uma brincadeira própria (asterisco, rasura, horas infinitas, 
 | Bloco | O que tem |
 | --- | --- |
 | Home | "vão se casar."; "chegamos à versão oficial\* da história" (sem risco até o toque) → ~~oficial~~ *completa\** e "\*Ou quase. Algumas informações foram omitidas." |
-| A versão oficial | 19/12/2021 ("Foi amor à primeira vista.\*", "\*Helena recusou o primeiro beijo."; o asterisco revela o banheiro; fotos dos dois com coração à mão pulsando), as semanas seguintes ("por horas e horas e horas…" escrito à mão saindo da página, "Às vezes, literalmente seis.", balão flutuante "O último romântico →" que abre a foto do dia 7), 7/01/2022 (Sabará "tecnicamente debaixo d’água", vídeo "Tô nadando.", "Programação especial da noite" com a atração surpresa do pai e o encerramento da roda), 21/02/2022 (começam a namorar, sem rasura) |
+| A versão oficial | 19/12/2021 ("Foi amor à primeira vista.\*", "\*Helena recusou o primeiro beijo."; o asterisco revela o banheiro; fotos dos dois com coração à mão pulsando), as semanas seguintes ("por horas e horas e horas…" escrito à mão saindo da página, "Às vezes, literalmente seis.", balão flutuante "O último romântico →" que abre a foto do dia 7), 7/01/2022 (Sabará "tecnicamente debaixo d’água", vídeo "Vamos nadar.", "Programação especial da noite" com a atração surpresa do pai e o encerramento da roda, com a foto em "ver registro →"), 21/02/2022 (começam a namorar, sem rasura) |
 | Depois, muitos lugares | Toscana de ~~conversível~~ *Panda* (foto embaçada até tocar); Muro de Berlim com a única votação |
 | A semana do pedido | "sem nenhuma expectativa" → "Ou a gente volta noivo, ou volta solteiro."; anel (~~Italo~~ *Helena*, print de 2/09); Cape Town (revelado ao rolar); achado da ponte |
 | Pedido | 7/09/2026, "Foi aqui." (rodapé "Nada foi omitido desta versão." sob teste); achado do macaco (5/09) |
@@ -26,7 +26,7 @@ Confirmação de presença por lista de convidados: a pessoa digita o nome, o si
 - Evento fechado: sábado, 23/01/2027, 15h às 23h, Rua João Batista Campanha, 46, Terra Santa, Sabará. Sem cerimônia (casam na quarta, 20/01; o sábado é comemoração). Traje esporte fino e colorido. Crianças bem-vindas, estacionamento na rua, sem transporte, chuva mantém o local. Dúvidas: Helena.
 - Evento pendente: prazo da confirmação, presentes (Pix, chave e titular), hospedagem, número do WhatsApp conferido.
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
-- Material recebido: anel, print, guia do safári, ponte, pedido, macaco, Panda (fora do Git: o repositório é público).
-- Material pendente: vídeos do safári (Helena com medo, Italo perto da leoa), muro, fotos do Italo e da Helena na noite em que se conheceram, balãozinho do dia 7, vídeo do Italo no carro ("Tô nadando."), vídeo do pai com a caixa de som, roda quebrada, foto do casal para a prévia do link; ilustrações do Save the Date (definem o visual, hoje provisório).
+- Material recebido: anel, print, guia do safári, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda (fora do Git: o repositório é público).
+- Material pendente: vídeos do safári (Helena com medo, Italo perto da leoa), muro, fotos do Italo e da Helena na noite em que se conheceram, balãozinho do dia 7, vídeo do pai com a caixa de som, foto do casal para a prévia do link; ilustrações do Save the Date (definem o visual, hoje provisório).
 - Lista de convidados em planilha.
 - Técnico: hospedagem, domínio e onde ficam confirmações e votos.
