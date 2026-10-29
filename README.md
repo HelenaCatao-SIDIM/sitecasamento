@@ -28,6 +28,6 @@ Confirmação de presença por lista de convidados: a pessoa digita o nome, o si
 - Evento pendente: prazo da confirmação, presentes (Pix, chave e titular), hospedagem, número do WhatsApp conferido.
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
 - Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, balãozinho do dia 7, ilustrações dos lugares (fora do Git: o repositório é público).
-- Material pendente: vídeos do safári (Helena com medo, legenda "Não olha no olho da leoa, senão ela acha que é desafio."; Italo perto da leoa), vídeo do pai com a caixa de som (o arquivo no Drive tem 91 MB, acima do limite de 10 MB da conexão), foto do casal para a prévia do link; ilustrações do Save the Date (definem o visual, hoje provisório).
+- Material pendente: vídeos do safári (Helena com medo, legenda "Não pode olhar pra leoa, só pelo celular."; Italo perto da leoa), vídeo do pai com a caixa de som (o arquivo no Drive tem 91 MB, acima do limite de 10 MB da conexão), foto do casal para a prévia do link; ilustrações do Save the Date (definem o visual, hoje provisório).
 - Lista de convidados em planilha.
 - Técnico: hospedagem, domínio e onde ficam confirmações e votos.
