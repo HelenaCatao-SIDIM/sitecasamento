@@ -278,7 +278,7 @@ main { overflow-x: hidden; overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) { .enter svg { animation: none; } }
 @media (max-width: 52rem) {
   /* celular: poucas peças, maiores, em faixas acima e abaixo do texto */
-  .home { padding-block: 10.5rem 12.5rem; min-height: 0; }
+  .home { padding-block: 8rem 9rem; min-height: 0; }
   .collage .routes { display: none; }
   .hp { display: none; }
   .hp.m { display: block; opacity: 0.92; left: auto !important; right: auto !important; top: auto !important; bottom: auto !important; transform: none !important; }
@@ -287,8 +287,8 @@ main { overflow-x: hidden; overflow-x: clip; }
   .hp.m-selo { right: 3vw !important; top: 0.8rem !important; width: 23vw !important; transform: rotate(8deg) !important; }
   .hp.m-girafa { left: -7vw !important; top: 38% !important; width: 21vw !important; opacity: 0.35; }
   .hp.m-olive-r { display: none; }
-  .hp.m-arrival { left: 3vw !important; bottom: 6.6rem !important; width: 34vw !important; transform: rotate(-8deg) !important; opacity: 0.8; }
-  .hp.m-bussola { right: 5vw !important; bottom: 6.4rem !important; width: 21vw !important; }
+  .hp.m-arrival { left: 3vw !important; bottom: 1.6rem !important; width: 34vw !important; transform: rotate(-8deg) !important; opacity: 0.8; }
+  .hp.m-bussola { right: 5vw !important; bottom: 1.4rem !important; width: 21vw !important; }
   .hp.m-capetown { left: 50% !important; bottom: 1rem !important; width: 96vw !important; transform: translateX(-50%) !important; }
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img.hp { filter: invert(1) hue-rotate(180deg); } }
