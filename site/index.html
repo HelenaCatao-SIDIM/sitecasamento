@@ -24,7 +24,8 @@
 <header class="top">
   <div class="wrap">
     <a class="mono" href="#inicio" data-view="historia">H &amp; I</a>
-    <nav class="nav" aria-label="Atalhos">
+    <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Abrir o menu"><svg viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2h20M2 9h20M2 16h20"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Atalhos">
       <a href="#inicio" data-view="historia">A história</a>
       <a href="#confirmar" data-view="confirmar">Confirmar presença</a>
       <a href="#presentes" data-view="presentes">Presentes</a>
@@ -252,7 +253,6 @@
 
   <!-- A comemoração -->
   <section class="wedding" id="casamento">
-    <img class="deco right" src="midia/deco-sabara.webp" alt="" aria-hidden="true" loading="lazy" style="top:1.5rem;--r:2deg;animation-delay:-2s">
     <div class="wrap">
       <div class="closing">
         <p>A gente se casa na quarta-feira, 20 de janeiro.</p>
@@ -261,9 +261,11 @@
         <p class="live">A versão completa a gente conta ao vivo.</p>
       </div>
 
+      <img class="sabara-band" src="midia/deco-sabara.webp" alt="" aria-hidden="true" loading="lazy">
       <h2>A comemoração</h2>
       <div class="facts">
-        <span class="big">Sábado, 23 de janeiro de 2027 · 15h às 23h</span>
+        <span class="date-main">Sábado, 23 de janeiro</span>
+        <span class="date-sub">2027 · das 15h às 23h</span>
         <span>Rua João Batista Campanha, 46</span>
         <span class="muted">Terra Santa, Sabará, MG</span>
       </div>

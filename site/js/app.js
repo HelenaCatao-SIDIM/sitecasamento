@@ -480,8 +480,15 @@
     window.scrollTo({ top: 0, behavior: "auto" });
     try { history.replaceState(null, "", name === "historia" ? location.pathname + location.search : "#" + name); } catch {}
   };
+  // menu do celular
+  const menuBtn = document.getElementById("menuBtn");
+  const nav = document.getElementById("nav");
+  const setMenu = (open) => { nav.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", String(open)); menuBtn.setAttribute("aria-label", open ? "Fechar o menu" : "Abrir o menu"); };
+  menuBtn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+  document.addEventListener("click", (e) => { if (nav.classList.contains("open") && !e.target.closest(".top")) setMenu(false); });
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a[data-view]");
+    if (a) setMenu(false);
     if (!a) return;
     e.preventDefault();
     showView(a.dataset.view);
