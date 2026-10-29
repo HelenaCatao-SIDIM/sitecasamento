@@ -372,6 +372,7 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 @keyframes hintpop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.6); } }
 .rasura.soft:not(.open) .mark { font-size: 1.3em; line-height: 1; margin-left: 0.04em; transform-origin: 50% 60%; text-shadow: 0 0 0.5em color-mix(in srgb, var(--pen) 45%, transparent); }
 .tap-note { display: inline-block; margin-left: 0.5rem; font-family: var(--hand); color: var(--pen); font-size: 0.85em; white-space: nowrap; animation: nudge-x 1.6s ease-in-out infinite; }
+.hand-arrow { display: inline-block; width: 1.5em; height: auto; vertical-align: -0.1em; }
 .rasura.open + .tap-note, p:has(.rasura.open) .tap-note, #pandaPhoto.clear + .tap-note { display: none; }
 .tap-vote { font-size: 1.1rem; margin-left: 0.3rem; }
 .tap-up { display: block; width: fit-content; margin: 0.9rem 0 0 12%; animation: nudge-y 1.6s ease-in-out infinite; }
@@ -750,7 +751,7 @@ details p { color: var(--muted); }
         <span class="label">2 de setembro de 2026</span>
         <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
         <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
-        <p class="official lead ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.<span class="tap-note" aria-hidden="true">↖ toque no nome</span></p>
+        <p class="official lead ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.<span class="tap-note" aria-hidden="true"><svg class="hand-arrow" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M29 21 C 22 20, 12 15, 5 5" /><path d="M4 13 L 4.6 4.4 L 13 5.6" /></svg> toque no nome</span></p>
         <p class="foot" style="margin-top:0.6rem">*Tocar no nome pode alterar sua percepção sobre o noivo.</p>
         <div id="omAnel" hidden>
           <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
