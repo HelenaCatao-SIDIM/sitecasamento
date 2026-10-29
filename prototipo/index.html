@@ -595,18 +595,33 @@ details p { color: var(--muted); }
 .proto button { background: none; border: 0; padding: 0; cursor: pointer; color: var(--paper); text-decoration: underline; text-underline-offset: 3px; font: inherit; letter-spacing: inherit; text-transform: inherit; }
 .gift-img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
 
-/* Página de presentes: o significado primeiro, depois as opções */
-.gift-text { margin-top: 1rem; display: grid; gap: 0.7rem; max-width: 36ch; }
-.gift-text p { margin: 0; }
-.gift-wish { font-family: var(--body); font-style: italic; font-size: 1.15rem; }
-.gift-h { font-family: var(--display); font-weight: 400; font-size: 1.6rem; margin: 0; }
-.divider { border: 0; height: 1px; width: 5rem; margin: 3rem 0; background: var(--pen); opacity: 0.45; }
-#listaBtn { margin-top: 1.4rem; }
-.pix-card { margin-top: 1.4rem; padding: 1.2rem; background: var(--surface); display: grid; gap: 0.5rem; }
-.pix-type { font-size: 0.95rem; color: var(--muted); }
-.pix-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; }
+/* Página de presentes: os três caminhos no topo, uma parte por faixa */
+.band { padding-block: 3.2rem; }
+#presentes.band { padding-top: 3.5rem; }
+.band.alt { background: color-mix(in srgb, var(--paper) 90%, var(--pen) 10%); }
+.ways { display: grid; gap: 0.6rem; margin-top: 1.8rem; }
+@media (min-width: 40rem) { .ways { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.way { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.9rem; align-items: baseline; text-align: left; padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font: inherit; color: var(--ink); }
+.way:hover { border-color: var(--pen); }
+.way-n { grid-row: span 2; font-family: var(--display); font-size: 1.8rem; color: var(--pen); line-height: 1; }
+.way-t { font-family: var(--display); font-size: 1.25rem; }
+.way-d { font-size: 0.92rem; color: var(--muted); }
+.chips { list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li { padding: 0.35rem 0.8rem; border: 1px solid color-mix(in srgb, var(--pen) 45%, transparent); border-radius: 2rem; font-size: 0.92rem; color: var(--pen); }
+.memory { margin: 3rem 0 0.5rem; text-align: center; }
+.key-art { width: 7.5rem; height: auto; color: var(--engrave); transform: rotate(-8deg); opacity: 0.85; }
+.memory blockquote { margin: 1.2rem auto 0; max-width: 24ch; font-family: var(--body); font-style: italic; font-size: clamp(1.4rem, 5.6vw, 1.8rem); line-height: 1.4; text-wrap: balance; }
+.rooms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; margin-top: 1.6rem; }
+.room { display: grid; justify-items: center; gap: 0.4rem; padding: 1rem 0.4rem; background: var(--surface); color: var(--engrave); font-size: 0.9rem; }
+.room svg { width: 2.2rem; height: auto; }
+.room span { color: var(--ink); }
+.wide { display: flex; width: 100%; box-sizing: border-box; margin-top: 1.4rem; }
+.btn.is-soon { opacity: 0.55; cursor: default; pointer-events: none; }
+.pix-card { margin-top: 1.4rem; padding: 1.3rem 1.2rem; background: var(--surface); display: grid; gap: 0.35rem; }
+.pix-name { font-family: var(--display); font-size: 1.3rem; }
+.pix-type { margin-top: 0.4rem; font-size: 0.92rem; color: var(--muted); }
 .pix-key { font-family: var(--mono); font-size: clamp(0.66rem, 3.2vw, 0.95rem); letter-spacing: 0; white-space: nowrap; }
-.pix-name { font-size: 0.98rem; }
+.pix-card .wide { margin-top: 1rem; }
 .gift-end { margin: 1.8rem 0 0; font-family: var(--hand); color: var(--pen); font-size: clamp(1.5rem, 5.6vw, 1.9rem); line-height: 1.3; transform: rotate(-2deg); transform-origin: left center; }
 
 </style>
@@ -938,49 +953,69 @@ details p { color: var(--muted); }
 
 <!-- Página 3: presentes -->
 <div class="view" id="v-presentes" data-name="presentes" hidden>
-  <section class="page" id="presentes">
+  <section class="band" id="presentes">
     <div class="wrap">
       <div class="thanks" id="thanks" hidden></div>
       <h1 class="page-title">Presentes</h1>
       <p class="official lead" style="margin-top:1rem">A gente está começando a montar a nossa casa e quer que ela tenha coisas com história.</p>
-      <div class="gift-text">
-        <p>Por isso, antes de qualquer lista, fica um pedido: se um dia você olhar para alguma coisa e pensar <em>“isso é muito a cara deles”</em>, pode ser exatamente esse o presente.</p>
-        <p>Pode ser algo novo, antigo, garimpado, feito à mão, encontrado numa viagem ou até uma coisa que já fazia parte da sua casa e que você acha que combina com a nossa.</p>
-        <p class="gift-wish">A ideia é que, daqui a alguns anos, a gente olhe para aquilo e lembre de quem deu.</p>
+      <div class="ways">
+        <button class="way" type="button" data-scroll="p-historia"><span class="way-n">1</span><span class="way-t">Algo com história</span><span class="way-d">o que te lembrar da gente</span></button>
+        <button class="way" type="button" data-scroll="p-lista"><span class="way-n">2</span><span class="way-t">Lista da casa</span><span class="way-d">ideias do que ainda falta</span></button>
+        <button class="way" type="button" data-scroll="p-pix"><span class="way-n">3</span><span class="way-t">Em dinheiro</span><span class="way-d">por Pix, direto pra gente</span></button>
       </div>
+    </div>
+  </section>
 
-      <hr class="divider">
+  <section class="band" id="p-historia">
+    <div class="wrap">
+      <span class="label">1 · Algo com história</span>
+      <p class="official" style="margin-top:0.8rem">Se um dia você olhar para alguma coisa e pensar <em>“isso é muito a cara deles”</em>, pode ser exatamente esse o presente.</p>
+      <ul class="chips" aria-label="Pode ser">
+        <li>novo</li><li>antigo</li><li>garimpado</li><li>feito à mão</li><li>de viagem</li><li>que já foi seu</li>
+      </ul>
+      <figure class="memory">
+        <svg class="key-art" viewBox="0 0 140 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="22" cy="28" r="14" /><circle cx="22" cy="28" r="6" />
+          <path d="M10 18 C 4 10, 14 4, 18 12 M10 38 C 4 46, 14 52, 18 44 M34 18 C 40 10, 30 4, 26 12" stroke-width="1.1" />
+          <path d="M36 28 H 124" /><path d="M36 25 H 46 M36 31 H 46" stroke-width="1.1" />
+          <path d="M102 28 v 10 h 5 v -6 h 5 v 9 h 5 v -13" /><path d="M124 28 l 4 -3 M124 28 l 4 3" stroke-width="1.1" />
+        </svg>
+        <blockquote>A ideia é que, daqui a alguns anos, a gente olhe para aquilo e lembre de quem deu.</blockquote>
+      </figure>
+    </div>
+  </section>
 
-      <h3 class="gift-h">Se quiser uma ajudinha</h3>
-      <div class="gift-text">
-        <p>Também montamos uma lista com algumas coisas que estamos querendo para a casa.</p>
-        <p>Não precisa seguir à risca: ela serve mais como referência do que a gente gosta e do que ainda precisa.</p>
+  <section class="band alt" id="p-lista">
+    <div class="wrap">
+      <span class="label">2 · Lista da casa</span>
+      <p class="official" style="margin-top:0.8rem">Montamos uma lista com coisas que estamos querendo para a casa. Serve mais como referência do que como regra.</p>
+      <div class="rooms">
+        <div class="room"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h18v7a7 7 0 0 1-7 7h-4a7 7 0 0 1-7-7z" /><path d="M24 13h2.5a3 3 0 0 1 0 6H24" /><path d="M4 28h24" /><path d="M12 4c-1 2 1 3 0 5M17 4c-1 2 1 3 0 5" stroke-width="1.1" /></svg><span>Cozinha</span></div>
+        <div class="room"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="17" r="10" /><circle cx="16" cy="17" r="6" stroke-width="1.1" /><path d="M3 6v8a2 2 0 0 0 2 2v12M3 6v5M5 6v5M7 6v8a2 2 0 0 1-2 2" stroke-width="1.1" /><path d="M29 6c-2 1-2 6 0 9v13" stroke-width="1.1" /></svg><span>Mesa</span></div>
+        <div class="room"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 26V10M29 26v-6M3 20h26M3 16h9v4" /><path d="M12 16h13a4 4 0 0 1 4 4" /><circle cx="7.5" cy="13" r="2.2" stroke-width="1.1" /></svg><span>Quarto</span></div>
       </div>
-      <a class="btn primary big-btn" id="listaBtn" href="#" target="_blank" rel="noopener">Ver dicas de presente</a>
-      <p class="hint" id="listaSoon" hidden>O link da lista entra aqui em breve.</p>
+      <a class="btn primary big-btn wide" id="listaBtn" href="#" target="_blank" rel="noopener">Ver dicas de presente</a>
+    </div>
+  </section>
 
-      <hr class="divider">
-
-      <h3 class="gift-h">Se preferir contribuir de outro jeito</h3>
-      <div class="gift-text">
-        <p>Se for mais prático, você também pode mandar um presente em dinheiro.</p>
-      </div>
+  <section class="band" id="p-pix">
+    <div class="wrap">
+      <span class="label">3 · Em dinheiro</span>
+      <p class="official" style="margin-top:0.8rem">Se for mais prático, um presente em dinheiro também é muito bem-vindo.</p>
       <div class="pix-card">
         <span class="label">Pix</span>
+        <span class="pix-name"><span id="pixName" class="todo">[nome do titular]</span></span>
         <span class="pix-type" id="pixType">Chave</span>
-        <div class="pix-row">
-          <span class="pix-key todo" id="pixKey">[chave Pix]</span>
-          <button class="btn" type="button" id="pixCopy">Copiar</button>
-        </div>
-        <span class="pix-name">Nome: <span id="pixName" class="todo">[nome do titular]</span></span>
+        <span class="pix-key todo" id="pixKey">[chave Pix]</span>
+        <button class="btn primary wide" type="button" id="pixCopy">Copiar chave</button>
       </div>
+    </div>
+  </section>
 
-      <hr class="divider">
-
+  <section class="band alt">
+    <div class="wrap">
       <p class="official lead">E se você não quiser dar presente nenhum, também está tudo bem.</p>
-      <div class="gift-text">
-        <p>Sua presença no dia 23 já é presente suficiente.</p>
-      </div>
+      <p class="official" style="margin-top:0.5rem">Sua presença no dia 23 já é presente suficiente.</p>
       <p class="gift-end">A gente só vai ficar feliz de ter você com a gente.</p>
     </div>
   </section>
@@ -1457,7 +1492,12 @@ window.SITE_CONFIG = {
   const PIX = CFG.pix || {};
   const listaBtn = document.getElementById("listaBtn");
   if (CFG.listaPresentes) listaBtn.href = CFG.listaPresentes;
-  else { listaBtn.hidden = true; document.getElementById("listaSoon").hidden = false; }
+  else { listaBtn.textContent = "Lista em breve"; listaBtn.classList.add("is-soon"); listaBtn.setAttribute("aria-disabled", "true"); listaBtn.removeAttribute("href"); }
+  // os três cartões do topo levam a cada parte
+  document.addEventListener("click", (e) => {
+    const w = e.target.closest("[data-scroll]");
+    if (w) document.getElementById(w.dataset.scroll)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  });
   const pixKey = document.getElementById("pixKey");
   if (PIX.tipo) document.getElementById("pixType").textContent = "Chave " + PIX.tipo;
   if (PIX.titular) { const n = document.getElementById("pixName"); n.textContent = PIX.titular; n.classList.remove("todo"); }
@@ -1466,7 +1506,7 @@ window.SITE_CONFIG = {
   }
   document.getElementById("pixCopy").addEventListener("click", (e) => {
     const c = e.currentTarget;
-    const done = () => { c.textContent = "Copiado"; setTimeout(() => (c.textContent = "Copiar"), 2000); };
+    const done = () => { c.textContent = "Copiado ✓"; setTimeout(() => (c.textContent = "Copiar chave"), 2500); };
     const fallback = () => { const r = document.createRange(); r.selectNodeContents(pixKey); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = "Selecionado"; };
     try { navigator.clipboard.writeText(pixKey.textContent.trim()).then(done, fallback); } catch { fallback(); }
   });

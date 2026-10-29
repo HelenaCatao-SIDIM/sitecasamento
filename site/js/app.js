@@ -428,7 +428,12 @@
   const PIX = CFG.pix || {};
   const listaBtn = document.getElementById("listaBtn");
   if (CFG.listaPresentes) listaBtn.href = CFG.listaPresentes;
-  else { listaBtn.hidden = true; document.getElementById("listaSoon").hidden = false; }
+  else { listaBtn.textContent = "Lista em breve"; listaBtn.classList.add("is-soon"); listaBtn.setAttribute("aria-disabled", "true"); listaBtn.removeAttribute("href"); }
+  // os três cartões do topo levam a cada parte
+  document.addEventListener("click", (e) => {
+    const w = e.target.closest("[data-scroll]");
+    if (w) document.getElementById(w.dataset.scroll)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  });
   const pixKey = document.getElementById("pixKey");
   if (PIX.tipo) document.getElementById("pixType").textContent = "Chave " + PIX.tipo;
   if (PIX.titular) { const n = document.getElementById("pixName"); n.textContent = PIX.titular; n.classList.remove("todo"); }
@@ -437,7 +442,7 @@
   }
   document.getElementById("pixCopy").addEventListener("click", (e) => {
     const c = e.currentTarget;
-    const done = () => { c.textContent = "Copiado"; setTimeout(() => (c.textContent = "Copiar"), 2000); };
+    const done = () => { c.textContent = "Copiado ✓"; setTimeout(() => (c.textContent = "Copiar chave"), 2500); };
     const fallback = () => { const r = document.createRange(); r.selectNodeContents(pixKey); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = "Selecionado"; };
     try { navigator.clipboard.writeText(pixKey.textContent.trim()).then(done, fallback); } catch { fallback(); }
   });

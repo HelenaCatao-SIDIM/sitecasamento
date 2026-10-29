@@ -22,7 +22,7 @@ O site tem três páginas, com o menu "A história · Confirmar presença · Pre
 
 1. **A história**: tudo acima, terminando na comemoração.
 2. **Confirmar presença** (#confirmar): onde (endereço, Maps, Waze, agenda, sem cerimônia, estacionamento), traje, onde ficar (dica de hotel), a confirmação por lista de convidados, perguntas frequentes e contato. Ao confirmar, vai sozinha para os presentes.
-3. **Presentes** (#presentes): agradecimento da confirmação (quando vem de lá); o significado ("coisas com história", "isso é muito a cara deles"); "Se quiser uma ajudinha" com o botão para a lista externa (Amazon); "Se preferir contribuir de outro jeito" com o Pix (chave aleatória, botão de copiar e nome); "E se você não quiser dar presente nenhum, também está tudo bem."
+3. **Presentes** (#presentes): agradecimento da confirmação (quando vem de lá); "A gente está começando a montar a nossa casa…" e três cartões que levam a cada parte (1 Algo com história, 2 Lista da casa, 3 Em dinheiro). Em faixas alternadas: o pedido do "isso é muito a cara deles", etiquetas (novo, antigo, garimpado, feito à mão, de viagem, que já foi seu) e a frase "A ideia é que, daqui a alguns anos…" centralizada com uma chave antiga desenhada; a lista com Cozinha, Mesa e Quarto e o botão "Lista em breve" até o link chegar; o Pix com o nome, a chave aleatória e "Copiar chave" → "Copiado ✓"; e "E se você não quiser dar presente nenhum, também está tudo bem."
 
 Confirmação de presença por lista de convidados: a pessoa digita o nome, o site acha o convite, aparecem só as pessoas daquele convite, cada uma marca Vou / Não vou conseguir, restrição alimentar por pessoa, sem "adicionar acompanhante".
 
