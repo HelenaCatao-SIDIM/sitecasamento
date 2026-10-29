@@ -8,7 +8,7 @@ Código do site: o que está riscado foi omitido. Tocar mostra a correção à m
 
 | Bloco | O que tem |
 | --- | --- |
-| Home | "vão se casar."; "chegamos à versão ~~oficial~~ da história" → *completa\** e "\*Ou quase. Algumas informações foram omitidas." |
+| Home | "vão se casar."; "chegamos à versão oficial\* da história" (sem risco até o toque) → ~~oficial~~ *completa\** e "\*Ou quase. Algumas informações foram omitidas." |
 | A versão oficial | 19/12/2021 (o beijo e o banheiro), as semanas seguintes (ligações de 6 horas e o balãozinho do dia 7), 7/01/2022 (Sabará alagando, o pai com a caixa de som, a roda quebrada), 21/02/2022 (começam a namorar, sem rasura) |
 | Depois, muitos lugares | Toscana de ~~conversível~~ *Panda* (foto embaçada até tocar); Muro de Berlim com a única votação |
 | A semana do pedido | "sem nenhuma expectativa" → "Ou a gente volta noivo, ou volta solteiro."; anel (~~Italo~~ *Helena*, print de 2/09); Cape Town (revelado ao rolar); achado da ponte |

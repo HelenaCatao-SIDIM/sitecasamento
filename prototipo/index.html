@@ -82,6 +82,10 @@ section { scroll-margin-top: 4rem; }
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
 .struck:hover { text-decoration-color: var(--pen); }
+/* Home: a palavra parece normal, só com o asterisco, até o toque */
+.rasura.soft .struck { text-decoration-line: none; }
+.rasura.soft.open .struck { text-decoration-line: line-through; }
+.rasura.open .mark { display: none; }
 .rasura.open .struck { cursor: default; color: var(--muted); text-decoration-color: var(--pen); }
 .hand { display: none; font-family: var(--hand); color: var(--pen); font-size: 1.05em; margin-left: 0.25em; }
 .rasura.open .hand { display: inline; animation: ink .6s ease both; }
@@ -318,7 +322,7 @@ details p { color: var(--muted); }
     <div class="wrap">
       <h1>HELENA <span class="amp">&amp;</span>&nbsp;ITALO</h1>
       <p class="subtitle">vão se casar.</p>
-      <p class="thesis">Depois de tantos lugares, chegamos à versão <span class="rasura" data-rasura="home" data-panel="homeNote"><button class="struck" type="button" aria-controls="homeNote" aria-expanded="false">oficial</button><span class="hand">completa*</span></span> da história.</p>
+      <p class="thesis">Depois de tantos lugares, chegamos à versão <span class="rasura soft" data-rasura="home" data-panel="homeNote"><button class="struck" type="button" aria-controls="homeNote" aria-expanded="false">oficial<span class="mark" aria-hidden="true">*</span></button><span class="hand">completa*</span></span> da história.</p>
       <p class="foot" id="homeNote" hidden>*Ou quase. Algumas informações foram omitidas.</p>
       <p class="when">23.01.2027 · SABARÁ, MG</p>
       <a class="enter" href="#historia" id="enter">Ler a história</a>
@@ -576,8 +580,10 @@ details p { color: var(--muted); }
     const key = wrap.dataset.rasura;
     const btn = wrap.querySelector(".struck");
     const panel = document.getElementById(wrap.dataset.panel);
-    const label = btn.textContent;
-    btn.setAttribute("aria-label", `${label}, riscado. Toque para ver o que foi omitido.`);
+    const soft = wrap.classList.contains("soft");
+    const label = btn.textContent.replace("*", "");
+    const closedLabel = soft ? `${label}, com nota. Toque para ver.` : `${label}, riscado. Toque para ver o que foi omitido.`;
+    btn.setAttribute("aria-label", closedLabel);
     const open = (animate) => {
       wrap.classList.add("open");
       btn.setAttribute("aria-expanded", "true");
@@ -588,7 +594,7 @@ details p { color: var(--muted); }
     const close = () => {
       wrap.classList.remove("open");
       btn.setAttribute("aria-expanded", "false");
-      btn.setAttribute("aria-label", `${label}, riscado. Toque para ver o que foi omitido.`);
+      btn.setAttribute("aria-label", closedLabel);
       if (panel) { panel.hidden = true; panel.classList.remove("show"); }
       if (key === "panda") { pandaPhoto.classList.remove("clear"); pandaPhoto.setAttribute("role", "button"); pandaPhoto.setAttribute("tabindex", "0"); }
     };
