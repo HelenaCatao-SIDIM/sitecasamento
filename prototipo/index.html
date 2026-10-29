@@ -78,10 +78,12 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .deco.right { right: -26vw; }
 .desk-only { display: none; }
 .skyline {
-  display: block; width: 100%; max-width: 34rem; height: auto; margin: 0 auto 1.6rem; opacity: 0.55;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+  /* Cape Town na largura da foto do pedido, subindo um pouco sobre ela */
+  position: relative; z-index: 2; display: block; width: 100%; height: auto; margin: -5.5vw auto 0; opacity: 0.7;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
+@media (min-width: 48rem) { .skyline { width: min(100%, calc(92vh * 0.75)); margin-top: -2.2rem; } }
 @keyframes drift { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-12px) rotate(var(--r, 0deg)); } }
 @media (min-width: 72rem) {
   .deco { width: clamp(16rem, calc(50vw - 17rem), 30rem); max-width: none; opacity: 0.5; }
@@ -313,7 +315,7 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .full { width: 100%; margin: 0; }
 .full img { display: block; width: 100%; height: auto; margin-inline: auto; background: var(--tint); }
 @media (min-width: 48rem) { .full img { width: auto; max-width: 100%; max-height: 92vh; } }
-.pedido-text { padding-block: 3rem 0; text-align: center; }
+.pedido-text { padding-block: 1.6rem 0; text-align: center; }
 .pedido-text .place { font-family: var(--display); font-size: clamp(1.6rem, 6vw, 2.2rem); margin: 0; }
 .pedido-text .date { margin-top: 0.4rem; }
 .pedido-text .here { font-family: var(--display); font-style: italic; font-size: clamp(2rem, 8vw, 3rem); margin: 3rem 0 0; }
@@ -621,8 +623,8 @@ details p { color: var(--muted); }
   <section class="pedido" id="pedido">
     <div class="wrap"><span class="label">7 de setembro de 2026</span></div>
     <figure class="full"><img src="midia/pedido.jpg" width="1200" height="1600" alt="A mão de Helena com o anel, contra o pôr do sol"></figure>
+    <img class="skyline" src="midia/deco-capetown.webp" alt="" aria-hidden="true" loading="lazy">
     <div class="wrap pedido-text">
-      <img class="skyline" src="midia/deco-capetown.webp" alt="" aria-hidden="true" loading="lazy">
       <p class="place">Cape Town, África do Sul</p>
       <p class="here">Foi aqui.</p>
       <p class="foot">Nada foi omitido desta versão.</p>
