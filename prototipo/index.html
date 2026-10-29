@@ -124,15 +124,28 @@ section { scroll-margin-top: 4rem; }
 .balloon { position: relative; margin: 1.4rem 0 0 auto; width: min(18rem, 85%); background: var(--surface); padding: 0.8rem; border-radius: 1.2rem; transform: rotate(-2deg); animation: ink .6s ease both; }
 .balloon::before { content: ""; position: absolute; right: 2.4rem; top: -0.6rem; border: 0.6rem solid transparent; border-bottom-color: var(--surface); border-top: 0; }
 .balloon .foot { margin: 0.6rem 0 0; }
+/* 7 de janeiro: o vídeo pequeno, boiando ao lado do texto */
+.boat {
+  float: right; position: relative; width: 8.5rem; margin: 0.2rem 0 1.4rem 1.1rem; padding: 0;
+  border: 0; background: none; cursor: pointer; transform-origin: 50% 100%;
+  animation: rock 4.5s ease-in-out infinite;
+}
+.boat video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 1rem; background: var(--tint); }
+.boat-tag {
+  position: absolute; left: -1.4rem; bottom: -0.9rem; padding: 0.1rem 0.55rem;
+  font-family: var(--hand); color: var(--pen); font-size: 1.1rem; white-space: nowrap;
+  background: var(--paper); transform: rotate(4deg);
+}
+@keyframes rock { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(1deg) translateY(3px); } }
 /* 7 de janeiro: a programação da noite */
-.program { margin-top: 2.6rem; border: 1px solid var(--ink); padding: 1.4rem 1.2rem; display: grid; gap: 1.4rem; text-align: center; }
+.program { clear: both; margin-top: 2.6rem; border: 1px solid var(--ink); padding: 1.4rem 1.2rem; display: grid; gap: 1.4rem; text-align: center; }
 .program-title { margin: 0; padding-bottom: 1rem; border-bottom: 3px double var(--ink); font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.1em; text-transform: uppercase; text-wrap: balance; }
 .program-item .label { display: block; }
 .program-item p { margin: 0.35rem 0 0; }
 .program-item + .program-item { padding-top: 1.4rem; border-top: 1px dotted var(--line); }
 .program-link { margin-top: 0.7rem; background: none; border: 0; padding: 0.3rem; cursor: pointer; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
 .program-link:hover { color: var(--pen); }
-@media (prefers-reduced-motion: reduce) { .romantic, .balloon { animation: none; } .write.go { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .romantic, .balloon, .boat { animation: none; } .write.go { transition: none; } }
 .omitted .ph, .omitted .photo { margin-top: 1.1rem; }
 @media (prefers-reduced-motion: reduce) { .rasura.open .hand, .omitted.show { animation: none; } }
 
@@ -402,11 +415,13 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <span class="label">7 de janeiro de 2022</span>
+        <button class="boat" type="button" data-open="nadar" aria-label="Ver com som o vídeo de Italo na rua alagada">
+          <video src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+          <span class="boat-tag">“Vamos nadar.”</span>
+        </button>
         <p class="official">Segundo encontro, em Sabará. Italo atravessou Belo Horizonte para ver Helena.</p>
         <p class="foot" style="margin:0.4rem 0 0">Sabará estava, tecnicamente, debaixo d’água.</p>
-        <video class="clip" style="margin-top:1.4rem" src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" controls playsinline preload="metadata" aria-label="Vídeo de Italo dirigindo pela rua alagada"></video>
-        <p class="said" style="margin:0.5rem 0 0">“Vamos nadar.”</p>
-        <div class="program">
+                <div class="program">
           <p class="program-title">Programação especial da noite</p>
           <div class="program-item">
             <span class="label">Atração surpresa</span>
@@ -682,6 +697,9 @@ details p { color: var(--muted); }
     });
   }
 
+  // vídeo pequeno do 7 de janeiro: parado para quem pediu menos movimento
+  if (reduce) document.querySelectorAll(".boat video").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); });
+
   // ---------- Cape Town: registros entram ao rolar ----------
   if ("IntersectionObserver" in window && !reduce) {
     const io = new IntersectionObserver((entries) => {
@@ -751,6 +769,11 @@ details p { color: var(--muted); }
       title: "Atração surpresa",
       html: `<figure class="ph vid tall" style="margin-top:1rem">Vídeo · o pai da Helena e a caixa de som</figure>
              <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
+    },
+    nadar: {
+      title: "Condições adversas",
+      html: `<video class="clip" src="midia/nadar.mp4" poster="midia/nadar-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: Italo dirige pela rua alagada e diz: Vamos nadar."></video>
+             <p class="foot" style="margin-top:0.6rem">A caminho de Sabará, 7 de janeiro de 2022.</p>`,
     },
     roda: {
       title: "Encerramento",
