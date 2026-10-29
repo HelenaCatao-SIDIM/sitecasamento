@@ -135,6 +135,12 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 1.6rem; }
 .pair .ph, .pair .photo { margin: 0; }
 .pair img { aspect-ratio: 4 / 5; object-fit: cover; }
+/* o coração troca as fotos daquela noite pelas de bebê, e volta */
+.pair .photo { position: relative; }
+.pair .baby { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; transition: opacity .6s ease; }
+.pair.babies .baby { opacity: 1; }
+.heart-btn { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 9rem; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -50%); z-index: 2; }
+.heart-btn .heart { position: static; display: block; width: 100%; max-width: none; transform: none; animation: bridgebeat 1.6s ease-in-out infinite; }
 .heart { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 9rem; height: auto; stroke: var(--pen); transform: translate(-50%, -50%); animation: beat 1.6s ease-in-out infinite; pointer-events: none; }
 @keyframes beat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 14% { transform: translate(-50%, -50%) scale(1.12); } 28% { transform: translate(-50%, -50%) scale(1); } 42% { transform: translate(-50%, -50%) scale(1.07); } }
 @media (prefers-reduced-motion: reduce) { .heart, .reveal.show { animation: none; } }
@@ -600,12 +606,14 @@ details p { color: var(--muted); }
         <p class="foot" style="margin:0.5rem 0 0">*Helena recusou o primeiro beijo.</p>
         <p class="foot reveal" id="omBeijo" style="margin:0.2rem 0 0" hidden>Depois quase entrou no banheiro masculino atrás dele.</p>
         <div class="pair">
-          <figure class="photo"><img src="midia/noite-italo.jpg" width="480" height="600" alt="Italo sorrindo, de camiseta preta, na noite em que se conheceram"></figure>
-          <figure class="photo"><img src="midia/noite-helena.jpg" width="480" height="600" alt="Helena sorrindo, de blusa branca, na noite em que se conheceram"></figure>
-          <svg class="heart" viewBox="0 0 100 92" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <figure class="photo"><img src="midia/noite-italo.jpg" width="480" height="600" alt="Italo sorrindo, de camiseta preta, na noite em que se conheceram"><span class="baby ph">Foto · Italo bebê</span></figure>
+          <figure class="photo"><img src="midia/noite-helena.jpg" width="480" height="600" alt="Helena sorrindo, de blusa branca, na noite em que se conheceram"><img class="baby" src="midia/bebe-helena.jpg" width="480" height="600" alt="Helena bebê, sorrindo, de brinco cor-de-rosa"></figure>
+          <button class="heart-btn" type="button" id="heartBtn" aria-pressed="false" aria-label="Trocar pelas fotos de bebê">
+            <svg class="heart" viewBox="0 0 100 92" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M50 82 C 21 60, 4 42, 10 24 C 15 9, 36 6, 48 22 C 50 25, 51 25, 53 21 C 63 6, 86 8, 91 25 C 96 44, 78 62, 51 82" stroke-width="3" />
             <path d="M48 79 C 23 58, 7 40, 12 23 C 18 11, 37 9, 49 25 C 60 8, 84 11, 88 26 C 93 45, 75 60, 53 80" stroke-width="1.4" opacity=".7" />
           </svg>
+          </button>
         </div>
         <div class="baby-row"><span class="baby-tag">olha as carinhas de bebê</span></div>
       </div>
@@ -895,6 +903,14 @@ details p { color: var(--muted); }
   const pandaBtn = rasuras.find((r) => r.key === "panda").btn;
   pandaPhoto.addEventListener("click", () => pandaBtn.click());
   pandaPhoto.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pandaBtn.click(); } });
+
+  // 19/12: o coração troca as fotos pelas de bebê
+  const heartBtn = document.getElementById("heartBtn");
+  heartBtn.addEventListener("click", () => {
+    const on = heartBtn.closest(".pair").classList.toggle("babies");
+    heartBtn.setAttribute("aria-pressed", String(on));
+    heartBtn.setAttribute("aria-label", on ? "Voltar para as fotos daquela noite" : "Trocar pelas fotos de bebê");
+  });
 
   // as horas se escrevem sozinhas quando aparecem na tela
   if ("IntersectionObserver" in window && !reduce) {
@@ -1208,6 +1224,7 @@ details p { color: var(--muted); }
     try { localStorage.removeItem(KEY); } catch {}
     state = { rasuras: {}, rsvp: {} }; draft = null; current = null;
     rasuras.forEach((r) => r.close());
+    heartBtn.closest(".pair").classList.remove("babies"); heartBtn.setAttribute("aria-pressed", "false");
     renderVote(); out.innerHTML = ""; nameInput.value = "";
     setTimeout(showIntro, 300);
     window.scrollTo({ top: 0, behavior: "auto" });
