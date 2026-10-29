@@ -198,7 +198,7 @@ section { scroll-margin-top: 4rem; }
 .clip { display: block; width: 100%; max-height: 70vh; margin-top: 1rem; background: var(--tint); object-fit: contain; }
 
 /* Toscana: a foto embaçada até tocar, menor e torta */
-#pandaPhoto { width: 78%; margin-left: 8%; transform: rotate(-3deg); }
+#pandaPhoto { width: 78%; margin-left: 8%; transform: rotate(-3deg); border-radius: 1rem; }
 @media (max-width: 26rem) { #pandaPhoto { width: 86%; margin-left: 5%; } }
 .blurred { overflow: hidden; cursor: pointer; }
 .blurred > * { filter: blur(14px); transform: scale(1.06); transition: filter .8s ease, transform .8s ease; }
@@ -229,6 +229,7 @@ section { scroll-margin-top: 4rem; }
 .muro-stage { margin-top: 2rem; }
 .muro-stage .ph, .muro-stage .photo { margin: 0; }
 .muro-stage .photo { width: 62%; }
+.muro-stage .photo img { border-radius: 1rem; }
 .plaque {
   position: relative; width: 74%; margin: -4.5rem 0 0 auto; padding: 1.3rem 1.2rem 1.4rem; box-sizing: border-box;
   background: var(--surface); transform: rotate(-1deg);
