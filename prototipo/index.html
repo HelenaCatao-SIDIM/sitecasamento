@@ -105,7 +105,34 @@ section { scroll-margin-top: 4rem; }
 .omitted p { margin: 0; }
 .omitted p + p { margin-top: 0.7rem; }
 .omitted .punch { font-weight: 600; }
-.omitted .said { font-family: var(--hand); color: var(--pen); font-size: 1.35rem; line-height: 1.4; }
+.said { font-family: var(--hand); color: var(--pen); font-size: 1.35rem; line-height: 1.4; }
+/* As semanas seguintes: as horas escapam da coluna e saem da página */
+#historia { overflow-x: hidden; overflow-x: clip; }
+.endless { font-family: var(--hand); color: var(--pen); font-size: 1.15em; white-space: nowrap; }
+.write { display: inline-block; clip-path: inset(0 0 0 0); }
+.write.wait { clip-path: inset(0 100% 0 0); }
+.write.go { transition: clip-path 4s linear; }
+.romantic-row { display: flex; justify-content: flex-end; margin-top: 1.6rem; }
+.romantic {
+  position: relative; font-family: var(--hand); color: var(--pen); font-size: 1.3rem; cursor: pointer;
+  background: var(--surface); border: 0; padding: 0.5rem 1.1rem; border-radius: 1.5rem;
+  transform: rotate(4deg); animation: bob 3.2s ease-in-out infinite;
+}
+.romantic::after { content: ""; position: absolute; left: 1.4rem; bottom: -0.55rem; border: 0.6rem solid transparent; border-top-color: var(--surface); border-bottom: 0; }
+.romantic[aria-expanded="true"] { animation: none; color: var(--muted); cursor: default; }
+@keyframes bob { 0%, 100% { transform: rotate(4deg) translateY(0); } 50% { transform: rotate(4deg) translateY(-6px); } }
+.balloon { position: relative; margin: 1.4rem 0 0 auto; width: min(18rem, 85%); background: var(--surface); padding: 0.8rem; border-radius: 1.2rem; transform: rotate(-2deg); animation: ink .6s ease both; }
+.balloon::before { content: ""; position: absolute; right: 2.4rem; top: -0.6rem; border: 0.6rem solid transparent; border-bottom-color: var(--surface); border-top: 0; }
+.balloon .foot { margin: 0.6rem 0 0; }
+/* 7 de janeiro: a programação da noite */
+.program { margin-top: 2.6rem; border: 1px solid var(--ink); padding: 1.4rem 1.2rem; display: grid; gap: 1.4rem; text-align: center; }
+.program-title { margin: 0; padding-bottom: 1rem; border-bottom: 3px double var(--ink); font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.1em; text-transform: uppercase; text-wrap: balance; }
+.program-item .label { display: block; }
+.program-item p { margin: 0.35rem 0 0; }
+.program-item + .program-item { padding-top: 1.4rem; border-top: 1px dotted var(--line); }
+.program-link { margin-top: 0.7rem; background: none; border: 0; padding: 0.3rem; cursor: pointer; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.program-link:hover { color: var(--pen); }
+@media (prefers-reduced-motion: reduce) { .romantic, .balloon { animation: none; } .write.go { transition: none; } }
 .omitted .ph, .omitted .photo { margin-top: 1.1rem; }
 @media (prefers-reduced-motion: reduce) { .rasura.open .hand, .omitted.show { animation: none; } }
 
@@ -362,26 +389,35 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <span class="label">As semanas seguintes</span>
-        <p class="official">Os dois conversam por telefone <span class="rasura" data-rasura="ligacoes" data-panel="omLigacoes"><button class="struck" type="button" aria-controls="omLigacoes" aria-expanded="false">bastante</button><span class="hand">por até 6 horas seguidas</span></span>.</p>
-        <div class="omitted" id="omLigacoes" hidden>
-          <p>Ligações de 4, 5, 6 horas.</p>
-          <p class="punch">Pessoalmente, a gente só tinha se visto uma vez.</p>
-          <p>Até o segundo encontro, foi praticamente assim. A contagem para o dia 7 veio desenhada:</p>
-          <figure class="ph tall">Foto · Italo e o balãozinho do dia 7</figure>
-          <p class="foot" style="margin-top:0.6rem">Repare como a gente era novinho.</p>
+        <p class="official">Os dois conversam por telefone por horas e horas <span class="endless write">e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas…</span></p>
+        <p class="foot" style="margin:0.4rem 0 0">Às vezes, literalmente seis.</p>
+        <div class="romantic-row">
+          <button class="romantic" type="button" id="romanticBtn" aria-expanded="false" aria-controls="balloon">O último romântico →</button>
+        </div>
+        <div class="balloon" id="balloon" hidden>
+          <figure class="ph tall" style="margin:0">Foto · Italo e a contagem para o dia 7</figure>
+          <p class="foot">Até então, pessoalmente, a gente tinha se visto uma vez.</p>
         </div>
       </div>
 
       <div class="entry">
         <span class="label">7 de janeiro de 2022</span>
-        <p class="official">Segundo encontro, em Sabará. <span class="rasura" data-rasura="sabara" data-panel="omSabara"><button class="struck" type="button" aria-controls="omSabara" aria-expanded="false">Tudo dentro do previsto.</button><span class="hand">Três pequenos imprevistos.</span></span></p>
-        <div class="omitted" id="omSabara" hidden>
-          <p>Sabará estava alagando. Ele veio do Barreiro mesmo assim.</p>
-          <p>No meio do encontro, apareceu meu pai com uma caixa de som, dançando na rua.</p>
-          <p>Na volta, a roda do carro dele quebrou.</p>
-          <p class="punch">Estranhamente, o encontro deu certo.</p>
-          <figure class="ph vid tall">Vídeo · o pai da Helena e a caixa de som</figure>
-          <figure class="ph">Foto · a roda quebrada</figure>
+        <p class="official">Segundo encontro, em Sabará. Italo atravessou Belo Horizonte para ver Helena.</p>
+        <p class="foot" style="margin:0.4rem 0 0">Sabará estava, tecnicamente, debaixo d’água.</p>
+        <figure class="ph vid" style="margin-top:1.4rem">Vídeo · Italo no carro</figure>
+        <p class="said" style="margin:0.5rem 0 0">“Tô nadando.”</p>
+        <div class="program">
+          <p class="program-title">Programação especial da noite</p>
+          <div class="program-item">
+            <span class="label">Atração surpresa</span>
+            <p>Pai da Helena · caixa de som · apresentação na rua</p>
+            <button class="program-link" type="button" data-open="pai">ver apresentação →</button>
+          </div>
+          <div class="program-item">
+            <span class="label">Encerramento</span>
+            <p>A roda do carro do Italo quebrou na volta.</p>
+            <p class="foot">E, por algum motivo, ele marcou um terceiro encontro.</p>
+          </div>
         </div>
       </div>
 
@@ -623,6 +659,28 @@ details p { color: var(--muted); }
   pandaPhoto.addEventListener("click", () => pandaBtn.click());
   pandaPhoto.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pandaBtn.click(); } });
 
+  // ---------- as semanas seguintes: o último romântico ----------
+  const romanticBtn = document.getElementById("romanticBtn");
+  const balloon = document.getElementById("balloon");
+  const openBalloon = () => { balloon.hidden = false; romanticBtn.setAttribute("aria-expanded", "true"); };
+  romanticBtn.addEventListener("click", () => { openBalloon(); state.rasuras.romantico = true; save(); });
+  if (state.rasuras.romantico) openBalloon();
+
+  // as horas se escrevem sozinhas quando aparecem na tela
+  if ("IntersectionObserver" in window && !reduce) {
+    const wio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        // observa a frase em volta: o recorte da própria linha a deixaria "invisível" para o observador
+        const el = e.target.querySelector(".write");
+        el.classList.add("go"); el.classList.remove("wait"); wio.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll(".write").forEach((el) => {
+      if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("wait"); wio.observe(el.parentElement); }
+    });
+  }
+
   // ---------- Cape Town: registros entram ao rolar ----------
   if ("IntersectionObserver" in window && !reduce) {
     const io = new IntersectionObserver((entries) => {
@@ -687,6 +745,11 @@ details p { color: var(--muted); }
       title: "Registro de viagem",
       html: `<p class="big">600 km até a ponte.<br>Italo nem pisou nela.</p>
              <figure class="photo"><img src="midia/ponte.jpg" width="1200" height="1600" alt="Ponte suspensa sobre o rio, entre montanhas"></figure>`,
+    },
+    pai: {
+      title: "Atração surpresa",
+      html: `<figure class="ph vid tall" style="margin-top:1rem">Vídeo · o pai da Helena e a caixa de som</figure>
+             <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
     },
     macaco: {
       title: "Registro anterior · mesmo local",
@@ -862,6 +925,7 @@ details p { color: var(--muted); }
     try { localStorage.removeItem(KEY); } catch {}
     state = { rasuras: {}, rsvp: {} }; draft = null; current = null;
     rasuras.forEach((r) => r.close());
+    balloon.hidden = true; romanticBtn.setAttribute("aria-expanded", "false");
     renderVote(); out.innerHTML = ""; nameInput.value = "";
     window.scrollTo({ top: 0, behavior: "auto" });
   });
