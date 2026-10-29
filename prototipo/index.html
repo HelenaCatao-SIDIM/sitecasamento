@@ -197,7 +197,9 @@ section { scroll-margin-top: 4rem; }
 .photo figcaption { margin-top: 0.6rem; }
 .clip { display: block; width: 100%; max-height: 70vh; margin-top: 1rem; background: var(--tint); object-fit: contain; }
 
-/* Toscana: a foto embaçada até tocar */
+/* Toscana: a foto embaçada até tocar, menor e torta */
+#pandaPhoto { width: 78%; margin-left: 8%; transform: rotate(-3deg); }
+@media (max-width: 26rem) { #pandaPhoto { width: 86%; margin-left: 5%; } }
 .blurred { overflow: hidden; cursor: pointer; }
 .blurred > * { filter: blur(14px); transform: scale(1.06); transition: filter .8s ease, transform .8s ease; }
 .blurred.clear { cursor: default; }
@@ -226,14 +228,16 @@ section { scroll-margin-top: 4rem; }
 /* Muro: a ficha e a enquete num card que flutua sobre a foto */
 .muro-stage { margin-top: 2rem; }
 .muro-stage .ph, .muro-stage .photo { margin: 0; }
+.muro-stage .photo { width: 62%; }
 .plaque {
-  position: relative; width: 88%; margin: -5.5rem 0 0 auto; padding: 1.3rem 1.2rem 1.4rem; box-sizing: border-box;
+  position: relative; width: 74%; margin: -4.5rem 0 0 auto; padding: 1.3rem 1.2rem 1.4rem; box-sizing: border-box;
   background: var(--surface); transform: rotate(-1deg);
   box-shadow: 0 22px 44px -20px color-mix(in srgb, var(--ink) 55%, transparent);
 }
 .plaque .ficha { margin-top: 0; }
 .plaque .vote { margin-top: 1.3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
-@media (max-width: 26rem) { .plaque { width: 94%; } }
+.plaque .choice { font-size: 0.74rem; letter-spacing: 0.08em; }
+@media (max-width: 26rem) { .muro-stage .photo { width: 68%; } .plaque { width: 82%; } }
 /* Muro */
 .ficha { margin-top: 1.2rem; display: grid; gap: 0.25rem; }
 .ficha .title { font-family: var(--display); font-size: 1.35rem; line-height: 1.25; }
@@ -500,8 +504,8 @@ details p { color: var(--muted); }
         <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
         <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
         <p class="official ring-line"><span class="rasura" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" aria-controls="omAnel" aria-expanded="false">Italo</button><span class="hand">Helena</span></span> escolheu cuidadosamente o anel de noivado.</p>
+        <p class="foot" style="margin-top:0.6rem">Aviso: tocar no nome pode alterar sua percepção sobre o noivo.</p>
         <div id="omAnel" hidden>
-          <p class="foot" style="margin-top:1rem">Informação que pode alterar sua percepção sobre o noivo.</p>
           <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
         </div>
       </div>
