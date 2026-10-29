@@ -629,6 +629,21 @@ details p { color: var(--muted); }
 
 .gift-h { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2rem); line-height: 1.15; margin: 0; }
 
+/* Confirmar presença: o formulário primeiro */
+.rsvp-card { margin-top: 1.6rem; padding: 1.3rem 1.2rem 1.4rem; background: var(--surface); }
+.rsvp-card .rsvp-search { margin-top: 1.1rem; }
+.rsvp-card .rsvp-search .btn { flex: 1 1 100%; }
+.flowers { display: flex; flex-wrap: wrap; gap: 0.15rem; margin-top: 1.1rem; }
+.fl { display: block; width: 2rem; }
+.fl:nth-child(even) { transform: translateY(0.45rem) rotate(18deg); }
+.fl .flower { display: block; width: 100%; height: auto; }
+.f1 { color: #E2553B; } .f2 { color: #F2B134; } .f3 { color: #2F7FB5; } .f4 { color: #C2407F; }
+.f5 { color: #3E9E5C; } .f6 { color: #F07B2E; } .f7 { color: #7A5BB0; }
+.info-card { margin-top: 0.8rem; padding: 1.3rem 1.2rem; background: var(--surface); display: grid; gap: 0.35rem; }
+.info-title { font-family: var(--display); font-size: 1.3rem; color: var(--ink); }
+.route-options { display: grid; gap: 0.6rem; margin-top: 1rem; }
+.thanks .btn { margin-top: 0.9rem; }
+
 </style>
 
 <header class="top">
@@ -891,47 +906,13 @@ details p { color: var(--muted); }
 <!-- Página 2: confirmar presença -->
 <div class="view" id="v-confirmar" data-name="confirmar" hidden>
   <section class="page" id="confirmar">
-    <img class="deco right" src="midia/deco-sabara.webp" alt="" aria-hidden="true" loading="lazy" style="top:1rem;--r:2deg">
     <div class="wrap">
       <span class="label">Sábado, 23 de janeiro de 2027 · 15h às 23h</span>
       <h1 class="page-title">Confirmar presença</h1>
-      <p class="page-lede">Antes de confirmar, o que você precisa saber para chegar lá.</p>
-
-      <div class="part">
-        <h3>Onde</h3>
-        <div class="facts" style="margin-top:0">
-          <span>Rua João Batista Campanha, 46</span>
-          <span class="muted">Terra Santa, Sabará, MG</span>
-        </div>
-        <div class="links">
-        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Abrir no Google Maps</a>
-        <a class="btn" href="https://waze.com/ul?q=Rua%20Jo%C3%A3o%20Batista%20Campanha%2046%20Sabar%C3%A1%20MG" target="_blank" rel="noopener">Abrir no Waze</a>
-        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&amp;dates=20270123T150000/20270123T230000&amp;ctz=America/Sao_Paulo&amp;location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
-        </div>
-        <p class="note">Não vai ter cerimônia: a gente se casa na quarta-feira, 20 de janeiro, e no sábado é só comemoração. Estacionamento na rua, com espaço suficiente.</p>
-      </div>
-
-      <div class="part">
-        <h3>Traje</h3>
-        <p>Esporte fino e colorido. Venha com a roupa mais colorida que tiver, em cores fortes, como um campo de flores. Terno não é necessário.</p>
-      </div>
-
-      <div class="part">
-        <h3>Onde ficar</h3>
-        <p>Para quem vem de longe, uma dica de hospedagem perto da festa:</p>
-        <div class="hotel">
-          <span class="label">Dica</span>
-          <p class="hotel-name todo">[Nome do hotel]</p>
-          <p class="todo">[Bairro ou distância até a festa · faixa de preço]</p>
-          <p class="todo">[Link ou telefone para reservar]</p>
-        </div>
-      </div>
-
-      <div class="part rsvp-part" id="rsvp">
-        <h3>Confirme sua presença</h3>
-        <p>Confirme até <span class="todo" data-cfg="prazo">[data limite]</span>. Digite seu nome para encontrar o seu convite.</p>
+      <div class="rsvp-card" id="rsvp">
+        <p style="margin:0">Digite seu nome e sobrenome para encontrar o seu convite. Confirme até <span class="todo" data-cfg="prazo">[data limite]</span>.</p>
         <form class="rsvp-search" id="rsvpForm" autocomplete="off">
-          <label class="label" for="rsvpName" style="flex-basis:100%">Seu nome</label>
+          <label class="label" for="rsvpName" style="flex-basis:100%">Nome e sobrenome</label>
           <input class="field" id="rsvpName" name="nome" type="text" placeholder="Nome e sobrenome" enterkeyhint="search">
           <button class="btn primary" type="submit">Buscar convite</button>
         </form>
@@ -939,18 +920,42 @@ details p { color: var(--muted); }
       </div>
 
       <div class="part">
+        <h3>Onde</h3>
+        <div class="facts" style="margin-top:0">
+          <span>Rua João Batista Campanha, 46</span>
+          <span class="muted">Terra Santa, Sabará, MG</span>
+        </div>
+        <button class="btn wide" type="button" id="routeBtn">Como chegar</button>
+      </div>
+
+      <div class="part">
+        <h3>Traje</h3>
+        <p>Esporte fino e colorido. Venha com a roupa mais colorida que tiver, em cores fortes, como um campo de flores. Terno não é necessário.</p>
+        <div class="flowers" aria-hidden="true"><span class="fl f1"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span><span class="fl f2"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span><span class="fl f3"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span><span class="fl f4"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span><span class="fl f5"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span><span class="fl f6"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span><span class="fl f7"><svg class="flower" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><circle cx="12" cy="5.5" r="4"/><circle cx="18.2" cy="10" r="4"/><circle cx="15.8" cy="17.3" r="4"/><circle cx="8.2" cy="17.3" r="4"/><circle cx="5.8" cy="10" r="4"/></g><circle cx="12" cy="12" r="3" fill="var(--paper)"/></svg></span></div>
+      </div>
+
+      <div class="part">
+        <h3>Onde ficar</h3>
+        <div class="info-card">
+          <span class="label">Dica de hospedagem</span>
+          <span class="info-title todo">[Nome do hotel]</span>
+          <span class="todo">[Bairro ou distância até a festa · faixa de preço]</span>
+          <span class="todo">[Link ou telefone para reservar]</span>
+        </div>
+      </div>
+
+      <div class="part">
         <h3>Perguntas frequentes</h3>
         <details><summary>Vai ter cerimônia?</summary><p>Não. A gente se casa na quarta-feira, 20 de janeiro. No sábado é só comemoração.</p></details>
         <details><summary>Posso levar criança?</summary><p>Crianças são muito bem-vindas. Vai ter espaço e comida para elas.</p></details>
         <details><summary>Tem estacionamento?</summary><p>Na rua, com espaço suficiente.</p></details>
-        <details><summary>Até que horas vai?</summary><p>Até as 23h.</p></details>
         <details><summary>Vai ter transporte?</summary><p>Não. Cada convidado vai e volta por conta própria.</p></details>
         <details><summary>E se chover?</summary><p>Você não é de açúcar. A comemoração continua no mesmo lugar.</p></details>
       </div>
 
       <div class="part">
         <h3>Dúvidas</h3>
-        <p>Helena · WhatsApp <span class="todo" data-cfg="whatsapp">[número a confirmar]</span></p>
+        <a class="btn wide" id="waBtn" href="#" target="_blank" rel="noopener">Falar com a Helena no WhatsApp</a>
       </div>
     </div>
   </section>
@@ -1354,6 +1359,7 @@ window.SITE_CONFIG = {
     return inv;
   };
   const waDigits = (CFG.whatsapp || "").replace(/\D/g, "");
+  const CALENDAR = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&dates=20270123T150000/20270123T230000&ctz=America/Sao_Paulo&location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG";
   const waText = waDigits ? `+${waDigits.slice(0, 2)} (${waDigits.slice(2, 4)}) ${waDigits.slice(4, -4)}-${waDigits.slice(-4)}` : "[número a confirmar]";
   const byLine = (inv) => `${inv.by} ${inv.by.includes(" e ") ? "convidaram" : "convidou"}:`;
 
@@ -1479,7 +1485,7 @@ window.SITE_CONFIG = {
       const going = inv.guests.filter((g) => draft.answers[g.id]?.go).length;
       const thanks = document.getElementById("thanks");
       thanks.innerHTML = going
-        ? `<h2>${going > 1 ? "Presenças confirmadas." : "Presença confirmada."}</h2><p>Até 23 de janeiro. 🤎</p>`
+        ? `<h2>${going > 1 ? "Presenças confirmadas." : "Presença confirmada."}</h2><p>Até 23 de janeiro. 🤎</p><a class="btn" href="${CALENDAR}" target="_blank" rel="noopener">Adicionar à agenda</a>`
         : `<h2>Que pena.</h2><p>Obrigado por avisar.</p>`;
       thanks.hidden = false;
       setTimeout(() => showView("presentes"), 700);
@@ -1495,6 +1501,20 @@ window.SITE_CONFIG = {
     const d = e.target.dataset.diet;
     if (d && draft) draft.answers[d].diet = e.target.value;
   });
+
+  // ---------- confirmar presença: como chegar e WhatsApp ----------
+  const MAPS = "https://www.google.com/maps/search/?api=1&query=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG";
+  const WAZE = "https://waze.com/ul?q=Rua%20Jo%C3%A3o%20Batista%20Campanha%2046%20Sabar%C3%A1%20MG";
+  document.getElementById("routeBtn").addEventListener("click", () => openModal({
+    title: "Como chegar",
+    html: `<p class="big">Rua João Batista Campanha, 46</p><p style="margin:0.2rem 0 0">Terra Santa, Sabará, MG</p>
+      <div class="route-options">
+        <a class="btn primary" href="${MAPS}" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn" href="${WAZE}" target="_blank" rel="noopener">Abrir no Waze</a>
+      </div>`,
+  }));
+  const waBtn = document.getElementById("waBtn");
+  if (waDigits) waBtn.href = `https://wa.me/${waDigits}`; else waBtn.hidden = true;
 
   // ---------- presentes: a lista (link externo) e o Pix ----------
   const PIX = CFG.pix || {};

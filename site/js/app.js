@@ -282,6 +282,7 @@
     return inv;
   };
   const waDigits = (CFG.whatsapp || "").replace(/\D/g, "");
+  const CALENDAR = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&dates=20270123T150000/20270123T230000&ctz=America/Sao_Paulo&location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG";
   const waText = waDigits ? `+${waDigits.slice(0, 2)} (${waDigits.slice(2, 4)}) ${waDigits.slice(4, -4)}-${waDigits.slice(-4)}` : "[número a confirmar]";
   const byLine = (inv) => `${inv.by} ${inv.by.includes(" e ") ? "convidaram" : "convidou"}:`;
 
@@ -407,7 +408,7 @@
       const going = inv.guests.filter((g) => draft.answers[g.id]?.go).length;
       const thanks = document.getElementById("thanks");
       thanks.innerHTML = going
-        ? `<h2>${going > 1 ? "Presenças confirmadas." : "Presença confirmada."}</h2><p>Até 23 de janeiro. 🤎</p>`
+        ? `<h2>${going > 1 ? "Presenças confirmadas." : "Presença confirmada."}</h2><p>Até 23 de janeiro. 🤎</p><a class="btn" href="${CALENDAR}" target="_blank" rel="noopener">Adicionar à agenda</a>`
         : `<h2>Que pena.</h2><p>Obrigado por avisar.</p>`;
       thanks.hidden = false;
       setTimeout(() => showView("presentes"), 700);
@@ -423,6 +424,20 @@
     const d = e.target.dataset.diet;
     if (d && draft) draft.answers[d].diet = e.target.value;
   });
+
+  // ---------- confirmar presença: como chegar e WhatsApp ----------
+  const MAPS = "https://www.google.com/maps/search/?api=1&query=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG";
+  const WAZE = "https://waze.com/ul?q=Rua%20Jo%C3%A3o%20Batista%20Campanha%2046%20Sabar%C3%A1%20MG";
+  document.getElementById("routeBtn").addEventListener("click", () => openModal({
+    title: "Como chegar",
+    html: `<p class="big">Rua João Batista Campanha, 46</p><p style="margin:0.2rem 0 0">Terra Santa, Sabará, MG</p>
+      <div class="route-options">
+        <a class="btn primary" href="${MAPS}" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn" href="${WAZE}" target="_blank" rel="noopener">Abrir no Waze</a>
+      </div>`,
+  }));
+  const waBtn = document.getElementById("waBtn");
+  if (waDigits) waBtn.href = `https://wa.me/${waDigits}`; else waBtn.hidden = true;
 
   // ---------- presentes: a lista (link externo) e o Pix ----------
   const PIX = CFG.pix || {};

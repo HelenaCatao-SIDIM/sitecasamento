@@ -622,3 +622,18 @@ details p { color: var(--muted); }
 .gift-end { margin: 1.8rem 0 0; font-family: var(--hand); color: var(--pen); font-size: clamp(1.5rem, 5.6vw, 1.9rem); line-height: 1.3; transform: rotate(-2deg); transform-origin: left center; }
 
 .gift-h { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2rem); line-height: 1.15; margin: 0; }
+
+/* Confirmar presença: o formulário primeiro */
+.rsvp-card { margin-top: 1.6rem; padding: 1.3rem 1.2rem 1.4rem; background: var(--surface); }
+.rsvp-card .rsvp-search { margin-top: 1.1rem; }
+.rsvp-card .rsvp-search .btn { flex: 1 1 100%; }
+.flowers { display: flex; flex-wrap: wrap; gap: 0.15rem; margin-top: 1.1rem; }
+.fl { display: block; width: 2rem; }
+.fl:nth-child(even) { transform: translateY(0.45rem) rotate(18deg); }
+.fl .flower { display: block; width: 100%; height: auto; }
+.f1 { color: #E2553B; } .f2 { color: #F2B134; } .f3 { color: #2F7FB5; } .f4 { color: #C2407F; }
+.f5 { color: #3E9E5C; } .f6 { color: #F07B2E; } .f7 { color: #7A5BB0; }
+.info-card { margin-top: 0.8rem; padding: 1.3rem 1.2rem; background: var(--surface); display: grid; gap: 0.35rem; }
+.info-title { font-family: var(--display); font-size: 1.3rem; color: var(--ink); }
+.route-options { display: grid; gap: 0.6rem; margin-top: 1rem; }
+.thanks .btn { margin-top: 0.9rem; }
