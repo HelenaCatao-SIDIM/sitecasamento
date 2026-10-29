@@ -148,7 +148,7 @@ main { overflow-x: hidden; overflow-x: clip; }
 .pair .ph, .pair .photo { margin: 0; }
 .pair img { aspect-ratio: 4 / 5; object-fit: cover; }
 /* o coração troca as fotos daquela noite pelas de bebê, e volta */
-.pair .photo { position: relative; }
+.pair .photo { position: relative; cursor: pointer; }
 .pair .baby { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; transition: opacity .6s ease; }
 .pair.babies .baby { opacity: 1; }
 .heart-btn { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 9rem; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -50%); z-index: 2; }
@@ -1096,6 +1096,8 @@ window.SITE_CONFIG = {
     heartBtn.setAttribute("aria-pressed", String(on));
     heartBtn.setAttribute("aria-label", on ? "Voltar para as fotos daquela noite" : "Trocar pelas fotos de bebê");
   });
+  // tocar em qualquer uma das duas fotos faz o mesmo que o coração
+  heartBtn.closest(".pair").addEventListener("click", (e) => { if (e.target.closest(".photo")) heartBtn.click(); });
 
   // as horas se escrevem sozinhas quando aparecem na tela
   if ("IntersectionObserver" in window && !reduce) {

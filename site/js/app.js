@@ -62,6 +62,8 @@
     heartBtn.setAttribute("aria-pressed", String(on));
     heartBtn.setAttribute("aria-label", on ? "Voltar para as fotos daquela noite" : "Trocar pelas fotos de bebê");
   });
+  // tocar em qualquer uma das duas fotos faz o mesmo que o coração
+  heartBtn.closest(".pair").addEventListener("click", (e) => { if (e.target.closest(".photo")) heartBtn.click(); });
 
   // as horas se escrevem sozinhas quando aparecem na tela
   if ("IntersectionObserver" in window && !reduce) {
