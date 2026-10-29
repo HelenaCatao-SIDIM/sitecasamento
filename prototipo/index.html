@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&family=Corinthia:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&family=Corinthia:wght@400;700&family=Jost:ital,wght@0,300..600;1,300..500&display=swap">
 <style>
 /* Layout: uma coluna estreita de documento oficial; o Pedido é a única peça que ocupa a largura toda.
    Código do site: o que está riscado foi omitido; tocar mostra a correção à mão e o que ficou de fora.
@@ -22,6 +22,7 @@
   --body: "Newsreader", "Iowan Old Style", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --hand: "Nothing You Could Do", "Segoe Script", "Bradley Hand", cursive;
+  --sans: "Jost", "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
 
   --col: 38rem;
 }
@@ -40,7 +41,7 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   background: var(--paper); color: var(--ink);
-  font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
+  font-family: var(--sans); font-size: 1.05rem; line-height: 1.6; font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 body::before {
@@ -220,7 +221,7 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .program-item .label { display: block; }
 .program-item p { margin: 0.35rem 0 0; }
 .program-item + .program-item { padding-top: 1.4rem; border-top: 1px dotted var(--line); }
-.program-link { margin-top: 0.7rem; background: none; border: 0; padding: 0.3rem; cursor: pointer; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.program-link { margin-top: 0.7rem; background: none; border: 0; padding: 0.3rem; cursor: pointer; font-family: var(--sans); font-size: 0.98rem; font-weight: 500; letter-spacing: 0.01em; color: var(--pen); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .program-link:hover { color: var(--pen); }
 @media (prefers-reduced-motion: reduce) { .romantic, .balloon, .boat { animation: none; } .write.go { transition: none; } }
 .omitted .ph, .omitted .photo { margin-top: 1.1rem; }
@@ -297,7 +298,9 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .lede { font-style: italic; font-size: 1.25rem; margin: 0.5rem 0 0; color: var(--muted); }
 .entry { margin-top: 3.2rem; }
 .entry .label { display: block; margin-bottom: 0.6rem; }
-.official { font-size: clamp(1.25rem, 4.6vw, 1.45rem); line-height: 1.5; margin: 0; text-wrap: pretty; }
+/* hierarquia: o destaque de cada momento em serifa; o apoio em sem serifa, menor */
+.official { font-size: clamp(1.05rem, 3.9vw, 1.18rem); line-height: 1.6; margin: 0; text-wrap: pretty; }
+.official.lead { font-family: var(--body); font-size: clamp(1.3rem, 4.8vw, 1.5rem); line-height: 1.45; }
 .sub { margin-top: 3.6rem; }
 .sub h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2.1rem); margin: 0; line-height: 1.15; }
 
@@ -441,7 +444,7 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .pedido-text .earlier { margin-top: 1.4rem; margin-bottom: 4.5rem; }
 .link-star { display: inline-block; margin-left: 0.15em; color: var(--pen); font-weight: 700; font-size: 1.5em; line-height: 0; vertical-align: -0.15em; animation: hintpop 1.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .link-star, .tap-up { animation: none; } }
-.earlier { background: none; border: 0; padding: 0.4rem 0; cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); }
+.earlier { background: none; border: 0; padding: 0.4rem 0; cursor: pointer; font-family: var(--sans); font-size: 0.95rem; color: var(--muted); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .earlier:hover { color: var(--ink); }
 
 /* Comemoração */
@@ -602,7 +605,7 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <span class="label">19 de dezembro de 2021</span>
-        <p class="official">Foi amor à primeira vista.<span class="rasura soft star" data-rasura="beijo" data-panel="omBeijo"><button class="struck" type="button" data-label="Amor à primeira vista" aria-controls="omBeijo" aria-expanded="false">*</button></span><span class="tap-note" aria-hidden="true">← toque aqui</span></p>
+        <p class="official lead">Foi amor à primeira vista.<span class="rasura soft star" data-rasura="beijo" data-panel="omBeijo"><button class="struck" type="button" data-label="Amor à primeira vista" aria-controls="omBeijo" aria-expanded="false">*</button></span><span class="tap-note" aria-hidden="true">← toque aqui</span></p>
         <p class="foot" style="margin:0.5rem 0 0">*Helena recusou o primeiro beijo.</p>
         <p class="foot reveal" id="omBeijo" style="margin:0.2rem 0 0" hidden>Depois quase entrou no banheiro masculino atrás dele.</p>
         <div class="pair">
@@ -620,7 +623,7 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <span class="label">As semanas seguintes</span>
-        <p class="official">Os dois conversam por telefone por horas e horas <span class="endless write">e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas…</span></p>
+        <p class="official lead">Os dois conversam por telefone por horas e horas <span class="endless write">e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas e horas…</span></p>
         <p class="foot" style="margin:0.4rem 0 0">Às vezes, literalmente seis.</p>
         <div class="romantic-row">
           <button class="romantic" type="button" data-open="romantico">O último romântico →</button>
@@ -633,7 +636,7 @@ details p { color: var(--muted); }
           <video src="midia/pai.mp4" poster="midia/pai-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
           <span class="boat-tag">e o pai dela.</span>
         </button>
-        <p class="official">Segundo encontro foi em Sabará.</p>
+        <p class="official lead">Segundo encontro foi em Sabará.</p>
         <p class="official" style="margin-top:0.6rem">Italo atravessou Belo Horizonte para ver Helena.</p>
 
         <div class="night">
@@ -652,7 +655,7 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <span class="label">21 de fevereiro de 2022</span>
-        <p class="official">Começam a namorar.</p>
+        <p class="official lead">Começam a namorar.</p>
         <p class="aside-hand">Sim!!! Foram quase 5 anos pra casar.<span>desafiando os limites da paciência da família</span></p>
       </div>
     </div>
@@ -667,12 +670,11 @@ details p { color: var(--muted); }
     <img class="deco right" src="midia/deco-atenas.webp" alt="" aria-hidden="true" loading="lazy" style="top:82%;--r:-3deg;animation-delay:-5s">
     <div class="wrap">
       <h2>Depois, muitos lugares</h2>
-      <p class="official" style="margin-top:1.4rem">Itália, Chile e, no último ano, um intercâmbio que acabou virando mochilão.</p>
+      <p class="official" style="margin-top:1.4rem">Itália, Chile e, no último ano, um intercâmbio que quase acabou virando mochilão.</p>
 
       <div class="entry">
-        <p class="official">Na Itália, Helena realiza o sonho de cruzar a Toscana de <span class="rasura" data-rasura="panda" data-panel="pandaNote"><button class="struck" type="button" aria-controls="pandaNote" aria-expanded="false">conversível</button><span class="hand">Panda</span></span>.</p>
+        <p class="official lead">Na Itália, Helena realiza o sonho de cruzar a Toscana de <span class="rasura" data-rasura="panda" data-panel="pandaNote"><button class="struck" type="button" aria-controls="pandaNote" aria-expanded="false">conversível</button><span class="hand">Panda</span></span>.</p>
         <figure class="photo blurred" id="pandaPhoto" role="button" tabindex="0" aria-label="Foto embaçada do carro na Toscana. Toque para ver."><img src="midia/panda.jpg" width="894" height="513" alt="Fiat Panda prata estacionado"><span class="reveal-hint" aria-hidden="true">toque para revelar</span></figure>
-        <span class="tap-note tap-up" aria-hidden="true">↑ toque aqui</span>
         <span id="pandaNote" hidden></span>
       </div>
 
@@ -701,7 +703,7 @@ details p { color: var(--muted); }
     <div class="wrap">
       <p class="official">Depois de um ano e vinte dias fora, seis meses morando em Malta, muitos países e já dividindo a vida há algum tempo, eles embarcam para o último destino do intercâmbio:</p>
       <h2 class="destino">África do Sul.</h2>
-      <p class="official" style="margin-top:1.4rem"><span class="rasura" data-rasura="expectativa" data-panel="omExpectativa"><button class="struck" type="button" aria-controls="omExpectativa" aria-expanded="false">Sem nenhuma expectativa.</button></span><span class="tap-note" aria-hidden="true">← toque</span></p>
+      <p class="official lead" style="margin-top:1.4rem"><span class="rasura" data-rasura="expectativa" data-panel="omExpectativa"><button class="struck" type="button" aria-controls="omExpectativa" aria-expanded="false">Sem nenhuma expectativa.</button></span><span class="tap-note" aria-hidden="true">← toque</span></p>
       <div class="reveal" id="omExpectativa" hidden>
         <p class="said" style="margin:0.6rem 0 0">“Ou a gente volta noivo, ou volta solteiro.”</p>
         <p class="foot" style="margin:0.3rem 0 0">Em tom de brincadeira. Mais ou menos.</p>
@@ -744,7 +746,7 @@ details p { color: var(--muted); }
         <span class="label">2 de setembro de 2026</span>
         <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
         <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
-        <p class="official ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.<span class="tap-note" aria-hidden="true">↖ toque no nome</span></p>
+        <p class="official lead ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.<span class="tap-note" aria-hidden="true">↖ toque no nome</span></p>
         <p class="foot" style="margin-top:0.6rem">*Tocar no nome pode alterar sua percepção sobre o noivo.</p>
         <div id="omAnel" hidden>
           <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
@@ -754,7 +756,7 @@ details p { color: var(--muted); }
       <div class="sub">
         <span class="label">Cinco dias depois</span>
         <p class="official" style="margin-top:0.6rem">O anel estava resolvido.</p>
-        <p class="official punch">Faltava uma coisa.</p>
+        <p class="official lead punch">Faltava uma coisa.</p>
       </div>
       <p class="pedido-cue" id="pedidoCue">o pedido!</p>
     </div>

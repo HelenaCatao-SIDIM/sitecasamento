@@ -4,7 +4,9 @@ Site do casamento. Conceito: uma versão oficial cheia de coisas escondidas. O c
 
 ## Estrutura
 
-Ao entrar, um pop-up de boas-vindas explica o que é tocável (palavra riscada, asterisco, vídeo ou etiqueta flutuando, desenho pulsando); não aparece para quem chega por um atalho como #confirmar. Os pontos tocáveis pulsam até serem tocados, setinhas escritas à mão em 19/12, "Sem nenhuma expectativa", Panda ("↑ toque aqui" e "toque para revelar"), enquete do muro ("vote ↓") e anel ("↖ toque no nome"); o asterisco do "oficial" pulsa forte, o "último romântico" pulsa com um anel em volta e os vídeos flutuantes têm ▶. Cada visita começa com tudo fechado. Cada memória tem uma brincadeira própria (asterisco, rasura, horas infinitas, programação da noite, votação, rolagem); a rasura é a mais comum. O que está riscado foi omitido. Tocar mostra a correção à mão e o causo que ficou de fora. A versão oficial fala em terceira pessoa; o que foi omitido, em primeira.
+Ao entrar, um pop-up de boas-vindas explica o que é tocável (palavra riscada, asterisco, vídeo ou etiqueta flutuando, desenho pulsando); não aparece para quem chega por um atalho como #confirmar. Os pontos tocáveis pulsam até serem tocados, setinhas escritas à mão em 19/12, "Sem nenhuma expectativa", Panda ("toque para revelar"), enquete do muro ("vote ↓") e anel ("↖ toque no nome"); o asterisco do "oficial" pulsa forte, o "último romântico" pulsa com um anel em volta e os vídeos flutuantes têm ▶. Cada visita começa com tudo fechado. Cada memória tem uma brincadeira própria (asterisco, rasura, horas infinitas, programação da noite, votação, rolagem); a rasura é a mais comum. O que está riscado foi omitido. Tocar mostra a correção à mão e o causo que ficou de fora. A versão oficial fala em terceira pessoa; o que foi omitido, em primeira.
+
+Tipografia: destaque de cada momento, títulos e citações em serifa (Bodoni Moda, Newsreader); texto de apoio, contexto e parte prática em sem serifa (Jost); nome em Corinthia; correções à mão em Nothing You Could Do; etiquetas em IBM Plex Mono. "ver registro" e "registro anterior" em sem serifa, minúsculas e sublinhados.
 
 | Bloco | O que tem |
 | --- | --- |
