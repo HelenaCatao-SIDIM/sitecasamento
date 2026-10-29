@@ -86,6 +86,16 @@ section { scroll-margin-top: 4rem; }
 .rasura.soft .struck { text-decoration-line: none; }
 .rasura.soft.open .struck { text-decoration-line: line-through; }
 .rasura.open .mark { display: none; }
+/* Asterisco tocável */
+.rasura.star .struck { color: var(--pen); font-weight: 600; padding: 0 0.3em 0 0.08em; }
+.rasura.star.open .struck { text-decoration-line: none; color: var(--muted); }
+.reveal.show { animation: ink .6s ease both; }
+/* Duas fotos lado a lado e o coração à mão entre elas */
+.pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 1.6rem; }
+.pair .ph { margin: 0; }
+.heart { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 9rem; height: auto; stroke: var(--pen); transform: translate(-50%, -50%); animation: beat 1.6s ease-in-out infinite; pointer-events: none; }
+@keyframes beat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 14% { transform: translate(-50%, -50%) scale(1.12); } 28% { transform: translate(-50%, -50%) scale(1); } 42% { transform: translate(-50%, -50%) scale(1.07); } }
+@media (prefers-reduced-motion: reduce) { .heart, .reveal.show { animation: none; } }
 .rasura.open .struck { cursor: default; color: var(--muted); text-decoration-color: var(--pen); }
 .hand { display: none; font-family: var(--hand); color: var(--pen); font-size: 1.05em; margin-left: 0.25em; }
 .rasura.open .hand { display: inline; animation: ink .6s ease both; }
@@ -333,16 +343,20 @@ details p { color: var(--muted); }
   <section class="block" id="historia">
     <div class="wrap">
       <h2>A versão oficial</h2>
-      <p class="foot howto">O que está riscado foi omitido. Toque para ver.</p>
+      <p class="foot howto">O que está riscado ou marcado com * foi omitido. Toque para ver.</p>
 
       <div class="entry">
         <span class="label">19 de dezembro de 2021</span>
-        <p class="official">Helena e Italo se conhecem numa festa. A conversa começa <span class="rasura" data-rasura="beijo" data-panel="omBeijo"><button class="struck" type="button" aria-controls="omBeijo" aria-expanded="false">sem pressa</button><span class="hand">com um pedido de beijo</span></span>.</p>
-        <div class="omitted" id="omBeijo" hidden>
-          <p>Ele pediu um beijo antes mesmo de a conversa começar direito. Eu dei um fora.</p>
-          <p>Pouco depois, ele foi ao banheiro e eu achei que tinha ido embora sem me passar o telefone.</p>
-          <p class="punch">O fora durou pouco: quase entrei no banheiro masculino atrás dele.</p>
-          <figure class="ph">Foto · a noite em que se conheceram</figure>
+        <p class="official">Foi amor à primeira vista.<span class="rasura soft star" data-rasura="beijo" data-panel="omBeijo"><button class="struck" type="button" data-label="Amor à primeira vista" aria-controls="omBeijo" aria-expanded="false">*</button></span></p>
+        <p class="foot" style="margin:0.5rem 0 0">*Helena recusou o primeiro beijo.</p>
+        <p class="foot reveal" id="omBeijo" style="margin:0.2rem 0 0" hidden>Depois quase entrou no banheiro masculino atrás dele.</p>
+        <div class="pair">
+          <figure class="ph tall">Foto · Italo naquela noite</figure>
+          <figure class="ph tall">Foto · Helena naquela noite</figure>
+          <svg class="heart" viewBox="0 0 100 92" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M50 82 C 21 60, 4 42, 10 24 C 15 9, 36 6, 48 22 C 50 25, 51 25, 53 21 C 63 6, 86 8, 91 25 C 96 44, 78 62, 51 82" stroke-width="3" />
+            <path d="M48 79 C 23 58, 7 40, 12 23 C 18 11, 37 9, 49 25 C 60 8, 84 11, 88 26 C 93 45, 75 60, 53 80" stroke-width="1.4" opacity=".7" />
+          </svg>
         </div>
       </div>
 
@@ -581,7 +595,7 @@ details p { color: var(--muted); }
     const btn = wrap.querySelector(".struck");
     const panel = document.getElementById(wrap.dataset.panel);
     const soft = wrap.classList.contains("soft");
-    const label = btn.textContent.replace("*", "");
+    const label = btn.dataset.label || btn.textContent.replace("*", "");
     const closedLabel = soft ? `${label}, com nota. Toque para ver.` : `${label}, riscado. Toque para ver o que foi omitido.`;
     btn.setAttribute("aria-label", closedLabel);
     const open = (animate) => {
