@@ -207,6 +207,8 @@ section { scroll-margin-top: 4rem; }
 
 /* Anel */
 .ring-line { margin-top: 2rem; }
+.destino { font-size: clamp(2.6rem, 11vw, 4rem) !important; margin-top: 0.5rem !important; }
+.punch { font-weight: 600; }
 
 /* Cape Town */
 .record { margin-top: 3.2rem; }
@@ -490,30 +492,20 @@ details p { color: var(--muted); }
     </div>
   </section>
 
-  <!-- A semana do pedido -->
+  <!-- África do Sul -->
   <section class="block" id="semana">
     <div class="wrap">
-      <h2>A semana do pedido</h2>
-      <p class="official" style="margin-top:1.4rem">Helena embarca para a África do Sul <span class="rasura" data-rasura="expectativa" data-panel="omExpectativa"><button class="struck" type="button" aria-controls="omExpectativa" aria-expanded="false">sem nenhuma expectativa</button></span>.</p>
-      <div class="omitted" id="omExpectativa" hidden>
-        <p class="said">“Ou a gente volta noivo, ou volta solteiro.”</p>
-        <p class="foot">Eu estava brincando. Mais ou menos.</p>
+      <p class="official">Depois de um ano e vinte dias fora, seis meses morando em Malta, muitos países e já dividindo a vida há algum tempo, eles embarcam para o último destino do intercâmbio:</p>
+      <h2 class="destino">África do Sul.</h2>
+      <p class="official" style="margin-top:1.4rem"><span class="rasura" data-rasura="expectativa" data-panel="omExpectativa"><button class="struck" type="button" aria-controls="omExpectativa" aria-expanded="false">Sem nenhuma expectativa.</button></span></p>
+      <div class="reveal" id="omExpectativa" hidden>
+        <p class="said" style="margin:0.6rem 0 0">“Ou a gente volta noivo, ou volta solteiro.”</p>
+        <p class="foot" style="margin:0.3rem 0 0">Em tom de brincadeira. Mais ou menos.</p>
       </div>
 
-      <div class="sub" id="anel">
-        <span class="label">2 de setembro de 2026</span>
-        <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
-        <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
-        <p class="official ring-line"><span class="rasura" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" aria-controls="omAnel" aria-expanded="false">Italo</button><span class="hand">Helena</span></span> escolheu cuidadosamente o anel de noivado.</p>
-        <p class="foot" style="margin-top:0.6rem">Aviso: tocar no nome pode alterar sua percepção sobre o noivo.</p>
-        <div id="omAnel" hidden>
-          <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="sub" id="capetown">
-        <h3>Cape Town</h3>
-        <p class="lede">Um encontro sereno com a vida selvagem.</p>
+      <div class="sub" id="safari">
+        <h3>Primeiro: sobreviver à vida selvagem.</h3>
+        <span class="label" style="display:block;margin-top:0.6rem">Hoedspruit · Kruger</span>
         <figure class="photo"><img src="midia/safari.jpg" width="1200" height="1600" alt="Guia de safári de chapéu, de costas, olhando a savana"></figure>
 
         <div class="record rise">
@@ -525,12 +517,17 @@ details p { color: var(--muted); }
         <div class="record rise">
           <p class="label who">Helena</p>
           <figure class="ph vid tall" style="margin-top:0" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto<br>até 20 s</figure>
-          <figcaption><p class="quote loud">“Não olha no olho dela. Se olhar, ela ataca.”</p></figcaption>
+          <figcaption><p class="quote loud todo">[fala real do vídeo]</p></figcaption>
         </div>
 
         <div class="verdict rise">
           <p>Helena também sustenta que o veículo foi estrategicamente posicionado como isca.</p>
           <p class="foot">Não há provas conclusivas.</p>
+        </div>
+
+        <div class="verdict rise">
+          <p class="punch">Helena tinha medo de encontrar uma leoa.</p>
+          <p class="foot">Italo ainda corria o risco de conhecer outra.</p>
         </div>
       </div>
 
@@ -546,6 +543,22 @@ details p { color: var(--muted); }
           </svg>
         </button>
       </div>
+      <div class="sub" id="anel">
+        <span class="label">2 de setembro de 2026</span>
+        <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
+        <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
+        <p class="official ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.</p>
+        <p class="foot" style="margin-top:0.6rem">*Tocar no nome pode alterar sua percepção sobre o noivo.</p>
+        <div id="omAnel" hidden>
+          <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="sub">
+        <span class="label">Cinco dias depois</span>
+        <p class="official" style="margin-top:0.6rem">O anel estava resolvido.</p>
+        <p class="official punch">Faltava uma coisa.</p>
+      </div>
     </div>
   </section>
 
@@ -559,7 +572,7 @@ details p { color: var(--muted); }
       <p class="foot">Nada foi omitido desta versão.</p>
     </div>
     <div class="wrap earlier-row">
-      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local · 5 de setembro →</button>
+      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local →</button>
     </div>
   </section>
 
