@@ -67,25 +67,32 @@ main { overflow-x: hidden; overflow-x: clip; }
 main > section { position: relative; }
 main > section > .wrap, main > section > figure { position: relative; z-index: 1; }
 .deco {
-  position: absolute; z-index: 0; width: 52vw; max-width: 22rem; height: auto; opacity: 0.26;
-  mix-blend-mode: multiply; pointer-events: none; transform: rotate(var(--r, 0deg));
+  position: absolute; z-index: 0; width: 72vw; max-width: 26rem; height: auto; opacity: 0.2;
+  pointer-events: none; transform: rotate(var(--r, 0deg));
+  /* borda esfumada: a gravura some no papel em vez de terminar num recorte */
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
   animation: drift 11s ease-in-out infinite;
 }
-.deco.left { left: -18vw; }
-.deco.right { right: -18vw; }
+.deco.left { left: -26vw; }
+.deco.right { right: -26vw; }
 .desk-only { display: none; }
-.skyline { display: block; width: 100%; max-width: 30rem; height: auto; margin: 0 auto 1.6rem; mix-blend-mode: multiply; opacity: 0.85; }
+.skyline {
+  display: block; width: 100%; max-width: 34rem; height: auto; margin: 0 auto 1.6rem; opacity: 0.55;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+}
 @keyframes drift { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-12px) rotate(var(--r, 0deg)); } }
 @media (min-width: 72rem) {
-  .deco { width: clamp(12rem, calc(50vw - 24rem), 19rem); opacity: 0.95; }
-  .deco.left { left: 1.5vw; }
-  .deco.right { right: 1.5vw; }
+  .deco { width: clamp(16rem, calc(50vw - 17rem), 30rem); max-width: none; opacity: 0.5; }
+  .deco.left { left: -1vw; }
+  .deco.right { right: -1vw; }
   .desk-only { display: block; }
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .deco, :root:not([data-theme="light"]) .skyline { filter: invert(1) hue-rotate(180deg); mix-blend-mode: screen; }
+  :root:not([data-theme="light"]) .deco, :root:not([data-theme="light"]) .skyline { filter: invert(1) hue-rotate(180deg); }
 }
-:root[data-theme="dark"] .deco, :root[data-theme="dark"] .skyline { filter: invert(1) hue-rotate(180deg); mix-blend-mode: screen; }
+:root[data-theme="dark"] .deco, :root[data-theme="dark"] .skyline { filter: invert(1) hue-rotate(180deg); }
 @media (prefers-reduced-motion: reduce) { .deco { animation: none; } }
 
 /* Topo */
