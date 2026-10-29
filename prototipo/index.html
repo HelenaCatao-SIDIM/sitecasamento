@@ -599,9 +599,12 @@ details p { color: var(--muted); }
 .band { padding-block: 3.2rem; }
 #presentes.band { padding-top: 3.5rem; }
 .band.alt { background: color-mix(in srgb, var(--paper) 90%, var(--pen) 10%); }
-.ways { display: grid; gap: 0.6rem; margin-top: 1.8rem; }
-@media (min-width: 40rem) { .ways { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.way { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.9rem; align-items: baseline; text-align: left; padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font: inherit; color: var(--ink); }
+.ways { display: grid; gap: 0.35rem; margin-top: 1.8rem; }
+@media (min-width: 40rem) { .ways { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 0.6rem; } }
+.or { display: block; margin: 0; text-align: center; font-family: var(--body); font-style: italic; font-size: 1.05rem; color: var(--pen); }
+.band .or { text-align: left; margin-bottom: 0.3rem; font-size: 1.15rem; }
+.ways .or { text-align: center; }
+.way { display: grid; gap: 0.15rem; align-items: baseline; text-align: left; padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font: inherit; color: var(--ink); }
 .way:hover { border-color: var(--pen); }
 .way-n { grid-row: span 2; font-family: var(--display); font-size: 1.8rem; color: var(--pen); line-height: 1; }
 .way-t { font-family: var(--display); font-size: 1.25rem; }
@@ -623,6 +626,8 @@ details p { color: var(--muted); }
 .pix-key { font-family: var(--mono); font-size: clamp(0.66rem, 3.2vw, 0.95rem); letter-spacing: 0; white-space: nowrap; }
 .pix-card .wide { margin-top: 1rem; }
 .gift-end { margin: 1.8rem 0 0; font-family: var(--hand); color: var(--pen); font-size: clamp(1.5rem, 5.6vw, 1.9rem); line-height: 1.3; transform: rotate(-2deg); transform-origin: left center; }
+
+.gift-h { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2rem); line-height: 1.15; margin: 0; }
 
 </style>
 
@@ -957,21 +962,23 @@ details p { color: var(--muted); }
     <div class="wrap">
       <div class="thanks" id="thanks" hidden></div>
       <h1 class="page-title">Presentes</h1>
-      <p class="official lead" style="margin-top:1rem">A gente está começando a montar a nossa casa e quer que ela tenha coisas com história.</p>
+      <p class="official lead" style="margin-top:1rem">A gente está começando a montar a nossa casa. Se você quiser nos presentear, escolha o jeito que for mais fácil pra você:</p>
       <div class="ways">
-        <button class="way" type="button" data-scroll="p-historia"><span class="way-n">1</span><span class="way-t">Algo com história</span><span class="way-d">o que te lembrar da gente</span></button>
-        <button class="way" type="button" data-scroll="p-lista"><span class="way-n">2</span><span class="way-t">Lista da casa</span><span class="way-d">ideias do que ainda falta</span></button>
-        <button class="way" type="button" data-scroll="p-pix"><span class="way-n">3</span><span class="way-t">Em dinheiro</span><span class="way-d">por Pix, direto pra gente</span></button>
+        <button class="way" type="button" data-scroll="p-historia"><span class="way-t">Algo com história</span><span class="way-d">o que te lembrar da gente</span></button>
+        <span class="or">ou</span>
+        <button class="way" type="button" data-scroll="p-lista"><span class="way-t">Uma ideia da nossa lista</span><span class="way-d">o que ainda falta na casa</span></button>
+        <span class="or">ou</span>
+        <button class="way" type="button" data-scroll="p-pix"><span class="way-t">Um Pix</span><span class="way-d">direto pra gente</span></button>
       </div>
     </div>
   </section>
 
   <section class="band" id="p-historia">
     <div class="wrap">
-      <span class="label">1 · Algo com história</span>
-      <p class="official" style="margin-top:0.8rem">Se um dia você olhar para alguma coisa e pensar <em>“isso é muito a cara deles”</em>, pode ser exatamente esse o presente.</p>
+      <h2 class="gift-h">Algo com história</h2>
+      <p class="official" style="margin-top:0.8rem">Se um dia você olhar para alguma coisa e pensar <em>“isso é muito a cara deles”</em>, esse pode ser o presente.</p>
       <ul class="chips" aria-label="Pode ser">
-        <li>novo</li><li>antigo</li><li>garimpado</li><li>feito à mão</li><li>de viagem</li><li>que já foi seu</li>
+        <li>novo</li><li>garimpado</li><li>feito à mão</li><li>trazido de viagem</li><li>algo que já foi seu</li>
       </ul>
       <figure class="memory">
         <svg class="key-art" viewBox="0 0 140 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -987,8 +994,9 @@ details p { color: var(--muted); }
 
   <section class="band alt" id="p-lista">
     <div class="wrap">
-      <span class="label">2 · Lista da casa</span>
-      <p class="official" style="margin-top:0.8rem">Montamos uma lista com coisas que estamos querendo para a casa. Serve mais como referência do que como regra.</p>
+      <p class="or">ou</p>
+      <h2 class="gift-h">Uma ideia da nossa lista</h2>
+      <p class="official" style="margin-top:0.8rem">Pra facilitar, separamos algumas coisas que ainda faltam na casa. É só uma referência, não precisa seguir à risca.</p>
       <div class="rooms">
         <div class="room"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h18v7a7 7 0 0 1-7 7h-4a7 7 0 0 1-7-7z" /><path d="M24 13h2.5a3 3 0 0 1 0 6H24" /><path d="M4 28h24" /><path d="M12 4c-1 2 1 3 0 5M17 4c-1 2 1 3 0 5" stroke-width="1.1" /></svg><span>Cozinha</span></div>
         <div class="room"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="17" r="10" /><circle cx="16" cy="17" r="6" stroke-width="1.1" /><path d="M3 6v8a2 2 0 0 0 2 2v12M3 6v5M5 6v5M7 6v8a2 2 0 0 1-2 2" stroke-width="1.1" /><path d="M29 6c-2 1-2 6 0 9v13" stroke-width="1.1" /></svg><span>Mesa</span></div>
@@ -1000,8 +1008,9 @@ details p { color: var(--muted); }
 
   <section class="band" id="p-pix">
     <div class="wrap">
-      <span class="label">3 · Em dinheiro</span>
-      <p class="official" style="margin-top:0.8rem">Se for mais prático, um presente em dinheiro também é muito bem-vindo.</p>
+      <p class="or">ou</p>
+      <h2 class="gift-h">Um Pix</h2>
+      <p class="official" style="margin-top:0.8rem">Se for mais prático, pode mandar um presente em dinheiro.</p>
       <div class="pix-card">
         <span class="label">Pix</span>
         <span class="pix-name"><span id="pixName" class="todo">[nome do titular]</span></span>
@@ -1014,9 +1023,8 @@ details p { color: var(--muted); }
 
   <section class="band alt">
     <div class="wrap">
-      <p class="official lead">E se você não quiser dar presente nenhum, também está tudo bem.</p>
-      <p class="official" style="margin-top:0.5rem">Sua presença no dia 23 já é presente suficiente.</p>
-      <p class="gift-end">A gente só vai ficar feliz de ter você com a gente.</p>
+      <p class="official lead">E se não quiser dar nada, tudo bem também.</p>
+      <p class="gift-end">Fique à vontade: o que importa mesmo é você estar lá com a gente.</p>
     </div>
   </section>
 </div>
