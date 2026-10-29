@@ -15,14 +15,13 @@ config = (site / "js" / "config.js").read_text(encoding="utf-8")
 app = (site / "js" / "app.js").read_text(encoding="utf-8")
 
 fontes = re.search(r'<link rel="stylesheet" href="(https://fonts\.googleapis\.com[^"]+)">', html).group(1)
-corpo = html[html.index("<body>") + len("<body>"):html.index('<script src="https://cdnjs')].strip()
+corpo = html[html.index("<body>") + len("<body>"):html.index('<script src="js/config.js"')].strip()
 
 saida = f"""<title>Helena &amp; Italo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{fontes}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 {css}
 </style>

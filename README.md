@@ -22,7 +22,7 @@ O site tem três páginas, com o menu "A história · Confirmar presença · Pre
 
 1. **A história**: tudo acima, terminando na comemoração.
 2. **Confirmar presença** (#confirmar): onde (endereço, Maps, Waze, agenda, sem cerimônia, estacionamento), traje, onde ficar (dica de hotel), a confirmação por lista de convidados, perguntas frequentes e contato. Ao confirmar, vai sozinha para os presentes.
-3. **Presentes** (#presentes): agradecimento da confirmação (quando vem de lá); o significado ("coisas com história", "isso é muito a cara deles"); "Se quiser uma ajudinha" com o botão para a lista externa (Amazon); "Se preferir contribuir de outro jeito" com o Pix (chave, copiar, nome e QR Code sem valor); "E se você não quiser dar presente nenhum, também está tudo bem."
+3. **Presentes** (#presentes): agradecimento da confirmação (quando vem de lá); o significado ("coisas com história", "isso é muito a cara deles"); "Se quiser uma ajudinha" com o botão para a lista externa (Amazon); "Se preferir contribuir de outro jeito" com o Pix (chave aleatória, botão de copiar e nome); "E se você não quiser dar presente nenhum, também está tudo bem."
 
 Confirmação de presença por lista de convidados: a pessoa digita o nome, o site acha o convite, aparecem só as pessoas daquele convite, cada uma marca Vou / Não vou conseguir, restrição alimentar por pessoa, sem "adicionar acompanhante".
 
@@ -46,7 +46,7 @@ Sem `apiUrl` em `config.js`, o site roda em **modo demonstração**: convites fi
 ## Como colocar no ar
 
 1. **Planilha:** siga `backend/apps-script/LEIAME.md` e cole a URL em `site/js/config.js` (`apiUrl`).
-2. **Configuração:** em `site/js/config.js`, preencha `prazoConfirmacao`, `whatsapp`, `listaPresentes` (link da lista da Amazon) e `pix` (tipo, chave, titular, cidade). Com a chave preenchida, aparece o botão de copiar e o QR Code do Pix.
+2. **Configuração:** em `site/js/config.js`, preencha `prazoConfirmacao`, `whatsapp`, `listaPresentes` (link da lista da Amazon) e `pix` (tipo, chave, titular, cidade). Com a chave preenchida, aparece o botão de copiar.
 3. **Hospedagem:** a pasta `site/` é um site estático, sem servidor próprio. O caminho mais simples é o **Netlify** (netlify.com → Add new site → Deploy manually → arrastar a pasta `site/` inteira, com a `midia/`). Cloudflare Pages e Vercel também servem. Os três são gratuitos para este tamanho.
 4. **Domínio:** compre o domínio (ex.: no Registro.br para `.com.br`) e aponte para o Netlify (Domain settings → Add custom domain). O HTTPS vem automático.
 5. **Prévia do link:** em `site/index.html`, troque `SEU-DOMINIO` pelo domínio final na linha `og:image`.

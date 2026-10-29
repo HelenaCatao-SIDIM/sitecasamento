@@ -426,24 +426,6 @@
 
   // ---------- presentes: a lista (link externo) e o Pix ----------
   const PIX = CFG.pix || {};
-  // Pix copia e cola (BR Code) sem valor: quem paga escolhe quanto
-  const crc16 = (str) => {
-    let crc = 0xffff;
-    for (let i = 0; i < str.length; i++) {
-      crc ^= str.charCodeAt(i) << 8;
-      for (let j = 0; j < 8; j++) crc = crc & 0x8000 ? ((crc << 1) ^ 0x1021) & 0xffff : (crc << 1) & 0xffff;
-    }
-    return crc.toString(16).toUpperCase().padStart(4, "0");
-  };
-  const plain = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase();
-  const pixPayload = () => {
-    const f = (id, v) => id + String(v.length).padStart(2, "0") + v;
-    const p = f("00", "01") + f("26", f("00", "br.gov.bcb.pix") + f("01", PIX.chave))
-      + f("52", "0000") + f("53", "986") + f("58", "BR")
-      + f("59", plain(PIX.titular).slice(0, 25)) + f("60", plain(PIX.cidade || "SABARA").slice(0, 15))
-      + f("62", f("05", "***")) + "6304";
-    return p + crc16(p);
-  };
   const listaBtn = document.getElementById("listaBtn");
   if (CFG.listaPresentes) listaBtn.href = CFG.listaPresentes;
   else { listaBtn.hidden = true; document.getElementById("listaSoon").hidden = false; }
@@ -452,8 +434,6 @@
   if (PIX.titular) { const n = document.getElementById("pixName"); n.textContent = PIX.titular; n.classList.remove("todo"); }
   if (PIX.chave) {
     pixKey.textContent = PIX.chave; pixKey.classList.remove("todo");
-    const qr = document.getElementById("pixQr");
-    if (PIX.titular && window.QRCode) { qr.hidden = false; new window.QRCode(qr, { text: pixPayload(), width: 176, height: 176, colorDark: "#3A2A1E", colorLight: "#F7F0E4" }); }
   }
   document.getElementById("pixCopy").addEventListener("click", (e) => {
     const c = e.currentTarget;

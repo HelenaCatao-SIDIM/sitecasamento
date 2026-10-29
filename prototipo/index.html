@@ -3,7 +3,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&family=Corinthia:wght@400;700&family=Jost:ital,wght@0,300..600;1,300..500&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 /* Layout: uma coluna estreita de documento oficial; o Pedido é a única peça que ocupa a largura toda.
    Código do site: o que está riscado foi omitido; tocar mostra a correção à mão e o que ficou de fora.
@@ -608,8 +607,6 @@ details p { color: var(--muted); }
 .pix-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; }
 .pix-key { font-family: var(--mono); font-size: 1.05rem; letter-spacing: 0.04em; word-break: break-all; }
 .pix-name { font-size: 0.98rem; }
-.pix-qr { margin-top: 0.6rem; width: 11rem; }
-.pix-qr img, .pix-qr canvas { display: block; width: 100% !important; height: auto !important; }
 .gift-end { margin: 1.8rem 0 0; font-family: var(--hand); color: var(--pen); font-size: clamp(1.5rem, 5.6vw, 1.9rem); line-height: 1.3; transform: rotate(-2deg); transform-origin: left center; }
 
 </style>
@@ -976,7 +973,6 @@ details p { color: var(--muted); }
           <button class="btn" type="button" id="pixCopy">Copiar</button>
         </div>
         <span class="pix-name">Nome: <span id="pixName" class="todo">[nome do titular]</span></span>
-        <div class="pix-qr" id="pixQr" hidden></div>
       </div>
 
       <hr class="divider">
@@ -984,7 +980,6 @@ details p { color: var(--muted); }
       <p class="official lead">E se você não quiser dar presente nenhum, também está tudo bem.</p>
       <div class="gift-text">
         <p>Sua presença no dia 23 já é presente suficiente.</p>
-        <p>Sem discurso pronto. Sem obrigação. Sem tabela de valores.</p>
       </div>
       <p class="gift-end">A gente só vai ficar feliz de ter você com a gente.</p>
     </div>
@@ -1460,24 +1455,6 @@ window.SITE_CONFIG = {
 
   // ---------- presentes: a lista (link externo) e o Pix ----------
   const PIX = CFG.pix || {};
-  // Pix copia e cola (BR Code) sem valor: quem paga escolhe quanto
-  const crc16 = (str) => {
-    let crc = 0xffff;
-    for (let i = 0; i < str.length; i++) {
-      crc ^= str.charCodeAt(i) << 8;
-      for (let j = 0; j < 8; j++) crc = crc & 0x8000 ? ((crc << 1) ^ 0x1021) & 0xffff : (crc << 1) & 0xffff;
-    }
-    return crc.toString(16).toUpperCase().padStart(4, "0");
-  };
-  const plain = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase();
-  const pixPayload = () => {
-    const f = (id, v) => id + String(v.length).padStart(2, "0") + v;
-    const p = f("00", "01") + f("26", f("00", "br.gov.bcb.pix") + f("01", PIX.chave))
-      + f("52", "0000") + f("53", "986") + f("58", "BR")
-      + f("59", plain(PIX.titular).slice(0, 25)) + f("60", plain(PIX.cidade || "SABARA").slice(0, 15))
-      + f("62", f("05", "***")) + "6304";
-    return p + crc16(p);
-  };
   const listaBtn = document.getElementById("listaBtn");
   if (CFG.listaPresentes) listaBtn.href = CFG.listaPresentes;
   else { listaBtn.hidden = true; document.getElementById("listaSoon").hidden = false; }
@@ -1486,8 +1463,6 @@ window.SITE_CONFIG = {
   if (PIX.titular) { const n = document.getElementById("pixName"); n.textContent = PIX.titular; n.classList.remove("todo"); }
   if (PIX.chave) {
     pixKey.textContent = PIX.chave; pixKey.classList.remove("todo");
-    const qr = document.getElementById("pixQr");
-    if (PIX.titular && window.QRCode) { qr.hidden = false; new window.QRCode(qr, { text: pixPayload(), width: 176, height: 176, colorDark: "#3A2A1E", colorLight: "#F7F0E4" }); }
   }
   document.getElementById("pixCopy").addEventListener("click", (e) => {
     const c = e.currentTarget;
