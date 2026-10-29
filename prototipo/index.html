@@ -281,6 +281,12 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .ring-line { margin-top: 2rem; }
 .destino { font-size: clamp(2.6rem, 11vw, 4rem) !important; margin-top: 0.5rem !important; }
 .punch { font-weight: 600; }
+/* "o pedido!": ocupa o espaço que já existe antes do 7 de setembro, sem abrir espaço novo */
+.pedido-cue {
+  position: absolute; left: 0; right: 0; top: calc(100% + 2.2rem); margin: 0; text-align: center;
+  font-family: var(--hand); color: var(--pen); font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1;
+  transform: rotate(-4deg); will-change: transform, opacity;
+}
 
 /* Cape Town */
 .record { margin-top: 3.2rem; }
@@ -679,6 +685,7 @@ details p { color: var(--muted); }
         <p class="official" style="margin-top:0.6rem">O anel estava resolvido.</p>
         <p class="official punch">Faltava uma coisa.</p>
       </div>
+      <p class="pedido-cue" id="pedidoCue">o pedido!</p>
     </div>
   </section>
 
@@ -843,6 +850,23 @@ details p { color: var(--muted); }
     document.querySelectorAll(".write").forEach((el) => {
       if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("wait"); wio.observe(el.parentElement); }
     });
+  }
+
+  // "o pedido!" sobe e ganha força conforme a tela rola
+  const cue = document.getElementById("pedidoCue");
+  if (cue && !reduce) {
+    const base = cue.parentElement;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const top = base.getBoundingClientRect().bottom + 35;
+      const p = Math.min(1, Math.max(0, (innerHeight - top) / (innerHeight * 0.5)));
+      cue.style.opacity = (0.08 + 0.92 * p).toFixed(3);
+      cue.style.transform = `translateY(${((1 - p) * 56).toFixed(1)}px) rotate(-4deg)`;
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener("resize", update);
+    update();
   }
 
   // vídeo pequeno do 7 de janeiro: parado para quem pediu menos movimento
