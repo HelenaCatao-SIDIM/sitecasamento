@@ -16,7 +16,13 @@ Tipografia: destaque de cada momento, títulos e citações em serifa (Bodoni Mo
 | África do Sul | "Depois de um ano e vinte dias fora, seis meses morando em Malta…" → "África do Sul." como título; ~~Sem nenhuma expectativa.~~ → "Ou a gente volta noivo, ou volta solteiro." / "Em tom de brincadeira. Mais ou menos."; "Antes de descobrir como voltariam, precisavam descobrir se voltariam." (Hoedspruit · Kruger, sem a foto do guia; Italo × Helena lado a lado com um X à mão: do lado dele, o quadro das leoas de boca aberta; do lado dela, o vídeo escondida, que abre com som, isca, "A leoa não atacou. / O ultimato continuava de pé."); 2/09 "Foi Italo\* quem escolheu…" → ~~Italo~~ *Helena* e o print; "Cinco dias depois: O anel estava resolvido. Faltava uma coisa." e "o pedido!" à mão, que sobe e ganha força com a rolagem no espaço antes do 7 de setembro |
 | Pedido | 7/09/2026, "Foi aqui." e, logo abaixo, "registro anterior · mesmo local\*" com o asterisco pulsando, que abre o macaco (5/09) |
 | Ilustrações | gravuras dos lugares num tom só de sépia (traço marrom sobre fundo transparente), grandes, translúcidas e com bordas esfumadas, flutuando nas laterais atrás do texto: Coliseu, Paris, Londres, Dublin e Atenas em "muitos lugares"; Kosovo (só no computador), Montenegro e o elefante na África do Sul, e a girafa à direita do comparativo do safári; Cape Town como horizonte na largura da foto do pedido, logo abaixo dela, com "Cape Town, África do Sul" quase encostando no desenho; Sabará na comemoração. Nada na parte de 2021–2022 |
-| A comemoração | "A versão completa a gente conta ao vivo." escrito à mão; informação direta, sem vocabulário de campanha |
+| A comemoração | "A versão completa a gente conta ao vivo." escrito à mão; data, endereço e o botão "Confirmar presença →" (e "Ver a lista de presentes") |
+
+O site tem três páginas, com o menu "A história · Confirmar presença · Presentes":
+
+1. **A história**: tudo acima, terminando na comemoração.
+2. **Confirmar presença** (#confirmar): onde (endereço, Maps, Waze, agenda, sem cerimônia, estacionamento), traje, onde ficar (dica de hotel), a confirmação por lista de convidados, perguntas frequentes e contato. Ao confirmar, vai sozinha para os presentes.
+3. **Presentes** (#presentes): agradecimento da confirmação (quando vem de lá), lista com foto, nome e valor (hoje exemplos), cada item abre o Pix copia e cola com QR Code, e "outro valor" com a chave Pix.
 
 Confirmação de presença por lista de convidados: a pessoa digita o nome, o site acha o convite, aparecem só as pessoas daquele convite, cada uma marca Vou / Não vou conseguir, restrição alimentar por pessoa, sem "adicionar acompanhante".
 
@@ -31,7 +37,7 @@ Confirmação de presença por lista de convidados: a pessoa digita o nome, o si
 ## Pendências
 
 - Evento fechado: sábado, 23/01/2027, 15h às 23h, Rua João Batista Campanha, 46, Terra Santa, Sabará. Sem cerimônia (casam na quarta, 20/01; o sábado é comemoração). Traje esporte fino e colorido. Crianças bem-vindas, estacionamento na rua, sem transporte, chuva mantém o local. Dúvidas: Helena.
-- Evento pendente: prazo da confirmação, presentes (Pix, chave e titular), hospedagem, número do WhatsApp conferido.
+- Evento pendente: prazo da confirmação; presentes (lista com fotos e valores, chave Pix, titular, cidade); dica de hotel (nome, onde fica, preço, como reservar); número do WhatsApp conferido.
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
 - Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date (fora do Git: o repositório é público).
 - Material pendente: foto do casal para a prévia do link; Malta, ramos de oliveira, selos e bússola em arquivos separados (hoje recortados da imagem de referência do Save the Date).

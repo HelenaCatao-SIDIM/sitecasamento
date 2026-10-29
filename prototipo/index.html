@@ -67,8 +67,9 @@ section { scroll-margin-top: 4rem; }
 
 /* Ilustrações dos lugares: flutuam nas laterais, atrás do texto */
 main { overflow-x: hidden; overflow-x: clip; }
-main > section { position: relative; }
-main > section > .wrap, main > section > figure { position: relative; z-index: 1; }
+.view > section { position: relative; }
+.view > section > .wrap, .view > section > figure { position: relative; z-index: 1; }
+.view[hidden] { display: none !important; }
 .deco {
   position: absolute; z-index: 0; width: 72vw; max-width: 26rem; height: auto; opacity: 0.2;
   pointer-events: none; transform: rotate(var(--r, 0deg));
@@ -481,6 +482,34 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .part p { margin: 0.3rem 0 0; }
 .todo { color: var(--muted); }
 
+/* Páginas de confirmar presença e presentes */
+.page { padding-block: 3.5rem 5rem; min-height: 70svh; }
+.page-title { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 9vw, 3.4rem); line-height: 1.05; margin: 0.6rem 0 0; }
+.page-lede { margin: 0.9rem 0 0; font-size: 1.1rem; max-width: 34ch; }
+.page .part:first-of-type { margin-top: 2.6rem; }
+.note { margin-top: 1rem !important; color: var(--muted); font-size: 0.98rem; }
+.hotel { margin-top: 1rem; padding: 1.1rem 1.2rem; background: var(--surface); display: grid; gap: 0.2rem; }
+.hotel p { margin: 0 !important; }
+.hotel-name { font-family: var(--display); font-size: 1.35rem; color: var(--ink) !important; }
+.rsvp-part { padding: 1.4rem 1.2rem 1.6rem; background: var(--surface); margin-left: -1.2rem; margin-right: -1.2rem; }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; margin-top: 2rem; }
+.big-btn { padding: 0.95rem 1.4rem; font-size: 0.8rem; }
+.text-link { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.text-link:hover { color: var(--pen); }
+.thanks { margin-bottom: 2.4rem; padding: 1.3rem 1.2rem; background: var(--surface); }
+.thanks h2 { font-family: var(--display); font-weight: 400; font-size: 1.8rem; margin: 0; }
+.thanks p { margin: 0.3rem 0 0; }
+.gifts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; margin-top: 2rem; }
+@media (min-width: 40rem) { .gifts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.gift { display: grid; gap: 0.35rem; text-align: left; padding: 0; border: 0; background: none; cursor: pointer; }
+.gift .ph { margin: 0; aspect-ratio: 1; font-size: 0.6rem; }
+.gift-name { font-size: 1rem; line-height: 1.3; }
+.gift-price { font-family: var(--display); font-size: 1.15rem; }
+.gift:hover .gift-name { text-decoration: underline; text-underline-offset: 3px; }
+.pix { margin-top: 1rem; display: grid; gap: 0.8rem; }
+.pix .qr { width: 11rem; aspect-ratio: 1; margin: 0; }
+.pix-code { font-family: var(--mono); font-size: 0.75rem; word-break: break-all; padding: 0.7rem; background: var(--paper); }
+
 /* Confirmação */
 .rsvp-search { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
 .field {
@@ -553,16 +582,17 @@ details p { color: var(--muted); }
 
 <header class="top">
   <div class="wrap">
-    <a class="mono" href="#inicio">H &amp; I</a>
+    <a class="mono" href="#inicio" data-view="historia">H &amp; I</a>
     <nav class="nav" aria-label="Atalhos">
-      <a href="#casamento">Evento</a>
-      <a href="#confirmar">Confirmar presença</a>
-      <a href="#presentes">Presentes</a>
+      <a href="#inicio" data-view="historia">A história</a>
+      <a href="#confirmar" data-view="confirmar">Confirmar presença</a>
+      <a href="#presentes" data-view="presentes">Presentes</a>
     </nav>
   </div>
 </header>
 
 <main>
+<div class="view" id="v-historia" data-name="historia">
   <!-- Home -->
   <section class="home" id="inicio">
     <div class="collage" aria-hidden="true">
@@ -796,21 +826,39 @@ details p { color: var(--muted); }
         <span>Rua João Batista Campanha, 46</span>
         <span class="muted">Terra Santa, Sabará, MG</span>
       </div>
-      <div class="links">
+      <div class="cta">
+        <a class="btn primary big-btn" href="#confirmar" data-view="confirmar">Confirmar presença →</a>
+        <a class="text-link" href="#presentes" data-view="presentes">Ver a lista de presentes</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="end">
+    <p class="label">Helena &amp; Italo · 23.01.2027 · Sabará, MG</p>
+  </footer>
+</div>
+
+<!-- Página 2: confirmar presença -->
+<div class="view" id="v-confirmar" data-name="confirmar" hidden>
+  <section class="page" id="confirmar">
+    <img class="deco right" src="midia/deco-sabara.webp" alt="" aria-hidden="true" loading="lazy" style="top:1rem;--r:2deg">
+    <div class="wrap">
+      <span class="label">Sábado, 23 de janeiro de 2027 · 15h às 23h</span>
+      <h1 class="page-title">Confirmar presença</h1>
+      <p class="page-lede">Antes de confirmar, o que você precisa saber para chegar lá.</p>
+
+      <div class="part">
+        <h3>Onde</h3>
+        <div class="facts" style="margin-top:0">
+          <span>Rua João Batista Campanha, 46</span>
+          <span class="muted">Terra Santa, Sabará, MG</span>
+        </div>
+        <div class="links">
         <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Abrir no Google Maps</a>
         <a class="btn" href="https://waze.com/ul?q=Rua%20Jo%C3%A3o%20Batista%20Campanha%2046%20Sabar%C3%A1%20MG" target="_blank" rel="noopener">Abrir no Waze</a>
         <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&amp;dates=20270123T150000/20270123T230000&amp;ctz=America/Sao_Paulo&amp;location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
-      </div>
-
-      <div class="part" id="confirmar">
-        <h3>Confirmar presença</h3>
-        <p>Confirme até <span class="todo">[data limite]</span>.</p>
-        <form class="rsvp-search" id="rsvpForm" autocomplete="off">
-          <label class="label" for="rsvpName" style="flex-basis:100%">Seu nome</label>
-          <input class="field" id="rsvpName" name="nome" type="text" placeholder="Nome e sobrenome" enterkeyhint="search">
-          <button class="btn primary" type="submit">Buscar convite</button>
-        </form>
-        <div class="rsvp-out" id="rsvpOut" aria-live="polite"></div>
+        </div>
+        <p class="note">Não vai ter cerimônia: a gente se casa na quarta-feira, 20 de janeiro, e no sábado é só comemoração. Estacionamento na rua, com espaço suficiente.</p>
       </div>
 
       <div class="part">
@@ -818,14 +866,26 @@ details p { color: var(--muted); }
         <p>Esporte fino e colorido. Venha com a roupa mais colorida que tiver, em cores fortes, como um campo de flores. Terno não é necessário.</p>
       </div>
 
-      <div class="part" id="presentes">
-        <h3>Presentes</h3>
-        <p class="todo">[Em definição: lista com fotos de referência e Pix.]</p>
-      </div>
-
       <div class="part">
         <h3>Onde ficar</h3>
-        <p>Em breve, sugestões de hospedagem.</p>
+        <p>Para quem vem de longe, uma dica de hospedagem perto da festa:</p>
+        <div class="hotel">
+          <span class="label">Dica</span>
+          <p class="hotel-name todo">[Nome do hotel]</p>
+          <p class="todo">[Bairro ou distância até a festa · faixa de preço]</p>
+          <p class="todo">[Link ou telefone para reservar]</p>
+        </div>
+      </div>
+
+      <div class="part rsvp-part" id="rsvp">
+        <h3>Confirme sua presença</h3>
+        <p>Confirme até <span class="todo">[data limite]</span>. Digite seu nome para encontrar o seu convite.</p>
+        <form class="rsvp-search" id="rsvpForm" autocomplete="off">
+          <label class="label" for="rsvpName" style="flex-basis:100%">Seu nome</label>
+          <input class="field" id="rsvpName" name="nome" type="text" placeholder="Nome e sobrenome" enterkeyhint="search">
+          <button class="btn primary" type="submit">Buscar convite</button>
+        </form>
+        <div class="rsvp-out" id="rsvpOut" aria-live="polite"></div>
       </div>
 
       <div class="part">
@@ -844,10 +904,28 @@ details p { color: var(--muted); }
       </div>
     </div>
   </section>
+</div>
 
-  <footer class="end">
-    <p class="label">Helena &amp; Italo · 23.01.2027 · Sabará, MG</p>
-  </footer>
+<!-- Página 3: presentes -->
+<div class="view" id="v-presentes" data-name="presentes" hidden>
+  <section class="page" id="presentes">
+    <div class="wrap">
+      <div class="thanks" id="thanks" hidden></div>
+      <span class="label">Lista de presentes</span>
+      <h1 class="page-title">Presentes</h1>
+      <p class="page-lede">A sua presença já é o presente. Mas, se quiser nos dar algo, escolha um item da lista: o valor vai por Pix, direto para a gente.</p>
+      <p class="foot" style="margin-top:0.4rem">Exemplos para mostrar o formato. A lista e os valores de verdade vêm de vocês.</p>
+
+      <div class="gifts" id="gifts"></div>
+
+      <div class="part">
+        <h3>Prefere outro valor?</h3>
+        <p>Use a chave Pix e escolha quanto quer dar.</p>
+        <button class="btn" type="button" data-gift="livre">Ver a chave Pix</button>
+      </div>
+    </div>
+  </section>
+</div>
 </main>
 
 <!-- Janela dos achados -->
@@ -1070,7 +1148,7 @@ details p { color: var(--muted); }
   const modalClose = document.getElementById("modalClose");
   let lastFocus = null;
   const openModal = (key) => {
-    const egg = EGGS[key]; if (!egg) return;
+    const egg = typeof key === "object" ? key : EGGS[key]; if (!egg) return;
     lastFocus = document.activeElement;
     modalTitle.textContent = egg.title;
     modalBody.innerHTML = egg.html;
@@ -1208,6 +1286,13 @@ details p { color: var(--muted); }
       Object.values(draft.answers).forEach((x) => { if (!x.go) x.diet = ""; delete x.showDiet; });
       state.rsvp[inv.id] = { done: true, answers: draft.answers }; save();
       renderDone(inv);
+      const going = inv.guests.filter((g) => draft.answers[g.id]?.go).length;
+      const thanks = document.getElementById("thanks");
+      thanks.innerHTML = going
+        ? `<h2>${going > 1 ? "Presenças confirmadas." : "Presença confirmada."}</h2><p>Até 23 de janeiro. 🤎</p>`
+        : `<h2>Que pena.</h2><p>Obrigado por avisar.</p>`;
+      thanks.hidden = false;
+      setTimeout(() => showView("presentes"), 700);
       return;
     }
     if (t.id === "changeBtn" && current) {
@@ -1221,13 +1306,71 @@ details p { color: var(--muted); }
     if (d && draft) draft.answers[d].diet = e.target.value;
   });
 
+  // ---------- presentes: lista com foto e valor, pago por Pix ----------
+  // Exemplos para mostrar o formato; a lista, os valores e a chave vêm da Helena.
+  const GIFTS = [
+    { id: "jantar", name: "Um jantar a dois", price: "R$ [valor]" },
+    { id: "mala", name: "Uma mala nova", price: "R$ [valor]" },
+    { id: "passagem", name: "Passagem para o próximo destino", price: "R$ [valor]" },
+    { id: "hotel", name: "Uma noite de hotel na lua de mel", price: "R$ [valor]" },
+    { id: "barco", name: "Um passeio de barco", price: "R$ [valor]" },
+    { id: "safari", name: "Um safári (desta vez, sem leoas)", price: "R$ [valor]" },
+  ];
+  document.getElementById("gifts").innerHTML = GIFTS.map((g) =>
+    `<button class="gift" type="button" data-gift="${g.id}"><span class="ph">Foto · ${esc(g.name)}</span><span class="gift-name">${esc(g.name)}</span><span class="gift-price">${esc(g.price)}</span></button>`
+  ).join("");
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-gift]");
+    if (!b) return;
+    const g = GIFTS.find((x) => x.id === b.dataset.gift);
+    const head = g ? `<p class="big">${esc(g.name)}</p><p style="margin:0.2rem 0 0">${esc(g.price)}</p>` : `<p class="big">O valor que você quiser</p>`;
+    const code = g ? "[código Pix copia e cola, já com o valor]" : "[chave Pix]";
+    openModal({
+      title: "Presentear",
+      html: `${head}
+        <div class="pix">
+          ${g ? `<figure class="ph qr">QR Code do Pix</figure>` : `<p style="margin:0">Titular: <span class="todo">[nome do titular]</span></p>`}
+          <span class="label">${g ? "Pix copia e cola" : "Chave Pix"}</span>
+          <div class="pix-code" id="pixCode">${code}</div>
+          <button class="btn primary" type="button" data-copy>Copiar</button>
+          <p class="foot">Obrigado pelo carinho. 🤎</p>
+        </div>`,
+    });
+  });
+  modalBody.addEventListener("click", (e) => {
+    const c = e.target.closest("[data-copy]");
+    if (!c) return;
+    const el = document.getElementById("pixCode");
+    const done = () => { c.textContent = "Copiado"; };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = "Selecionado: copie com o menu"; };
+    try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch { fallback(); }
+  });
+
   // ---------- links internos e endereço direto ----------
   document.getElementById("enter").addEventListener("click", (e) => {
     e.preventDefault();
     document.getElementById("historia").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
   });
+  // ---------- três páginas: a história, confirmar presença, presentes ----------
+  const views = [...document.querySelectorAll(".view")];
+  const showView = (name) => {
+    views.forEach((v) => { v.hidden = v.dataset.name !== name; });
+    document.querySelectorAll(".nav a").forEach((a) => {
+      if (a.dataset.view === name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    window.scrollTo({ top: 0, behavior: "auto" });
+    try { history.replaceState(null, "", name === "historia" ? location.pathname + location.search : "#" + name); } catch {}
+  };
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-view]");
+    if (!a) return;
+    e.preventDefault();
+    showView(a.dataset.view);
+  });
   const h = location.hash.slice(1);
-  if (h && /^[\w.~-]+$/.test(h) && document.getElementById(h)) {
+  if (h === "confirmar" || h === "rsvp") showView("confirmar");
+  else if (h === "presentes") showView("presentes");
+  else if (h && /^[\w.~-]+$/.test(h) && document.getElementById(h)) {
     requestAnimationFrame(() => document.getElementById(h).scrollIntoView());
   }
 
@@ -1238,6 +1381,8 @@ details p { color: var(--muted); }
     rasuras.forEach((r) => r.close());
     heartBtn.closest(".pair").classList.remove("babies"); heartBtn.setAttribute("aria-pressed", "false");
     renderVote(); out.innerHTML = ""; nameInput.value = "";
+    document.getElementById("thanks").hidden = true;
+    showView("historia");
     setTimeout(showIntro, 300);
     window.scrollTo({ top: 0, behavior: "auto" });
   });
