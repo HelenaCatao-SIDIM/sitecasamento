@@ -1,15 +1,16 @@
-<title>Helena &amp; Ítalo</title>
+<title>Helena &amp; Italo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&display=swap">
 <style>
 /* Layout: uma coluna estreita de documento oficial; o Pedido é a única peça que ocupa a largura toda.
+   Código do site: o que está riscado foi omitido; tocar mostra a correção à mão e o que ficou de fora.
    Visual provisório até chegarem as ilustrações do Save the Date. */
 :root {
   --paper: #EEEEE9;      /* papel timbrado, levemente frio */
-  --surface: #F7F7F3;    /* cartão, ficha, convite */
-  --ink: #241D18;        /* tinta de impressão; também a tarja */
+  --surface: #F7F7F3;    /* ficha, convite, o que foi omitido */
+  --ink: #241D18;        /* tinta de impressão; também o risco */
   --muted: #6D655E;      /* legenda, rodapé */
   --line: #D3D0C7;       /* fio, borda de campo */
   --tint: #E2E0D8;       /* espaço reservado para foto e vídeo */
@@ -44,6 +45,7 @@ body::before {
   content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
   z-index: 10; background: var(--paper);
 }
+[hidden] { display: none !important; }
 .wrap {
   max-width: var(--col); margin-inline: auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -61,10 +63,7 @@ section { scroll-margin-top: 4rem; }
 .foot { font-family: var(--body); font-size: 0.85rem; font-style: italic; color: var(--muted); }
 
 /* Topo */
-.top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
-  background: var(--paper);
-}
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); }
 .top .wrap {
   max-width: 64rem; display: flex; align-items: center; justify-content: space-between;
   gap: 1rem; padding-block: 0.9rem;
@@ -76,33 +75,43 @@ section { scroll-margin-top: 4rem; }
 .nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 26rem) { .mono { display: none; } .top .wrap { justify-content: center; } .nav { justify-content: center; gap: 0.3rem 0.9rem; } .nav a { font-size: 0.66rem; } }
 
-/* 01 Home */
+/* Rasura: o código do site */
+.struck {
+  background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit;
+  text-decoration: line-through; text-decoration-color: var(--ink); text-decoration-thickness: 2px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.struck:hover { text-decoration-color: var(--pen); }
+.rasura.open .struck { cursor: default; color: var(--muted); text-decoration-color: var(--pen); }
+.hand { display: none; font-family: var(--hand); color: var(--pen); font-size: 1.05em; margin-left: 0.25em; }
+.rasura.open .hand { display: inline; animation: ink .6s ease both; }
+@keyframes ink { from { opacity: 0; } to { opacity: 1; } }
+.omitted { margin-top: 1.4rem; padding: 1.3rem 1.2rem; background: var(--surface); }
+.omitted.show { animation: ink .6s ease .15s both; }
+.omitted p { margin: 0; }
+.omitted p + p { margin-top: 0.7rem; }
+.omitted .punch { font-weight: 600; }
+.omitted .said { font-family: var(--hand); color: var(--pen); font-size: 1.35rem; line-height: 1.4; }
+.omitted .ph, .omitted .photo { margin-top: 1.1rem; }
+@media (prefers-reduced-motion: reduce) { .rasura.open .hand, .omitted.show { animation: none; } }
+
+/* Home */
 .home { padding-block: clamp(4.5rem, 16vh, 9rem) clamp(4rem, 12vh, 7rem); text-align: center; }
 .home h1 {
   font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 11vw, 5rem);
   letter-spacing: 0.06em; line-height: 1; margin: 0;
 }
-.home h1 .amp { font-style: italic; font-weight: 400; }
+.home h1 .amp { font-style: italic; }
+.subtitle { font-family: var(--display); font-style: italic; font-size: clamp(1.2rem, 4.4vw, 1.5rem); margin: 0.9rem 0 0; }
 .thesis {
   font-family: var(--body); font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.45;
   max-width: 26ch; margin: 2.2rem auto 0; text-wrap: balance;
 }
-.redact {
-  display: inline; padding: 0 0.05em; border: 0; border-radius: 0; cursor: pointer;
-  background: var(--ink); color: transparent; font: inherit; line-height: inherit;
-  transition: background-color .5s ease, color .5s ease;
-  -webkit-box-decoration-break: clone; box-decoration-break: clone;
-}
-.redact.open { background: transparent; color: var(--ink); cursor: default; }
-[hidden] { display: none !important; }
-.redact .star, .omit-note { visibility: hidden; }
-.redact.open .star { visibility: visible; }
-.omit-note { margin: 1.1rem auto 0; opacity: 0; transition: opacity .6s ease .3s; }
-.omit-note.show { visibility: visible; opacity: 1; }
+.home .foot { margin: 1rem auto 0; }
 .when { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.16em; margin-top: 2.4rem; }
 .enter {
-  display: inline-block; margin-top: 2.6rem; padding: 0.85rem 2.4rem;
-  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.24em; text-transform: uppercase;
+  display: inline-block; margin-top: 2.6rem; padding: 0.85rem 2.2rem;
+  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase;
   background: var(--ink); color: var(--paper); border: 0; cursor: pointer; text-decoration: none;
 }
 .enter:hover { opacity: .88; }
@@ -111,7 +120,13 @@ section { scroll-margin-top: 4rem; }
 .block { padding-block: 4.5rem; }
 .block + .block { border-top: 1px solid var(--line); }
 .block h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 7vw, 2.8rem); margin: 0; line-height: 1.1; text-wrap: balance; }
+.howto { margin: 0.8rem 0 0; }
 .lede { font-style: italic; font-size: 1.25rem; margin: 0.5rem 0 0; color: var(--muted); }
+.entry { margin-top: 3.2rem; }
+.entry .label { display: block; margin-bottom: 0.6rem; }
+.official { font-size: clamp(1.25rem, 4.6vw, 1.45rem); line-height: 1.5; margin: 0; text-wrap: pretty; }
+.sub { margin-top: 3.6rem; }
+.sub h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2.1rem); margin: 0; line-height: 1.15; }
 
 .ph {
   position: relative; display: grid; place-items: center; text-align: center;
@@ -121,34 +136,22 @@ section { scroll-margin-top: 4rem; }
   background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--line) 55%, transparent) 14px 15px);
 }
 .ph.tall { aspect-ratio: 4 / 5; }
+.ph.vid::after { content: "▶"; position: absolute; left: 1rem; bottom: 0.9rem; font-size: 0.9rem; letter-spacing: 0; }
 .photo { margin: 2rem 0 0; }
 .photo img { display: block; width: 100%; height: auto; background: var(--tint); }
 .photo figcaption { margin-top: 0.6rem; }
 .clip { display: block; width: 100%; max-height: 70vh; margin-top: 1rem; background: var(--tint); object-fit: contain; }
-.ph.wide { aspect-ratio: 16 / 9; }
-.ph.vid::after {
-  content: "▶"; position: absolute; left: 1rem; bottom: 0.9rem; font-size: 0.9rem; letter-spacing: 0;
-}
-figcaption { margin-top: 0.6rem; }
 
-/* 02 Anel */
-.ring-line { font-family: var(--body); font-size: clamp(1.35rem, 5vw, 1.7rem); line-height: 1.5; margin: 2.2rem 0 0; padding-top: 1.2rem; text-wrap: balance; }
-.name-fix { position: relative; display: inline-block; }
-.name-btn { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink); }
-.name-btn sup { font-size: 0.6em; margin-left: 0.05em; }
-.name-fix.fixed .name-btn { cursor: default; text-decoration: line-through; text-decoration-color: var(--pen); text-decoration-thickness: 2px; }
-.name-fix.fixed .name-btn sup { display: none; }
-.hand {
-  position: absolute; left: 0.1em; bottom: 72%; transform: rotate(-4deg); transform-origin: left bottom;
-  font-family: var(--hand); color: var(--pen); font-size: 1.15em; white-space: nowrap;
-  opacity: 0; transition: opacity .5s ease .25s; pointer-events: none;
-}
-.name-fix.fixed .hand { opacity: 1; }
-.after-fix { opacity: 0; transition: opacity .6s ease .7s; visibility: hidden; }
-.after-fix.show { opacity: 1; visibility: visible; }
-.after-fix .foot { margin-top: 1rem; }
+/* Toscana: a foto embaçada até tocar */
+.blurred { overflow: hidden; cursor: pointer; }
+.blurred > * { filter: blur(14px); transform: scale(1.06); transition: filter .8s ease, transform .8s ease; }
+.blurred.clear { cursor: default; }
+.blurred.clear > * { filter: none; transform: none; }
 
-/* 03 Cape Town */
+/* Anel */
+.ring-line { margin-top: 2rem; }
+
+/* Cape Town */
 .record { margin-top: 3.2rem; }
 .record .who { margin-bottom: 0.8rem; }
 .quote { font-family: var(--display); font-size: clamp(1.45rem, 5.4vw, 1.9rem); line-height: 1.3; margin: 0; text-wrap: balance; }
@@ -156,23 +159,19 @@ figcaption { margin-top: 0.6rem; }
 .verdict { margin-top: 3.2rem; max-width: 30ch; }
 .verdict p { margin: 0; }
 .verdict .foot { margin-top: 0.4rem; }
-
 .rise-wait { opacity: 0; transform: translateY(14px); }
 .rise { transition: opacity .7s ease, transform .7s ease; }
 
-/* Achados (ponte) */
-.egg-row { display: flex; justify-content: flex-end; padding-block: 0.5rem; }
-.egg {
-  background: none; border: 0; padding: 0.4rem; cursor: pointer; color: var(--muted);
-  transition: color .3s ease, transform .3s ease;
-}
+/* Achado: a ponte */
+.egg-row { display: flex; justify-content: flex-end; padding-block: 1.5rem 0; }
+.egg { background: none; border: 0; padding: 0.4rem; cursor: pointer; color: var(--muted); transition: color .3s ease, transform .3s ease; }
 .egg:hover { color: var(--ink); transform: translateY(-2px); }
 .egg svg { display: block; width: 7.5rem; height: auto; }
 
-/* 04 Muro */
+/* Muro */
 .ficha { margin-top: 1.2rem; display: grid; gap: 0.25rem; }
 .ficha .title { font-family: var(--display); font-size: 1.35rem; line-height: 1.25; }
-.ficha .sub { color: var(--muted); }
+.ficha .owner { color: var(--muted); }
 .vote { margin-top: 2.8rem; }
 .vote h3 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; margin: 0 0 1rem; }
 .choices { display: grid; gap: 0.6rem; }
@@ -193,8 +192,9 @@ figcaption { margin-top: 0.6rem; }
 .reaction { margin-top: 1.6rem; font-size: 1.2rem; font-style: italic; }
 .vote-err { margin-top: 0.8rem; color: var(--pen); font-size: 0.95rem; }
 
-/* 05 Pedido */
-.pedido { padding-block: 6rem 0; }
+/* Pedido */
+.pedido { padding-block: 5rem 0; }
+.pedido > .wrap:first-child { padding-bottom: 2rem; }
 .full { width: 100%; margin: 0; }
 .full img { display: block; width: 100%; height: auto; margin-inline: auto; background: var(--tint); }
 @media (min-width: 48rem) { .full img { width: auto; max-width: 100%; max-height: 92vh; } }
@@ -207,9 +207,14 @@ figcaption { margin-top: 0.6rem; }
 .earlier { background: none; border: 0; padding: 0.4rem 0; cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); }
 .earlier:hover { color: var(--ink); }
 
-/* 06 Casamento */
+/* Comemoração */
 .wedding { background: var(--surface); padding-block: 5rem 4rem; }
 .wedding h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 8vw, 3rem); margin: 0; }
+.closing { font-size: 1.25rem; line-height: 1.5; margin-bottom: 4rem; }
+.closing p { margin: 0; }
+.closing p + p { margin-top: 0.8rem; }
+.closing .incl { font-weight: 600; }
+.closing .live { font-family: var(--display); font-style: italic; font-size: clamp(1.5rem, 5.6vw, 1.9rem); margin-top: 2.4rem; }
 .facts { margin-top: 2rem; display: grid; gap: 0.3rem; }
 .facts .big { font-family: var(--display); font-size: 1.45rem; line-height: 1.3; }
 .facts .muted { color: var(--muted); }
@@ -280,13 +285,12 @@ details p { color: var(--muted); }
 .modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center;
   background: color-mix(in srgb, var(--paper) 80%, transparent); backdrop-filter: blur(6px);
   padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
-.modal[hidden] { display: none; }
 .modal-card { background: var(--surface); width: min(30rem, 100%); max-height: 100%; overflow: auto; padding: 1.4rem; box-sizing: border-box; }
-.modal-card .ph { margin-top: 1rem; }
 .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 .x { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.3rem; }
 .x:hover { color: var(--ink); }
 .modal-card .big { font-family: var(--display); font-size: 1.5rem; margin: 0.8rem 0 0; line-height: 1.3; }
+.modal-card .photo { margin-top: 1rem; }
 
 /* Marca do protótipo */
 .proto {
@@ -299,7 +303,7 @@ details p { color: var(--muted); }
 
 <header class="top">
   <div class="wrap">
-    <a class="mono" href="#inicio">H &amp; Í</a>
+    <a class="mono" href="#inicio">H &amp; I</a>
     <nav class="nav" aria-label="Atalhos">
       <a href="#casamento">Evento</a>
       <a href="#confirmar">Confirmar presença</a>
@@ -309,101 +313,175 @@ details p { color: var(--muted); }
 </header>
 
 <main>
-  <!-- 01 · Home -->
+  <!-- Home -->
   <section class="home" id="inicio">
     <div class="wrap">
-      <h1>HELENA <span class="amp">&amp;</span>&nbsp;ÍTALO</h1>
-      <p class="thesis">Depois de tantos lugares, chegamos à versão <button class="redact" id="redact" type="button" aria-label="Palavra omitida. Toque para revelar.">oficial<span class="star">*</span></button> da história.</p>
-      <p class="foot omit-note" id="omitNote">*Algumas informações foram omitidas desta versão.</p>
+      <h1>HELENA <span class="amp">&amp;</span>&nbsp;ITALO</h1>
+      <p class="subtitle">vão se casar.</p>
+      <p class="thesis">Depois de tantos lugares, chegamos à versão <span class="rasura" data-rasura="home" data-panel="homeNote"><button class="struck" type="button" aria-controls="homeNote" aria-expanded="false">oficial</button><span class="hand">completa*</span></span> da história.</p>
+      <p class="foot" id="homeNote" hidden>*Ou quase. Algumas informações foram omitidas.</p>
       <p class="when">23.01.2027 · SABARÁ, MG</p>
-      <a class="enter" href="#anel" id="enter">Entrar</a>
+      <a class="enter" href="#historia" id="enter">Ler a história</a>
     </div>
   </section>
 
-  <!-- 02 · Anel -->
-  <section class="block" id="anel">
+  <!-- A versão oficial -->
+  <section class="block" id="historia">
     <div class="wrap">
-      <figure class="photo" style="margin-top:0"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
-      <p class="ring-line">
-        <span class="name-fix" id="nameFix"><button class="name-btn" id="nameBtn" type="button" aria-label="Ítalo. Toque para ver a correção.">Ítalo<sup>*</sup></button><span class="hand" aria-hidden="true">Helena</span></span>
-        escolheu cuidadosamente o anel de noivado.
-      </p>
-      <div class="after-fix" id="afterFix" aria-live="polite">
-        <p class="foot">Informação que pode alterar sua percepção sobre o noivo.</p>
-        <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
+      <h2>A versão oficial</h2>
+      <p class="foot howto">O que está riscado foi omitido. Toque para ver.</p>
+
+      <div class="entry">
+        <span class="label">19 de dezembro de 2021</span>
+        <p class="official">Helena e Italo se conhecem numa festa. A conversa começa <span class="rasura" data-rasura="beijo" data-panel="omBeijo"><button class="struck" type="button" aria-controls="omBeijo" aria-expanded="false">sem pressa</button><span class="hand">com um pedido de beijo</span></span>.</p>
+        <div class="omitted" id="omBeijo" hidden>
+          <p>Ele pediu um beijo antes mesmo de a conversa começar direito. Eu dei um fora.</p>
+          <p>Pouco depois, ele foi ao banheiro e eu achei que tinha ido embora sem me passar o telefone.</p>
+          <p class="punch">O fora durou pouco: quase entrei no banheiro masculino atrás dele.</p>
+          <figure class="ph">Foto · a noite em que se conheceram</figure>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="label">As semanas seguintes</span>
+        <p class="official">Os dois conversam por telefone <span class="rasura" data-rasura="ligacoes" data-panel="omLigacoes"><button class="struck" type="button" aria-controls="omLigacoes" aria-expanded="false">bastante</button><span class="hand">por até 6 horas seguidas</span></span>.</p>
+        <div class="omitted" id="omLigacoes" hidden>
+          <p>Ligações de 4, 5, 6 horas.</p>
+          <p class="punch">Pessoalmente, a gente só tinha se visto uma vez.</p>
+          <p>Até o segundo encontro, foi praticamente assim. A contagem para o dia 7 veio desenhada:</p>
+          <figure class="ph tall">Foto · Italo e o balãozinho do dia 7</figure>
+          <p class="foot" style="margin-top:0.6rem">Repare como a gente era novinho.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="label">7 de janeiro de 2022</span>
+        <p class="official">Segundo encontro, em Sabará. <span class="rasura" data-rasura="sabara" data-panel="omSabara"><button class="struck" type="button" aria-controls="omSabara" aria-expanded="false">Tudo dentro do previsto.</button><span class="hand">Três pequenos imprevistos.</span></span></p>
+        <div class="omitted" id="omSabara" hidden>
+          <p>Sabará estava alagando. Ele veio do Barreiro mesmo assim.</p>
+          <p>No meio do encontro, apareceu meu pai com uma caixa de som, dançando na rua.</p>
+          <p>Na volta, a roda do carro dele quebrou.</p>
+          <p class="punch">Estranhamente, o encontro deu certo.</p>
+          <figure class="ph vid tall">Vídeo · o pai da Helena e a caixa de som</figure>
+          <figure class="ph">Foto · a roda quebrada</figure>
+        </div>
+      </div>
+
+      <div class="entry">
+        <span class="label">21 de fevereiro de 2022</span>
+        <p class="official">Começam a namorar.</p>
       </div>
     </div>
   </section>
 
-  <!-- 03 · Cape Town -->
-  <section class="block" id="capetown">
+  <!-- Depois, muitos lugares -->
+  <section class="block" id="lugares">
     <div class="wrap">
-      <h2>Cape Town</h2>
-      <p class="lede">Um encontro sereno com a vida selvagem.</p>
-      <figure class="photo"><img src="midia/safari.jpg" width="1200" height="1600" alt="Guia de safári de chapéu, de costas, olhando a savana"></figure>
+      <h2>Depois, muitos lugares</h2>
+      <p class="official" style="margin-top:1.4rem">Itália, Chile e, no último ano, um intercâmbio que acabou virando 28 países.</p>
 
-      <div class="record rise">
-        <p class="label who">Ítalo</p>
-        <p class="quote">“Não tem problema morrer se eu vir a leoa de perto.”</p>
-        <figure class="ph vid" aria-label="Vídeo de Ítalo chegando perto da leoa">Vídeo · Ítalo chegando perto</figure>
+      <div class="entry">
+        <p class="official">Na Itália, Helena realiza o sonho de cruzar a Toscana de <span class="rasura" data-rasura="panda" data-panel="pandaNote"><button class="struck" type="button" aria-controls="pandaNote" aria-expanded="false">conversível</button><span class="hand">Panda</span></span>.</p>
+        <figure class="ph blurred" id="pandaPhoto" role="button" tabindex="0" aria-label="Foto embaçada do carro na Toscana. Toque para ver."><span>Foto · o Panda na Toscana</span></figure>
+        <span id="pandaNote" hidden></span>
       </div>
 
-      <div class="record rise">
-        <p class="label who">Helena</p>
-        <figure class="ph vid tall" style="margin-top:0" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto<br>até 20 s</figure>
-        <figcaption><p class="quote loud">“Não olha no olho dela. Se olhar, ela ataca.”</p></figcaption>
-      </div>
-
-      <div class="verdict rise">
-        <p>Helena também sustenta que o veículo foi estrategicamente posicionado como isca.</p>
-        <p class="foot">Não há provas conclusivas.</p>
+      <div class="entry">
+        <p class="official">De um desses lugares, Italo voltou com isto:</p>
+        <figure class="ph tall" aria-label="Foto do fragmento do muro">Foto · fragmento do muro</figure>
+        <div class="ficha">
+          <span class="title">Fragmento original do Muro de Berlim</span>
+          <span class="owner">Acervo pessoal de Italo.</span>
+          <span class="foot">Autenticidade declarada pelo proprietário.</span>
+        </div>
+        <div class="vote" id="vote" aria-live="polite"></div>
       </div>
     </div>
   </section>
 
-  <!-- Achado: a ponte -->
-  <div class="wrap egg-row">
-    <button class="egg" type="button" data-open="ponte" aria-label="Ponte">
-      <svg viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
-        <path d="M4 30 H116" />
-        <path d="M30 30 V8 M90 30 V8" />
-        <path d="M4 26 Q30 8 30 8 Q60 28 90 8 Q90 8 116 26" />
-        <path d="M40 30 V15 M50 30 V20 M60 30 V22 M70 30 V20 M80 30 V15 M16 30 V22 M104 30 V22" stroke-width="0.8" />
-        <path d="M2 36 Q12 33 22 36 T42 36 T62 36 T82 36 T102 36 T118 36" stroke-width="0.8" />
-      </svg>
-    </button>
-  </div>
-
-  <!-- 04 · Muro de Berlim -->
-  <section class="block" id="muro" style="border-top:0">
+  <!-- A semana do pedido -->
+  <section class="block" id="semana">
     <div class="wrap">
-      <figure class="ph tall" style="margin-top:0" aria-label="Foto do fragmento do muro">Foto · fragmento do muro</figure>
-      <div class="ficha">
-        <span class="title">Fragmento original do Muro de Berlim</span>
-        <span class="sub">Acervo pessoal de Ítalo.</span>
-        <span class="foot">Autenticidade declarada pelo proprietário.</span>
+      <h2>A semana do pedido</h2>
+      <p class="official" style="margin-top:1.4rem">Helena embarca para a África do Sul <span class="rasura" data-rasura="expectativa" data-panel="omExpectativa"><button class="struck" type="button" aria-controls="omExpectativa" aria-expanded="false">sem nenhuma expectativa</button></span>.</p>
+      <div class="omitted" id="omExpectativa" hidden>
+        <p class="said">“Ou a gente volta noivo, ou volta solteiro.”</p>
+        <p class="foot">Eu estava brincando. Mais ou menos.</p>
       </div>
-      <div class="vote" id="vote" aria-live="polite"></div>
+
+      <div class="sub" id="anel">
+        <span class="label">2 de setembro de 2026</span>
+        <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
+        <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
+        <p class="official ring-line"><span class="rasura" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" aria-controls="omAnel" aria-expanded="false">Italo</button><span class="hand">Helena</span></span> escolheu cuidadosamente o anel de noivado.</p>
+        <div id="omAnel" hidden>
+          <p class="foot" style="margin-top:1rem">Informação que pode alterar sua percepção sobre o noivo.</p>
+          <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="sub" id="capetown">
+        <h3>Cape Town</h3>
+        <p class="lede">Um encontro sereno com a vida selvagem.</p>
+        <figure class="photo"><img src="midia/safari.jpg" width="1200" height="1600" alt="Guia de safári de chapéu, de costas, olhando a savana"></figure>
+
+        <div class="record rise">
+          <p class="label who">Italo</p>
+          <p class="quote">“Não tem problema morrer se eu vir a leoa de perto.”</p>
+          <figure class="ph vid" aria-label="Vídeo de Italo chegando perto da leoa">Vídeo · Italo chegando perto</figure>
+        </div>
+
+        <div class="record rise">
+          <p class="label who">Helena</p>
+          <figure class="ph vid tall" style="margin-top:0" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto<br>até 20 s</figure>
+          <figcaption><p class="quote loud">“Não olha no olho dela. Se olhar, ela ataca.”</p></figcaption>
+        </div>
+
+        <div class="verdict rise">
+          <p>Helena também sustenta que o veículo foi estrategicamente posicionado como isca.</p>
+          <p class="foot">Não há provas conclusivas.</p>
+        </div>
+      </div>
+
+      <!-- Achado: a ponte -->
+      <div class="egg-row">
+        <button class="egg" type="button" data-open="ponte" aria-label="Ponte">
+          <svg viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 30 H116" />
+            <path d="M30 30 V8 M90 30 V8" />
+            <path d="M4 26 Q30 8 30 8 Q60 28 90 8 Q90 8 116 26" />
+            <path d="M40 30 V15 M50 30 V20 M60 30 V22 M70 30 V20 M80 30 V15 M16 30 V22 M104 30 V22" stroke-width="0.8" />
+            <path d="M2 36 Q12 33 22 36 T42 36 T62 36 T82 36 T102 36 T118 36" stroke-width="0.8" />
+          </svg>
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- 05 · Pedido -->
-  <section class="pedido block" id="pedido">
+  <!-- Pedido -->
+  <section class="pedido" id="pedido">
+    <div class="wrap"><span class="label">7 de setembro de 2026</span></div>
     <figure class="full"><img src="midia/pedido.jpg" width="1200" height="1600" alt="A mão de Helena com o anel, contra o pôr do sol"></figure>
     <div class="wrap pedido-text">
       <p class="place">Cape Town, África do Sul</p>
-      <p class="label date">7 de setembro de 2026</p>
       <p class="here">Foi aqui.</p>
       <p class="foot">Nada foi omitido desta versão.</p>
     </div>
     <div class="wrap earlier-row">
-      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local →</button>
+      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local · 5 de setembro →</button>
     </div>
   </section>
 
-  <!-- 06 · Casamento -->
+  <!-- A comemoração -->
   <section class="wedding" id="casamento">
     <div class="wrap">
+      <div class="closing">
+        <p>A gente se casa na quarta-feira, 20 de janeiro.</p>
+        <p>No sábado, 23, comemora em Sabará com a família, os amigos e algumas das pessoas que estavam por perto desde o começo.</p>
+        <p class="incl">Incluindo você.</p>
+        <p class="live">A versão completa a gente conta ao vivo.</p>
+      </div>
+
       <h2>A comemoração</h2>
       <div class="facts">
         <span class="big">Sábado, 23 de janeiro de 2027 · 15h às 23h</span>
@@ -414,7 +492,7 @@ details p { color: var(--muted); }
       <div class="links">
         <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Abrir no Google Maps</a>
         <a class="btn" href="https://waze.com/ul?q=Rua%20Jo%C3%A3o%20Batista%20Campanha%2046%20Sabar%C3%A1%20MG" target="_blank" rel="noopener">Abrir no Waze</a>
-        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20%C3%8Dtalo&amp;dates=20270123T150000/20270123T230000&amp;ctz=America/Sao_Paulo&amp;location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&amp;dates=20270123T150000/20270123T230000&amp;ctz=America/Sao_Paulo&amp;location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG" target="_blank" rel="noopener">Adicionar à agenda</a>
       </div>
 
       <div class="part" id="confirmar">
@@ -461,7 +539,7 @@ details p { color: var(--muted); }
   </section>
 
   <footer class="end">
-    <p class="label">Helena &amp; Ítalo · 23.01.2027 · Sabará, MG</p>
+    <p class="label">Helena &amp; Italo · 23.01.2027 · Sabará, MG</p>
   </footer>
 </main>
 
@@ -484,44 +562,48 @@ details p { color: var(--muted); }
 <script>
 (() => {
   // ---------- armazenamento local (protótipo: tudo fica neste aparelho) ----------
-  const KEY = "hi-prototipo-v1";
+  const KEY = "hi-prototipo-v2";
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
   let state = load();
+  state.rasuras = state.rasuras || {};
+  state.rsvp = state.rsvp || {};
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---------- 01 · tarja ----------
-  const redact = document.getElementById("redact");
-  const omitNote = document.getElementById("omitNote");
-  const openRedact = () => {
-    redact.classList.add("open");
-    redact.removeAttribute("aria-label");
-    redact.setAttribute("aria-disabled", "true");
-    omitNote.classList.add("show");
-  };
-  redact.addEventListener("click", () => {
-    if (redact.classList.contains("open")) return;
-    openRedact(); state.tarja = true; save();
+  // ---------- rasuras: o que está riscado foi omitido ----------
+  const pandaPhoto = document.getElementById("pandaPhoto");
+  const rasuras = [...document.querySelectorAll("[data-rasura]")].map((wrap) => {
+    const key = wrap.dataset.rasura;
+    const btn = wrap.querySelector(".struck");
+    const panel = document.getElementById(wrap.dataset.panel);
+    const label = btn.textContent;
+    btn.setAttribute("aria-label", `${label}, riscado. Toque para ver o que foi omitido.`);
+    const open = (animate) => {
+      wrap.classList.add("open");
+      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-label", `${label}, riscado. Corrigido: ${wrap.querySelector(".hand")?.textContent || "ver abaixo"}.`);
+      if (panel) { panel.hidden = false; if (animate) panel.classList.add("show"); }
+      if (key === "panda") { pandaPhoto.classList.add("clear"); pandaPhoto.removeAttribute("role"); pandaPhoto.removeAttribute("tabindex"); }
+    };
+    const close = () => {
+      wrap.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", `${label}, riscado. Toque para ver o que foi omitido.`);
+      if (panel) { panel.hidden = true; panel.classList.remove("show"); }
+      if (key === "panda") { pandaPhoto.classList.remove("clear"); pandaPhoto.setAttribute("role", "button"); pandaPhoto.setAttribute("tabindex", "0"); }
+    };
+    btn.addEventListener("click", () => {
+      if (wrap.classList.contains("open")) return;
+      open(true); state.rasuras[key] = true; save();
+    });
+    if (state.rasuras[key]) open(false);
+    return { key, btn, close };
   });
-  if (state.tarja) openRedact();
+  const pandaBtn = rasuras.find((r) => r.key === "panda").btn;
+  pandaPhoto.addEventListener("click", () => pandaBtn.click());
+  pandaPhoto.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pandaBtn.click(); } });
 
-  // ---------- 02 · anel ----------
-  const nameFix = document.getElementById("nameFix");
-  const nameBtn = document.getElementById("nameBtn");
-  const afterFix = document.getElementById("afterFix");
-  const fixName = () => {
-    nameFix.classList.add("fixed");
-    nameBtn.setAttribute("aria-label", "Ítalo, riscado. Corrigido à mão: Helena.");
-    nameBtn.setAttribute("aria-disabled", "true");
-    afterFix.classList.add("show");
-  };
-  nameBtn.addEventListener("click", () => {
-    if (nameFix.classList.contains("fixed")) return;
-    fixName(); state.anel = true; save();
-  });
-  if (state.anel) fixName();
-
-  // ---------- 03 · registros entram ao rolar ----------
+  // ---------- Cape Town: registros entram ao rolar ----------
   if ("IntersectionObserver" in window && !reduce) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
@@ -533,10 +615,10 @@ details p { color: var(--muted); }
     });
   }
 
-  // ---------- 04 · votação do muro ----------
+  // ---------- votação do muro ----------
   const OPTIONS = [
-    { id: "muro", label: "É o muro", reaction: "Ítalo agradece por ainda existirem pessoas razoáveis neste país." },
-    { id: "reboco", label: "É reboco", reaction: "Seu voto foi registrado. Ítalo discorda formalmente." },
+    { id: "muro", label: "É o muro", reaction: "Italo agradece por ainda existirem pessoas razoáveis neste país." },
+    { id: "reboco", label: "É reboco", reaction: "Seu voto foi registrado. Italo discorda formalmente." },
     { id: "neutro", label: "Prefiro não me envolver", reaction: "Decisão sensata. As relações diplomáticas agradecem." },
   ];
   // Protótipo: votos de demonstração. No site real, o total vem do servidor e começa do zero.
@@ -583,15 +665,13 @@ details p { color: var(--muted); }
   const EGGS = {
     ponte: {
       title: "Registro de viagem",
-      html: `<p class="big">600 km até a ponte.<br>Ítalo não atravessou.</p>
-             <figure class="photo" style="margin-top:1rem"><img src="midia/ponte.jpg" width="1200" height="1600" alt="Ponte suspensa sobre o rio, entre montanhas"></figure>
-             <figure class="ph vid">Vídeo · Ítalo na ponte pequena</figure>
-             <figcaption class="foot">Ponte menor, mesma viagem.</figcaption>`,
+      html: `<p class="big">600 km até a ponte.<br>Italo nem pisou nela.</p>
+             <figure class="photo"><img src="midia/ponte.jpg" width="1200" height="1600" alt="Ponte suspensa sobre o rio, entre montanhas"></figure>`,
     },
     macaco: {
       title: "Registro anterior · mesmo local",
       html: `<video class="clip" src="midia/macaco.mp4" poster="midia/macaco-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: um babuíno abre a porta de um carro"></video>
-             <figcaption class="foot">Cape Town, 5 de setembro de 2026.</figcaption>`,
+             <p class="foot" style="margin-top:0.6rem">Cape Town, 5 de setembro de 2026.</p>`,
     },
   };
   const modal = document.getElementById("modal");
@@ -607,27 +687,30 @@ details p { color: var(--muted); }
     modal.hidden = false;
     modalClose.focus();
   };
-  const closeModal = () => { modalBody.querySelectorAll("video").forEach((v) => v.pause()); modal.hidden = true; if (lastFocus) lastFocus.focus(); };
+  const closeModal = () => {
+    modalBody.querySelectorAll("video").forEach((v) => v.pause());
+    modal.hidden = true;
+    if (lastFocus) lastFocus.focus();
+  };
   document.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", () => openModal(b.dataset.open)));
   modalClose.addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
 
-  // ---------- 06 · confirmação por lista de convidados ----------
+  // ---------- confirmação por lista de convidados ----------
   // Protótipo: convites fictícios. No site real a lista vem da planilha de convidados.
   const INVITES = [
     { id: "andrade", name: "Família Andrade", by: "Helena",
       guests: [{ id: "a1", name: "Carla Andrade" }, { id: "a2", name: "Rafael Andrade" }, { id: "a3", name: "Lia Andrade", child: true }, { id: "a4", name: "Tomás Andrade", child: true }] },
-    { id: "prado", name: "Joana Prado", by: "Ítalo", guests: [{ id: "p1", name: "Joana Prado" }] },
-    { id: "lopes", name: "Pedro e Marina", by: "Helena e Ítalo", guests: [{ id: "l1", name: "Pedro Lopes" }, { id: "l2", name: "Marina Lopes" }] },
-    { id: "costa", name: "Marina Costa", by: "Ítalo", guests: [{ id: "c1", name: "Marina Costa" }] },
+    { id: "prado", name: "Joana Prado", by: "Italo", guests: [{ id: "p1", name: "Joana Prado" }] },
+    { id: "lopes", name: "Pedro e Marina", by: "Helena e Italo", guests: [{ id: "l1", name: "Pedro Lopes" }, { id: "l2", name: "Marina Lopes" }] },
+    { id: "costa", name: "Marina Costa", by: "Italo", guests: [{ id: "c1", name: "Marina Costa" }] },
   ];
   const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
   const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const out = document.getElementById("rsvpOut");
   const form = document.getElementById("rsvpForm");
   const nameInput = document.getElementById("rsvpName");
-  state.rsvp = state.rsvp || {};
 
   const find = (q) => {
     const words = norm(q).split(/\s+/).filter((w) => w.length >= 2);
@@ -637,10 +720,10 @@ details p { color: var(--muted); }
       return words.every((w) => hay.split(/\s+/).some((t) => t.startsWith(w)));
     });
   };
-
   const byLine = (inv) => `${inv.by} ${inv.by.includes(" e ") ? "convidaram" : "convidou"}:`;
 
-  let draft = null; // { inviteId, answers: { guestId: { go: true|false, diet: "" , showDiet } } }
+  let draft = null;   // { inviteId, answers: { guestId: { go, diet, showDiet } } }
+  let current = null; // convite na tela, para o "Alterar resposta"
 
   const renderInvite = (inv) => {
     const saved = state.rsvp[inv.id];
@@ -687,7 +770,6 @@ details p { color: var(--muted); }
       <div class="rsvp-actions"><button class="link-btn" type="button" id="changeBtn">Alterar resposta</button></div></div>`;
   };
 
-  let current = null; // convite na tela, para o "Alterar resposta"
   const show = (inv) => { current = inv.id; draft = null; state.rsvp[inv.id]?.done ? renderDone(inv) : renderInvite(inv); };
 
   form.addEventListener("submit", (e) => {
@@ -748,7 +830,7 @@ details p { color: var(--muted); }
   // ---------- links internos e endereço direto ----------
   document.getElementById("enter").addEventListener("click", (e) => {
     e.preventDefault();
-    document.getElementById("anel").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    document.getElementById("historia").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
   });
   const h = location.hash.slice(1);
   if (h && /^[\w.~-]+$/.test(h) && document.getElementById(h)) {
@@ -758,11 +840,8 @@ details p { color: var(--muted); }
   // ---------- recomeçar o protótipo ----------
   document.getElementById("reset").addEventListener("click", () => {
     try { localStorage.removeItem(KEY); } catch {}
-    state = { rsvp: {} }; draft = null; current = null;
-    redact.classList.remove("open"); redact.setAttribute("aria-label", "Palavra omitida. Toque para revelar."); redact.removeAttribute("aria-disabled");
-    omitNote.classList.remove("show");
-    nameFix.classList.remove("fixed"); nameBtn.setAttribute("aria-label", "Ítalo. Toque para ver a correção."); nameBtn.removeAttribute("aria-disabled");
-    afterFix.classList.remove("show");
+    state = { rasuras: {}, rsvp: {} }; draft = null; current = null;
+    rasuras.forEach((r) => r.close());
     renderVote(); out.innerHTML = ""; nameInput.value = "";
     window.scrollTo({ top: 0, behavior: "auto" });
   });
