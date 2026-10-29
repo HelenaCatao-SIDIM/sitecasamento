@@ -35,7 +35,7 @@ site/                  o site de verdade: é esta pasta que vai para o ar
   js/config.js         o que muda sem mexer no código: planilha, prazo, WhatsApp, Pix e presentes
   js/app.js            interações, confirmação, votação, Pix
   favicon.svg
-  midia/               fotos, vídeos e gravuras (fora do Git: o repositório é público)
+  midia/               fotos, vídeos e gravuras
 backend/apps-script/   planilha do Google que guarda confirmações e votos (ver LEIAME.md)
 scripts/build-preview.py   gera prototipo/index.html, a prévia de um arquivo só
 prototipo/index.html   prévia gerada; não editar à mão
@@ -52,7 +52,7 @@ Sem `apiUrl` em `config.js`, o site roda em **modo demonstração**: convites fi
 5. **Prévia do link:** em `site/index.html`, troque `SEU-DOMINIO` pelo domínio final na linha `og:image`.
 6. **Antes de mandar o link:** teste com 3 a 5 pessoas no celular.
 
-Se quiser que o GitHub publique sozinho a cada mudança, deixe o repositório **privado** e ligue o Netlify a ele; aí a pasta `midia/` pode entrar no Git.
+Se quiser que o site seja publicado sozinho a cada mudança, ligue o Netlify a este repositório (pasta de publicação: `site`). O repositório deve ficar **privado**, porque `site/midia/` tem fotos e vídeos pessoais.
 
 ## Ideias anotadas
 
@@ -63,7 +63,7 @@ Se quiser que o GitHub publique sozinho a cada mudança, deixe o repositório **
 - Evento fechado: sábado, 23/01/2027, 15h às 23h, Rua João Batista Campanha, 46, Terra Santa, Sabará. Sem cerimônia (casam na quarta, 20/01; o sábado é comemoração). Traje esporte fino e colorido. Crianças bem-vindas, estacionamento na rua, sem transporte, chuva mantém o local. Dúvidas: Helena.
 - Evento pendente: prazo da confirmação; presentes (lista com fotos e valores, chave Pix, titular, cidade); dica de hotel (nome, onde fica, preço, como reservar); número do WhatsApp conferido.
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
-- Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date (fora do Git: o repositório é público).
+- Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date.
 - Material pendente: foto do casal para a prévia do link; Malta, ramos de oliveira, selos e bússola em arquivos separados (hoje recortados da imagem de referência do Save the Date).
 - Lista de convidados em planilha.
 - Técnico: criar a planilha e publicar o Apps Script; escolher a hospedagem (sugestão: Netlify) e o domínio; trocar SEU-DOMINIO no og:image.
