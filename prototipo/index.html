@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&family=Corinthia:wght@400;700&family=Jost:ital,wght@0,300..600;1,300..500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 /* Layout: uma coluna estreita de documento oficial; o Pedido é a única peça que ocupa a largura toda.
    Código do site: o que está riscado foi omitido; tocar mostra a correção à mão e o que ficou de fora.
@@ -578,6 +579,8 @@ details p { color: var(--muted); }
   background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
 }
 .proto button { background: none; border: 0; padding: 0; cursor: pointer; color: var(--paper); text-decoration: underline; text-underline-offset: 3px; font: inherit; letter-spacing: inherit; text-transform: inherit; }
+.gift-img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+
 </style>
 
 <header class="top">
@@ -879,7 +882,7 @@ details p { color: var(--muted); }
 
       <div class="part rsvp-part" id="rsvp">
         <h3>Confirme sua presença</h3>
-        <p>Confirme até <span class="todo">[data limite]</span>. Digite seu nome para encontrar o seu convite.</p>
+        <p>Confirme até <span class="todo" data-cfg="prazo">[data limite]</span>. Digite seu nome para encontrar o seu convite.</p>
         <form class="rsvp-search" id="rsvpForm" autocomplete="off">
           <label class="label" for="rsvpName" style="flex-basis:100%">Seu nome</label>
           <input class="field" id="rsvpName" name="nome" type="text" placeholder="Nome e sobrenome" enterkeyhint="search">
@@ -900,7 +903,7 @@ details p { color: var(--muted); }
 
       <div class="part">
         <h3>Dúvidas</h3>
-        <p>Helena · WhatsApp <span class="todo">[número a confirmar]</span></p>
+        <p>Helena · WhatsApp <span class="todo" data-cfg="whatsapp">[número a confirmar]</span></p>
       </div>
     </div>
   </section>
@@ -945,14 +948,56 @@ details p { color: var(--muted); }
 </div>
 
 <script>
+// Configuração do site. É o único arquivo que precisa ser editado para publicar.
+// Enquanto apiUrl estiver vazio, o site roda em modo demonstração: convites fictícios,
+// votos de exemplo e nada é gravado fora do aparelho.
+window.SITE_CONFIG = {
+  // URL do Apps Script publicado como app da Web (ver backend/apps-script/LEIAME.md)
+  apiUrl: "",
+
+  // Aparece em "Confirme até ..."
+  prazoConfirmacao: "",
+
+  // Só números, com DDI e DDD: ex. "5531999999999"
+  whatsapp: "",
+
+  // Pix para os presentes: chave, nome do titular e cidade (como no banco, sem acento)
+  pix: { chave: "", titular: "", cidade: "SABARA" },
+
+  // Lista de presentes. valor em reais (número). foto: arquivo dentro de midia/ (opcional)
+  presentes: [
+    { id: "jantar", nome: "Um jantar a dois", valor: null, foto: "" },
+    { id: "mala", nome: "Uma mala nova", valor: null, foto: "" },
+    { id: "passagem", nome: "Passagem para o próximo destino", valor: null, foto: "" },
+    { id: "hotel", nome: "Uma noite de hotel na lua de mel", valor: null, foto: "" },
+    { id: "barco", nome: "Um passeio de barco", valor: null, foto: "" },
+    { id: "safari", nome: "Um safári (desta vez, sem leoas)", valor: null, foto: "" },
+  ],
+};
+
+</script>
+<script>
 (() => {
-  // ---------- armazenamento local (protótipo: tudo fica neste aparelho) ----------
-  const KEY = "hi-prototipo-v2";
+  // ---------- configuração (js/config.js) ----------
+  const CFG = window.SITE_CONFIG || {};
+  const API = (CFG.apiUrl || "").trim();
+  const DEMO_MODE = !API; // sem planilha ligada: convites fictícios e votos de exemplo
+  const api = {
+    get: (params) => fetch(API + "?" + new URLSearchParams(params)).then((r) => r.json()),
+    // texto puro evita a checagem prévia de CORS do navegador com o Apps Script
+    post: (body) => fetch(API, { method: "POST", body: JSON.stringify(body) }).then((r) => r.json()),
+  };
+
+  // ---------- armazenamento local: o que a pessoa já fez neste aparelho ----------
+  const KEY = "hi-site-v1";
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
   let state = load();
   state.rasuras = state.rasuras || {};
   state.rsvp = state.rsvp || {};
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
+  // identifica o aparelho para "um voto por aparelho"
+  state.device = state.device || (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2));
+  save();
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---------- rasuras: o que está riscado foi omitido ----------
@@ -1050,8 +1095,9 @@ details p { color: var(--muted); }
     { id: "reboco", label: "É reboco", reaction: "Seu voto foi registrado. Italo discorda formalmente." },
     { id: "neutro", label: "Prefiro não me envolver", reaction: "Decisão sensata. As relações diplomáticas agradecem." },
   ];
-  // Protótipo: votos de demonstração. No site real, o total vem do servidor e começa do zero.
+  // Modo demonstração: votos de exemplo. Com a planilha ligada, o total vem dela e começa do zero.
   const DEMO = { muro: 38, reboco: 17, neutro: 5 };
+  let serverCounts = null;
   const voteEl = document.getElementById("vote");
 
   const percents = (counts) => {
@@ -1071,7 +1117,7 @@ details p { color: var(--muted); }
       }</div><div class="vote-err" id="voteErr" hidden>Não conseguimos registrar seu voto. Tente de novo.</div>`;
       return;
     }
-    const counts = { ...DEMO }; counts[mine] += 1;
+    const counts = DEMO_MODE ? { ...DEMO, [mine]: DEMO[mine] + 1 } : (serverCounts || { muro: 0, reboco: 0, neutro: 0 });
     const pct = percents(counts);
     const chosen = OPTIONS.find((o) => o.id === mine);
     voteEl.innerHTML = `<h3>Você acredita?</h3><div class="results">${
@@ -1081,13 +1127,24 @@ details p { color: var(--muted); }
       voteEl.querySelectorAll(".bar i").forEach((b) => { b.style.width = b.dataset.w + "%"; });
     }));
   };
-  voteEl.addEventListener("click", (e) => {
+  voteEl.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-vote]");
     if (!b || state.voto) return;
-    voteEl.querySelectorAll(".choice").forEach((c) => (c.disabled = true));
-    // No site real aqui entra a chamada ao servidor; em caso de falha, reabilita e mostra #voteErr.
-    setTimeout(() => { state.voto = b.dataset.vote; save(); renderVote(); }, 350);
+    const choices = voteEl.querySelectorAll(".choice");
+    choices.forEach((c) => (c.disabled = true));
+    if (DEMO_MODE) { setTimeout(() => { state.voto = b.dataset.vote; save(); renderVote(); }, 350); return; }
+    try {
+      const res = await api.post({ action: "votar", opcao: b.dataset.vote, dispositivo: state.device });
+      if (!res || !res.votos) throw new Error(res && res.erro);
+      serverCounts = res.votos; state.voto = b.dataset.vote; save(); renderVote();
+    } catch {
+      choices.forEach((c) => (c.disabled = false));
+      voteEl.querySelector("#voteErr").hidden = false;
+    }
   });
+  if (!DEMO_MODE && state.voto) {
+    api.get({ action: "votos" }).then((r) => { if (r && r.votos) { serverCounts = r.votos; renderVote(); } }).catch(() => {});
+  }
   renderVote();
 
   // ---------- achados: ponte e macaco ----------
@@ -1170,8 +1227,8 @@ details p { color: var(--muted); }
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
 
   // ---------- confirmação por lista de convidados ----------
-  // Protótipo: convites fictícios. No site real a lista vem da planilha de convidados.
-  const INVITES = [
+  // Modo demonstração: convites fictícios. Com a planilha ligada, os convites vêm dela.
+  const DEMO_INVITES = [
     { id: "andrade", name: "Família Andrade", by: "Helena",
       guests: [{ id: "a1", name: "Carla Andrade" }, { id: "a2", name: "Rafael Andrade" }, { id: "a3", name: "Lia Andrade", child: true }, { id: "a4", name: "Tomás Andrade", child: true }] },
     { id: "prado", name: "Joana Prado", by: "Italo", guests: [{ id: "p1", name: "Joana Prado" }] },
@@ -1187,11 +1244,22 @@ details p { color: var(--muted); }
   const find = (q) => {
     const words = norm(q).split(/\s+/).filter((w) => w.length >= 2);
     if (!words.length) return [];
-    return INVITES.filter((inv) => {
+    return DEMO_INVITES.filter((inv) => {
       const hay = norm([inv.name, ...inv.guests.map((g) => g.name)].join(" "));
       return words.every((w) => hay.split(/\s+/).some((t) => t.startsWith(w)));
     });
   };
+  let cache = DEMO_MODE ? DEMO_INVITES : [];
+  const fromApi = (c) => {
+    const inv = { id: String(c.id), name: c.nome, by: c.por || "", guests: (c.pessoas || []).map((p) => ({ id: String(p.id), name: p.nome, child: !!p.crianca })) };
+    const ans = c.respostas || {};
+    if (inv.guests.length && inv.guests.every((g) => g.id in ans)) {
+      state.rsvp[inv.id] = { done: true, answers: Object.fromEntries(inv.guests.map((g) => [g.id, { go: !!ans[g.id].vai, diet: ans[g.id].restricao || "" }])) };
+    }
+    return inv;
+  };
+  const waDigits = (CFG.whatsapp || "").replace(/\D/g, "");
+  const waText = waDigits ? `+${waDigits.slice(0, 2)} (${waDigits.slice(2, 4)}) ${waDigits.slice(4, -4)}-${waDigits.slice(-4)}` : "[número a confirmar]";
   const byLine = (inv) => `${inv.by} ${inv.by.includes(" e ") ? "convidaram" : "convidou"}:`;
 
   let draft = null;   // { inviteId, answers: { guestId: { go, diet, showDiet } } }
@@ -1244,14 +1312,27 @@ details p { color: var(--muted); }
 
   const show = (inv) => { current = inv.id; draft = null; state.rsvp[inv.id]?.done ? renderDone(inv) : renderInvite(inv); };
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const q = nameInput.value;
-    if (norm(q).length < 3) {
-      out.innerHTML = `<p class="hint">Digite seu nome para buscarmos o convite.</p>`;
+    const words = norm(q).split(/\s+/).filter(Boolean);
+    if (norm(q).length < 3 || (!DEMO_MODE && words.length < 2)) {
+      out.innerHTML = `<p class="hint">Digite seu nome e sobrenome para buscarmos o convite.</p>`;
       return;
     }
-    const found = find(q);
+    let found;
+    if (DEMO_MODE) found = find(q);
+    else {
+      out.innerHTML = `<p class="hint">Procurando o seu convite…</p>`;
+      try {
+        const res = await api.get({ action: "buscar", nome: q });
+        found = (res.convites || []).map(fromApi);
+      } catch {
+        out.innerHTML = `<p class="hint">Não conseguimos buscar agora. Tente de novo em instantes.</p>`;
+        return;
+      }
+      cache = found;
+    }
     if (found.length === 1) return show(found[0]);
     if (found.length > 1) {
       out.innerHTML = `<p>Encontramos mais de um convite com esse nome. Qual é o seu?</p><div class="pick">${
@@ -1259,14 +1340,14 @@ details p { color: var(--muted); }
       }</div>`;
       return;
     }
-    out.innerHTML = `<div class="notfound"><p style="margin:0">Não encontramos seu convite. Fale com a gente pelo WhatsApp.</p><p class="hint" style="margin:0.4rem 0 0">Helena · [número a confirmar]</p></div>`;
+    out.innerHTML = `<div class="notfound"><p style="margin:0">Não encontramos seu convite. Fale com a gente pelo WhatsApp.</p><p class="hint" style="margin:0.4rem 0 0">Helena · ${esc(waText)}</p></div>`;
   });
 
-  out.addEventListener("click", (e) => {
+  out.addEventListener("click", async (e) => {
     const t = e.target;
     const pick = t.closest("[data-pick]");
-    if (pick) return show(INVITES.find((i) => i.id === pick.dataset.pick));
-    const inv = draft && INVITES.find((i) => i.id === draft.inviteId);
+    if (pick) return show(cache.find((i) => i.id === pick.dataset.pick));
+    const inv = draft && cache.find((i) => i.id === draft.inviteId);
     const ansBtn = t.closest("[data-ans]");
     if (ansBtn && inv) {
       const id = ansBtn.dataset.ans;
@@ -1284,6 +1365,20 @@ details p { color: var(--muted); }
     }
     if (t.id === "confirmBtn" && inv) {
       Object.values(draft.answers).forEach((x) => { if (!x.go) x.diet = ""; delete x.showDiet; });
+      if (!DEMO_MODE) {
+        t.disabled = true; t.textContent = "Enviando…";
+        try {
+          const res = await api.post({
+            action: "confirmar", convite_id: inv.id,
+            respostas: inv.guests.map((g) => ({ pessoa_id: g.id, vai: !!draft.answers[g.id].go, restricao: draft.answers[g.id].diet || "" })),
+          });
+          if (!res || !res.ok) throw new Error(res && res.erro);
+        } catch {
+          t.disabled = false; t.textContent = "Confirmar";
+          out.querySelector(".rsvp-actions").insertAdjacentHTML("beforeend", `<span class="hint">Não conseguimos registrar. Tente de novo.</span>`);
+          return;
+        }
+      }
       state.rsvp[inv.id] = { done: true, answers: draft.answers }; save();
       renderDone(inv);
       const going = inv.guests.filter((g) => draft.answers[g.id]?.go).length;
@@ -1296,7 +1391,7 @@ details p { color: var(--muted); }
       return;
     }
     if (t.id === "changeBtn" && current) {
-      const invC = INVITES.find((i) => i.id === current);
+      const invC = cache.find((i) => i.id === current);
       draft = { inviteId: invC.id, answers: JSON.parse(JSON.stringify(state.rsvp[invC.id].answers)) };
       renderInvite(invC);
     }
@@ -1307,35 +1402,53 @@ details p { color: var(--muted); }
   });
 
   // ---------- presentes: lista com foto e valor, pago por Pix ----------
-  // Exemplos para mostrar o formato; a lista, os valores e a chave vêm da Helena.
-  const GIFTS = [
-    { id: "jantar", name: "Um jantar a dois", price: "R$ [valor]" },
-    { id: "mala", name: "Uma mala nova", price: "R$ [valor]" },
-    { id: "passagem", name: "Passagem para o próximo destino", price: "R$ [valor]" },
-    { id: "hotel", name: "Uma noite de hotel na lua de mel", price: "R$ [valor]" },
-    { id: "barco", name: "Um passeio de barco", price: "R$ [valor]" },
-    { id: "safari", name: "Um safári (desta vez, sem leoas)", price: "R$ [valor]" },
-  ];
+  const GIFTS = (CFG.presentes || []).map((g) => ({ ...g, nome: g.nome || "" }));
+  const brl = (v) => (typeof v === "number" ? v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "R$ [valor]");
+  const PIX = CFG.pix || {};
+  // Pix copia e cola (BR Code) com o valor do presente
+  const crc16 = (str) => {
+    let crc = 0xffff;
+    for (let i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) crc = crc & 0x8000 ? ((crc << 1) ^ 0x1021) & 0xffff : (crc << 1) & 0xffff;
+    }
+    return crc.toString(16).toUpperCase().padStart(4, "0");
+  };
+  const plain = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase();
+  const pixPayload = (valor) => {
+    const f = (id, v) => id + String(v.length).padStart(2, "0") + v;
+    const p = f("00", "01") + f("26", f("00", "br.gov.bcb.pix") + f("01", PIX.chave))
+      + f("52", "0000") + f("53", "986") + (typeof valor === "number" ? f("54", valor.toFixed(2)) : "")
+      + f("58", "BR") + f("59", plain(PIX.titular).slice(0, 25)) + f("60", plain(PIX.cidade || "SABARA").slice(0, 15))
+      + f("62", f("05", "***")) + "6304";
+    return p + crc16(p);
+  };
+  const hasPix = !!(PIX.chave && PIX.titular);
   document.getElementById("gifts").innerHTML = GIFTS.map((g) =>
-    `<button class="gift" type="button" data-gift="${g.id}"><span class="ph">Foto · ${esc(g.name)}</span><span class="gift-name">${esc(g.name)}</span><span class="gift-price">${esc(g.price)}</span></button>`
+    `<button class="gift" type="button" data-gift="${esc(g.id)}">${g.foto ? `<img class="gift-img" src="midia/${esc(g.foto)}" alt="">` : `<span class="ph">Foto · ${esc(g.nome)}</span>`}<span class="gift-name">${esc(g.nome)}</span><span class="gift-price">${brl(g.valor)}</span></button>`
   ).join("");
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-gift]");
     if (!b) return;
     const g = GIFTS.find((x) => x.id === b.dataset.gift);
-    const head = g ? `<p class="big">${esc(g.name)}</p><p style="margin:0.2rem 0 0">${esc(g.price)}</p>` : `<p class="big">O valor que você quiser</p>`;
-    const code = g ? "[código Pix copia e cola, já com o valor]" : "[chave Pix]";
+    const head = g ? `<p class="big">${esc(g.nome)}</p><p style="margin:0.2rem 0 0">${brl(g.valor)}</p>` : `<p class="big">O valor que você quiser</p>`;
+    const code = hasPix ? (g ? pixPayload(g.valor) : PIX.chave) : (g ? "[código Pix copia e cola, já com o valor]" : "[chave Pix]");
     openModal({
       title: "Presentear",
       html: `${head}
         <div class="pix">
-          ${g ? `<figure class="ph qr">QR Code do Pix</figure>` : `<p style="margin:0">Titular: <span class="todo">[nome do titular]</span></p>`}
+          ${g ? `<figure class="ph qr" id="pixQr">${hasPix ? "" : "QR Code do Pix"}</figure>` : `<p style="margin:0">Titular: ${hasPix ? esc(PIX.titular) : `<span class="todo">[nome do titular]</span>`}</p>`}
           <span class="label">${g ? "Pix copia e cola" : "Chave Pix"}</span>
-          <div class="pix-code" id="pixCode">${code}</div>
+          <div class="pix-code" id="pixCode">${esc(code)}</div>
           <button class="btn primary" type="button" data-copy>Copiar</button>
           <p class="foot">Obrigado pelo carinho. 🤎</p>
         </div>`,
     });
+    const qr = document.getElementById("pixQr");
+    if (qr && hasPix && window.QRCode) {
+      qr.classList.remove("ph");
+      new window.QRCode(qr, { text: code, width: 176, height: 176, colorDark: "#3A2A1E", colorLight: "#F7F0E4" });
+    }
   });
   modalBody.addEventListener("click", (e) => {
     const c = e.target.closest("[data-copy]");
@@ -1345,6 +1458,11 @@ details p { color: var(--muted); }
     const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = "Selecionado: copie com o menu"; };
     try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch { fallback(); }
   });
+
+  // ---------- textos que vêm da configuração ----------
+  const fill = (key, html) => document.querySelectorAll(`[data-cfg="${key}"]`).forEach((el) => { el.innerHTML = html; el.classList.remove("todo"); });
+  if (CFG.prazoConfirmacao) fill("prazo", esc(CFG.prazoConfirmacao));
+  if (waDigits) fill("whatsapp", `<a class="text-link" href="https://wa.me/${waDigits}" target="_blank" rel="noopener">${esc(waText)}</a>`);
 
   // ---------- links internos e endereço direto ----------
   document.getElementById("enter").addEventListener("click", (e) => {
@@ -1375,7 +1493,8 @@ details p { color: var(--muted); }
   }
 
   // ---------- recomeçar o protótipo ----------
-  document.getElementById("reset").addEventListener("click", () => {
+  if (!DEMO_MODE) document.querySelector(".proto")?.remove();
+  document.getElementById("reset")?.addEventListener("click", () => {
     try { localStorage.removeItem(KEY); } catch {}
     state = { rasuras: {}, rsvp: {} }; draft = null; current = null;
     rasuras.forEach((r) => r.close());
@@ -1387,4 +1506,5 @@ details p { color: var(--muted); }
     window.scrollTo({ top: 0, behavior: "auto" });
   });
 })();
+
 </script>

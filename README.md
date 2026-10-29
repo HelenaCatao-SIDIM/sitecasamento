@@ -26,9 +26,33 @@ O site tem três páginas, com o menu "A história · Confirmar presença · Pre
 
 Confirmação de presença por lista de convidados: a pessoa digita o nome, o site acha o convite, aparecem só as pessoas daquele convite, cada uma marca Vou / Não vou conseguir, restrição alimentar por pessoa, sem "adicionar acompanhante".
 
-## Protótipo
+## Arquivos
 
-`prototipo/index.html`: os seis blocos navegáveis com espaços reservados para fotos e vídeos, convites e votos fictícios, tudo guardado só no aparelho. "Recomeçar" (no canto) apaga o estado para testar de novo. Convites de teste: Andrade, Joana, Marina (dois convites), Pedro.
+```
+site/                  o site de verdade: é esta pasta que vai para o ar
+  index.html           as três páginas (história, confirmar presença, presentes)
+  css/style.css        visual
+  js/config.js         o que muda sem mexer no código: planilha, prazo, WhatsApp, Pix e presentes
+  js/app.js            interações, confirmação, votação, Pix
+  favicon.svg
+  midia/               fotos, vídeos e gravuras (fora do Git: o repositório é público)
+backend/apps-script/   planilha do Google que guarda confirmações e votos (ver LEIAME.md)
+scripts/build-preview.py   gera prototipo/index.html, a prévia de um arquivo só
+prototipo/index.html   prévia gerada; não editar à mão
+```
+
+Sem `apiUrl` em `config.js`, o site roda em **modo demonstração**: convites fictícios (Andrade, Joana, Marina, Pedro), votos de exemplo e o selo "Protótipo · Recomeçar". Com a planilha ligada, o selo some, a busca exige nome e sobrenome e tudo é gravado na planilha.
+
+## Como colocar no ar
+
+1. **Planilha:** siga `backend/apps-script/LEIAME.md` e cole a URL em `site/js/config.js` (`apiUrl`).
+2. **Configuração:** em `site/js/config.js`, preencha `prazoConfirmacao`, `whatsapp`, `pix` (chave, titular, cidade) e a lista de `presentes` (nome, valor e foto em `midia/`). Com a chave preenchida, cada presente gera o Pix copia e cola e o QR Code já com o valor.
+3. **Hospedagem:** a pasta `site/` é um site estático, sem servidor próprio. O caminho mais simples é o **Netlify** (netlify.com → Add new site → Deploy manually → arrastar a pasta `site/` inteira, com a `midia/`). Cloudflare Pages e Vercel também servem. Os três são gratuitos para este tamanho.
+4. **Domínio:** compre o domínio (ex.: no Registro.br para `.com.br`) e aponte para o Netlify (Domain settings → Add custom domain). O HTTPS vem automático.
+5. **Prévia do link:** em `site/index.html`, troque `SEU-DOMINIO` pelo domínio final na linha `og:image`.
+6. **Antes de mandar o link:** teste com 3 a 5 pessoas no celular.
+
+Se quiser que o GitHub publique sozinho a cada mudança, deixe o repositório **privado** e ligue o Netlify a ele; aí a pasta `midia/` pode entrar no Git.
 
 ## Ideias anotadas
 
@@ -42,4 +66,4 @@ Confirmação de presença por lista de convidados: a pessoa digita o nome, o si
 - Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date (fora do Git: o repositório é público).
 - Material pendente: foto do casal para a prévia do link; Malta, ramos de oliveira, selos e bússola em arquivos separados (hoje recortados da imagem de referência do Save the Date).
 - Lista de convidados em planilha.
-- Técnico: hospedagem, domínio e onde ficam confirmações e votos.
+- Técnico: criar a planilha e publicar o Apps Script; escolher a hospedagem (sugestão: Netlify) e o domínio; trocar SEU-DOMINIO no og:image.

@@ -1,2 +1,4 @@
-# Fotos e vídeos pessoais: o repositório é público, a mídia vai só para o protótipo privado.
+# Fotos e vídeos pessoais: o repositório é público, então a mídia não entra no Git.
+# Para publicar, a pasta site/midia/ vai junto com o resto da pasta site/.
+site/midia/
 prototipo/midia/
