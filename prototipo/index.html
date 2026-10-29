@@ -2,19 +2,21 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&family=Nothing+You+Could+Do&family=Corinthia:wght@400;700&display=swap">
 <style>
 /* Layout: uma coluna estreita de documento oficial; o Pedido é a única peça que ocupa a largura toda.
    Código do site: o que está riscado foi omitido; tocar mostra a correção à mão e o que ficou de fora.
-   Visual provisório até chegarem as ilustrações do Save the Date. */
+   Paleta e gravuras vêm do Save the Date: pergaminho, tinta sépia, caneta marrom. */
 :root {
-  --paper: #EEEEE9;      /* papel timbrado, levemente frio */
-  --surface: #F7F7F3;    /* ficha, convite, o que foi omitido */
-  --ink: #241D18;        /* tinta de impressão; também o risco */
-  --muted: #6D655E;      /* legenda, rodapé */
-  --line: #D3D0C7;       /* fio, borda de campo */
-  --tint: #E2E0D8;       /* espaço reservado para foto e vídeo */
+  --paper: #EFE5D4;      /* pergaminho do Save the Date */
+  --surface: #F7F0E4;    /* ficha, convite, o que foi omitido */
+  --ink: #3A2A1E;        /* tinta sépia escura; também o risco */
+  --muted: #7A6754;      /* legenda, rodapé */
+  --line: #DCCBB2;       /* fio, borda de campo */
+  --tint: #E5D6BF;       /* espaço reservado para foto e vídeo */
   --pen: #7A4828;        /* caneta da correção à mão, marrom */
+  --engrave: #5B3A24;    /* traço das gravuras */
+  --script: "Corinthia", "Snell Roundhand", "Segoe Script", cursive;
 
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --body: "Newsreader", "Iowan Old Style", Georgia, serif;
@@ -25,13 +27,13 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #14110E; --surface: #1C1815; --ink: #ECE6DE; --muted: #A1988E;
-    --line: #39322C; --tint: #241F1B; --pen: #D69C6C; color-scheme: dark;
+    --paper: #17120D; --surface: #201912; --ink: #EDE3D3; --muted: #A8977F;
+    --line: #3D3226; --tint: #2A2219; --pen: #D69C6C; --engrave: #D9BC98; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #14110E; --surface: #1C1815; --ink: #ECE6DE; --muted: #A1988E;
-  --line: #39322C; --tint: #241F1B; --pen: #D69C6C; color-scheme: dark;
+  --paper: #17120D; --surface: #201912; --ink: #EDE3D3; --muted: #A8977F;
+  --line: #3D3226; --tint: #2A2219; --pen: #D69C6C; --engrave: #D9BC98; color-scheme: dark;
 }
 
 html { scroll-behavior: smooth; }
@@ -189,26 +191,57 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .omitted .ph, .omitted .photo { margin-top: 1.1rem; }
 @media (prefers-reduced-motion: reduce) { .rasura.open .hand, .omitted.show { animation: none; } }
 
-/* Home */
-.home { padding-block: clamp(4.5rem, 16vh, 9rem) clamp(4rem, 12vh, 7rem); text-align: center; }
-.home h1 {
-  font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 11vw, 5rem);
-  letter-spacing: 0.06em; line-height: 1; margin: 0;
+/* Home: o Save the Date, com as gravuras dos lugares em volta do nome */
+.home {
+  position: relative; overflow: hidden; text-align: center;
+  min-height: min(calc(100svh - 3.4rem), 60rem); display: grid; place-items: center;
+  padding-block: clamp(3rem, 8vh, 5rem) clamp(3rem, 7vh, 4rem);
 }
-.home h1 .amp { font-style: italic; }
-.subtitle { font-family: var(--display); font-style: italic; font-size: clamp(1.2rem, 4.4vw, 1.5rem); margin: 0.9rem 0 0; }
+.home::before {
+  /* manchas de café e a textura do papel */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle closest-side, color-mix(in srgb, var(--pen) 11%, transparent), transparent) 6% 30% / 30rem 30rem no-repeat,
+    radial-gradient(circle closest-side, color-mix(in srgb, var(--pen) 8%, transparent), transparent) 72% 4% / 20rem 20rem no-repeat,
+    radial-gradient(circle closest-side, color-mix(in srgb, var(--pen) 9%, transparent), transparent) 38% 96% / 16rem 16rem no-repeat,
+    radial-gradient(circle closest-side, color-mix(in srgb, var(--pen) 7%, transparent), transparent) 100% 64% / 18rem 18rem no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .23 0 0 0 0 .14 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.collage { position: absolute; inset: 0; z-index: 0; pointer-events: none; color: var(--engrave); }
+.collage .routes { position: absolute; inset: 0; width: 100%; height: 100%; }
+.collage .routes path { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-dasharray: 5 7; opacity: 0.45; vector-effect: non-scaling-stroke; }
+.hp { position: absolute; height: auto; opacity: 0.9; }
+.hp.svg { opacity: 0.75; }
+.place-label { position: absolute; font-family: var(--script); font-size: clamp(1.8rem, 2.6vw, 2.7rem); color: var(--engrave); opacity: 0.85; transform: rotate(-6deg); white-space: nowrap; }
+.home .wrap { max-width: 36rem; }
+.names { font-family: var(--script); font-weight: 400; font-size: clamp(4.6rem, 17vw, 9rem); line-height: 0.95; margin: 0; color: var(--ink); }
+.names span { font-size: 0.8em; }
+.morro { display: block; width: min(26rem, 92%); height: auto; margin: -0.4rem auto 0; }
+.subtitle { font-family: var(--mono); font-size: clamp(0.78rem, 2.6vw, 0.95rem); letter-spacing: 0.42em; text-transform: uppercase; margin: 1.6rem 0 0; padding-left: 0.42em; }
+.when { font-family: var(--display); font-size: clamp(2.1rem, 8vw, 3.3rem); letter-spacing: 0.12em; margin: 0.6rem 0 0; font-variant-numeric: lining-nums; }
+.where { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.32em; margin: 0.3rem 0 0; padding-left: 0.32em; }
+.rule { width: 4.5rem; height: 1px; background: var(--ink); opacity: 0.5; margin: 1.2rem auto 0; border: 0; }
 .thesis {
-  font-family: var(--body); font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.45;
-  max-width: 26ch; margin: 2.2rem auto 0; text-wrap: balance;
+  font-family: var(--body); font-style: italic; font-size: clamp(1.15rem, 4.2vw, 1.4rem); line-height: 1.45;
+  max-width: 28ch; margin: 1.4rem auto 0; text-wrap: balance;
 }
-.home .foot { margin: 1rem auto 0; }
-.when { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.16em; margin-top: 2.4rem; }
+.home .foot { margin: 0.8rem auto 0; }
 .enter {
-  display: inline-block; margin-top: 2.6rem; padding: 0.85rem 2.2rem;
-  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase;
-  background: var(--ink); color: var(--paper); border: 0; cursor: pointer; text-decoration: none;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.3rem; margin-top: 2rem;
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none; padding: 0.4rem 0.6rem;
 }
-.enter:hover { opacity: .88; }
+.enter svg { width: 1rem; height: auto; animation: nudge 2.4s ease-in-out infinite; }
+.enter:hover { color: var(--pen); }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .enter svg { animation: none; } }
+@media (max-width: 52rem) {
+  .hp.m-hide, .place-label.m-hide { display: none; }
+  .collage .routes { display: none; }
+  .hp { opacity: 0.55; }
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img.hp { filter: invert(1) hue-rotate(180deg); } }
+:root[data-theme="dark"] img.hp { filter: invert(1) hue-rotate(180deg); }
 
 /* Blocos */
 .block { padding-block: 4.5rem; }
@@ -436,13 +469,48 @@ details p { color: var(--muted); }
 <main>
   <!-- Home -->
   <section class="home" id="inicio">
+    <div class="collage" aria-hidden="true">
+      <svg class="routes" viewBox="0 0 1440 900" preserveAspectRatio="none">
+        <path d="M150 230 C 260 330, 420 330, 330 520 S 210 760, 260 880" />
+        <path d="M560 860 C 760 905, 900 760, 1060 820 S 1300 760, 1400 820" />
+        <path d="M1240 70 C 1330 220, 1150 300, 1220 430 S 1130 600, 1180 690" />
+        <path d="M430 60 C 620 20, 820 30, 1010 70" />
+      </svg>
+      <img class="hp m-hide" src="midia/h-olive-tl.webp" alt="" style="left:0;top:0;width:min(13vw,13rem)">
+      <svg class="hp svg m-hide" viewBox="0 0 120 70" style="left:23%;top:2%;width:6.5rem" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="30" cy="35" r="24"/><circle cx="30" cy="35" r="18" stroke-width=".8"/><path d="M58 22c10-6 20 6 30 0s20 6 30 0M58 32c10-6 20 6 30 0s20 6 30 0M58 42c10-6 20 6 30 0s20 6 30 0M58 52c10-6 20 6 30 0s20 6 30 0"/></svg>
+      <img class="hp" src="midia/h-malta.webp" alt="" style="left:8%;top:9%;width:min(27vw,28rem)">
+      <span class="place-label" style="left:2.5%;top:20%">Malta</span>
+      <svg class="hp svg m-hide" viewBox="0 0 240 140" style="left:5%;top:38%;width:min(13vw,12rem);transform:rotate(-8deg)"><g fill="none" stroke="currentColor"><rect x="6" y="6" width="228" height="128" rx="14" stroke-width="3" stroke-dasharray="2 3"/><rect x="16" y="16" width="208" height="108" rx="9" stroke-width="1.5"/></g><path d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.4v4.8l2.2 1.7v1.6L12 20.6l-3.5.9v-1.6l2.2-1.7v-4.8L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z" fill="currentColor" transform="translate(30 44) scale(2.3) rotate(-40 12 12)"/><text x="150" y="64" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="21" letter-spacing="5" fill="currentColor">ARRIVAL</text><text x="150" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="3" fill="currentColor">23 01 27</text></svg>
+      <img class="hp m-hide" src="midia/deco-elefante.webp" alt="" style="left:1%;top:50%;width:min(16vw,15rem);opacity:.55">
+      <img class="hp m-hide" src="midia/deco-girafa.webp" alt="" style="left:15%;top:28%;width:min(10vw,10rem)">
+      <span class="place-label m-hide" style="left:4%;top:69%">África do Sul</span>
+      <img class="hp m-hide" src="midia/deco-coliseu.webp" alt="" style="left:-2%;top:74%;width:min(20vw,19rem)">
+      <span class="place-label m-hide" style="left:16%;top:77%">Roma</span>
+      <img class="hp m-hide" src="midia/h-olive-bl.webp" alt="" style="left:19%;top:79%;width:min(10vw,9rem)">
+      <img class="hp" src="midia/h-selo-sabara.webp" alt="" style="right:1.5%;top:1.5%;width:min(9.5vw,8.5rem)">
+      <img class="hp m-hide" src="midia/deco-londres.webp" alt="" style="right:9%;top:3%;width:min(24vw,23rem)">
+      <span class="place-label m-hide" style="right:17%;top:26%">Londres</span>
+      <img class="hp m-hide" src="midia/h-olive-r.webp" alt="" style="right:0;top:27%;width:min(6vw,5.5rem)">
+      <img class="hp m-hide" src="midia/deco-montenegro.webp" alt="" style="right:5%;top:31%;width:min(23vw,22rem)">
+      <span class="place-label m-hide" style="right:1.5%;top:51%">Montenegro</span>
+      <img class="hp m-hide" src="midia/h-selo-trevo.webp" alt="" style="right:2%;top:57%;width:min(5vw,4.6rem);transform:rotate(6deg)">
+      <img class="hp m-hide" src="midia/deco-atenas.webp" alt="" style="right:12%;top:54%;width:min(21vw,20rem)">
+      <span class="place-label m-hide" style="right:34%;top:63%">Atenas</span>
+      <img class="hp m-hide" src="midia/h-bussola.webp" alt="" style="right:2%;top:68%;width:min(8vw,7.5rem)">
+      <svg class="hp svg m-hide" viewBox="0 0 24 24" style="left:59%;top:84%;width:2.6rem;transform:rotate(70deg)"><path d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.4v4.8l2.2 1.7v1.6L12 20.6l-3.5.9v-1.6l2.2-1.7v-4.8L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z" fill="currentColor"/></svg>
+      <img class="hp" src="midia/deco-capetown.webp" alt="" style="right:1.5%;top:80%;width:min(36vw,34rem)">
+      <span class="place-label m-hide" style="right:3%;top:92%">Cape Town</span>
+    </div>
     <div class="wrap">
-      <h1>HELENA <span class="amp">&amp;</span>&nbsp;ITALO</h1>
-      <p class="subtitle">vão se casar.</p>
+      <h1 class="names">Helena <span>e</span> Italo</h1>
+      <img class="morro" src="midia/h-morro.webp" width="960" height="320" alt="">
+      <p class="subtitle">vão se casar</p>
+      <p class="when">23 . 01 . 2027</p>
+      <p class="where">SABARÁ · MG</p>
+      <hr class="rule">
       <p class="thesis">Depois de tantos lugares, chegamos à versão <span class="rasura soft" data-rasura="home" data-panel="homeNote"><button class="struck" type="button" aria-controls="homeNote" aria-expanded="false">oficial<span class="mark" aria-hidden="true">*</span></button><span class="hand">completa*</span></span> da história.</p>
       <p class="foot" id="homeNote" hidden>*Ou quase. Algumas informações foram omitidas.</p>
-      <p class="when">23.01.2027 · SABARÁ, MG</p>
-      <a class="enter" href="#historia" id="enter">Ler a história</a>
+      <a class="enter" href="#historia" id="enter">Ler a história<svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 1l7 7 7-7"/></svg></a>
     </div>
   </section>
 
