@@ -218,6 +218,15 @@ section { scroll-margin-top: 4rem; }
 .verdict { margin-top: 3.2rem; max-width: 30ch; }
 .verdict p { margin: 0; }
 .verdict .foot { margin-top: 0.4rem; }
+/* Safári: Italo × Helena lado a lado, com um X à mão entre os dois */
+.versus { margin-top: 2.6rem; }
+.vs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.vs-names .label { margin: 0; }
+.vs-media { position: relative; margin-top: 0.6rem; }
+.vs-media .ph { margin: 0; }
+.vs-x { position: absolute; left: 50%; top: 50%; width: 26%; max-width: 6.5rem; height: auto; stroke: var(--pen); transform: translate(-50%, -50%) rotate(-6deg); pointer-events: none; }
+.vs-quotes p { margin: 0.8rem 0 0; font-family: var(--display); font-size: clamp(1.05rem, 3.8vw, 1.35rem); line-height: 1.3; }
+.vs-quotes .loud { font-family: var(--body); font-weight: 600; }
 .rise-wait { opacity: 0; transform: translateY(14px); }
 .rise { transition: opacity .7s ease, transform .7s ease; }
 
@@ -508,16 +517,21 @@ details p { color: var(--muted); }
         <span class="label" style="display:block;margin-top:0.6rem">Hoedspruit · Kruger</span>
         <figure class="photo"><img src="midia/safari.jpg" width="1200" height="1600" alt="Guia de safári de chapéu, de costas, olhando a savana"></figure>
 
-        <div class="record rise">
-          <p class="label who">Italo</p>
-          <p class="quote">“Não tem problema morrer se eu vir a leoa de perto.”</p>
-          <figure class="ph vid" aria-label="Vídeo de Italo chegando perto da leoa">Vídeo · Italo chegando perto</figure>
-        </div>
-
-        <div class="record rise">
-          <p class="label who">Helena</p>
-          <figure class="ph vid tall" style="margin-top:0" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto<br>até 20 s</figure>
-          <figcaption><p class="quote loud todo">[fala real do vídeo]</p></figcaption>
+        <div class="versus rise">
+          <div class="vs-row vs-names"><p class="label">Italo</p><p class="label">Helena</p></div>
+          <div class="vs-row vs-media">
+            <figure class="ph vid tall" aria-label="Vídeo de Italo chegando perto da leoa">Vídeo · Italo chegando perto</figure>
+            <figure class="ph vid tall" aria-label="Vídeo de Helena escondendo o rosto">Vídeo · Helena escondendo o rosto</figure>
+            <svg class="vs-x" viewBox="0 0 100 100" fill="none" stroke-linecap="round" aria-hidden="true">
+              <path d="M18 14 C 36 34, 58 58, 84 88" stroke-width="7" />
+              <path d="M82 12 C 64 36, 40 60, 14 86" stroke-width="7" />
+              <path d="M21 18 C 40 38, 60 60, 80 84" stroke-width="2" opacity=".6" />
+            </svg>
+          </div>
+          <div class="vs-row vs-quotes">
+            <p>“Não tem problema morrer se eu vir a leoa de perto.”</p>
+            <p class="loud todo">[fala real do vídeo]</p>
+          </div>
         </div>
 
         <div class="verdict rise">
