@@ -92,7 +92,8 @@ section { scroll-margin-top: 4rem; }
 .reveal.show { animation: ink .6s ease both; }
 /* Duas fotos lado a lado e o coração à mão entre elas */
 .pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 1.6rem; }
-.pair .ph { margin: 0; }
+.pair .ph, .pair .photo { margin: 0; }
+.pair img { aspect-ratio: 4 / 5; object-fit: cover; }
 .heart { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 9rem; height: auto; stroke: var(--pen); transform: translate(-50%, -50%); animation: beat 1.6s ease-in-out infinite; pointer-events: none; }
 @keyframes beat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 14% { transform: translate(-50%, -50%) scale(1.12); } 28% { transform: translate(-50%, -50%) scale(1); } 42% { transform: translate(-50%, -50%) scale(1.07); } }
 @media (prefers-reduced-motion: reduce) { .heart, .reveal.show { animation: none; } }
@@ -224,9 +225,9 @@ section { scroll-margin-top: 4rem; }
 
 /* Muro: a ficha e a enquete num card que flutua sobre a foto */
 .muro-stage { margin-top: 2rem; }
-.muro-stage .ph { margin: 0; }
+.muro-stage .ph, .muro-stage .photo { margin: 0; }
 .plaque {
-  position: relative; width: 88%; margin: -9rem 0 0 auto; padding: 1.3rem 1.2rem 1.4rem; box-sizing: border-box;
+  position: relative; width: 88%; margin: -5.5rem 0 0 auto; padding: 1.3rem 1.2rem 1.4rem; box-sizing: border-box;
   background: var(--surface); transform: rotate(-1deg);
   box-shadow: 0 22px 44px -20px color-mix(in srgb, var(--ink) 55%, transparent);
 }
@@ -402,8 +403,8 @@ details p { color: var(--muted); }
         <p class="foot" style="margin:0.5rem 0 0">*Helena recusou o primeiro beijo.</p>
         <p class="foot reveal" id="omBeijo" style="margin:0.2rem 0 0" hidden>Depois quase entrou no banheiro masculino atrás dele.</p>
         <div class="pair">
-          <figure class="ph tall">Foto · Italo naquela noite</figure>
-          <figure class="ph tall">Foto · Helena naquela noite</figure>
+          <figure class="photo"><img src="midia/noite-italo.jpg" width="480" height="600" alt="Italo sorrindo, de camiseta preta, na noite em que se conheceram"></figure>
+          <figure class="photo"><img src="midia/noite-helena.jpg" width="480" height="600" alt="Helena sorrindo, de blusa branca, na noite em que se conheceram"></figure>
           <svg class="heart" viewBox="0 0 100 92" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M50 82 C 21 60, 4 42, 10 24 C 15 9, 36 6, 48 22 C 50 25, 51 25, 53 21 C 63 6, 86 8, 91 25 C 96 44, 78 62, 51 82" stroke-width="3" />
             <path d="M48 79 C 23 58, 7 40, 12 23 C 18 11, 37 9, 49 25 C 60 8, 84 11, 88 26 C 93 45, 75 60, 53 80" stroke-width="1.4" opacity=".7" />
@@ -470,7 +471,7 @@ details p { color: var(--muted); }
       <div class="entry">
         <p class="official">De um desses lugares, Italo voltou com isto:</p>
         <div class="muro-stage">
-          <figure class="ph tall" aria-label="Foto do fragmento do muro">Foto · fragmento do muro</figure>
+          <figure class="photo"><img src="midia/muro.jpg" width="960" height="1200" alt="Fragmento do Muro de Berlim numa redoma de vidro com os dizeres Original Berliner Mauer 1961–1989"></figure>
           <div class="plaque">
             <div class="ficha">
               <span class="title">Fragmento original do Muro de Berlim</span>
