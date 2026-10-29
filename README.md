@@ -26,7 +26,7 @@ Confirmação de presença por lista de convidados: a pessoa digita o nome, o si
 - Evento fechado: sábado, 23/01/2027, 15h às 23h, Rua João Batista Campanha, 46, Terra Santa, Sabará. Sem cerimônia (casam na quarta, 20/01; o sábado é comemoração). Traje esporte fino e colorido. Crianças bem-vindas, estacionamento na rua, sem transporte, chuva mantém o local. Dúvidas: Helena.
 - Evento pendente: prazo da confirmação, presentes (Pix, chave e titular), hospedagem, número do WhatsApp conferido.
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
-- Material recebido: anel, print, guia do safári, ponte, pedido, macaco (fora do Git: o repositório é público).
-- Material pendente: vídeos do safári (Helena com medo, Italo perto da leoa), muro, fotos do Italo e da Helena na noite em que se conheceram, balãozinho do dia 7, vídeo do Italo no carro ("Tô nadando."), vídeo do pai com a caixa de som, roda quebrada, Panda na Toscana, foto do casal para a prévia do link; ilustrações do Save the Date (definem o visual, hoje provisório).
+- Material recebido: anel, print, guia do safári, ponte, pedido, macaco, Panda (fora do Git: o repositório é público).
+- Material pendente: vídeos do safári (Helena com medo, Italo perto da leoa), muro, fotos do Italo e da Helena na noite em que se conheceram, balãozinho do dia 7, vídeo do Italo no carro ("Tô nadando."), vídeo do pai com a caixa de som, roda quebrada, foto do casal para a prévia do link; ilustrações do Save the Date (definem o visual, hoje provisório).
 - Lista de convidados em planilha.
 - Técnico: hospedagem, domínio e onde ficam confirmações e votos.
