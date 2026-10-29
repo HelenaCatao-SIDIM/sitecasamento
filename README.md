@@ -10,7 +10,7 @@ Cada memória tem uma brincadeira própria (asterisco, rasura, horas infinitas, 
 | --- | --- |
 | Home | "vão se casar."; "chegamos à versão oficial\* da história" (sem risco até o toque) → ~~oficial~~ *completa\** e "\*Ou quase. Algumas informações foram omitidas." |
 | A versão oficial | 19/12/2021 ("Foi amor à primeira vista.\*", "\*Helena recusou o primeiro beijo."; o asterisco revela o banheiro; fotos dos dois com coração à mão pulsando), as semanas seguintes ("por horas e horas e horas…" escrito à mão saindo da página, "Às vezes, literalmente seis.", balão flutuante "O último romântico →" que abre a foto do dia 7), 7/01/2022 (Sabará "tecnicamente debaixo d’água", vídeo pequeno "Vamos nadar." boiando ao lado do texto, que abre com som, "Programação especial da noite" com a atração surpresa do pai e o encerramento da roda, com a foto em "ver registro →"), 21/02/2022 (começam a namorar, sem rasura) |
-| Depois, muitos lugares | Toscana de ~~conversível~~ *Panda* (foto embaçada até tocar); Muro de Berlim com a única votação |
+| Depois, muitos lugares | Toscana de ~~conversível~~ *Panda* (foto embaçada até tocar); Muro de Berlim com a única votação, num card flutuante sobre a foto (ficha do museu + enquete) |
 | A semana do pedido | "sem nenhuma expectativa" → "Ou a gente volta noivo, ou volta solteiro."; anel (~~Italo~~ *Helena*, print de 2/09); Cape Town (revelado ao rolar); achado da ponte |
 | Pedido | 7/09/2026, "Foi aqui." (rodapé "Nada foi omitido desta versão." sob teste); achado do macaco (5/09) |
 | A comemoração | "A versão completa a gente conta ao vivo."; informação direta, sem vocabulário de campanha |

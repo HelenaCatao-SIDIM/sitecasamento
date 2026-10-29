@@ -222,6 +222,17 @@ section { scroll-margin-top: 4rem; }
 .egg:hover { color: var(--ink); transform: translateY(-2px); }
 .egg svg { display: block; width: 7.5rem; height: auto; }
 
+/* Muro: a ficha e a enquete num card que flutua sobre a foto */
+.muro-stage { margin-top: 2rem; }
+.muro-stage .ph { margin: 0; }
+.plaque {
+  position: relative; width: 88%; margin: -9rem 0 0 auto; padding: 1.3rem 1.2rem 1.4rem; box-sizing: border-box;
+  background: var(--surface); transform: rotate(-1deg);
+  box-shadow: 0 22px 44px -20px color-mix(in srgb, var(--ink) 55%, transparent);
+}
+.plaque .ficha { margin-top: 0; }
+.plaque .vote { margin-top: 1.3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+@media (max-width: 26rem) { .plaque { width: 94%; } }
 /* Muro */
 .ficha { margin-top: 1.2rem; display: grid; gap: 0.25rem; }
 .ficha .title { font-family: var(--display); font-size: 1.35rem; line-height: 1.25; }
@@ -458,13 +469,17 @@ details p { color: var(--muted); }
 
       <div class="entry">
         <p class="official">De um desses lugares, Italo voltou com isto:</p>
-        <figure class="ph tall" aria-label="Foto do fragmento do muro">Foto · fragmento do muro</figure>
-        <div class="ficha">
-          <span class="title">Fragmento original do Muro de Berlim</span>
-          <span class="owner">Acervo pessoal de Italo.</span>
-          <span class="foot">Autenticidade declarada pelo proprietário.</span>
+        <div class="muro-stage">
+          <figure class="ph tall" aria-label="Foto do fragmento do muro">Foto · fragmento do muro</figure>
+          <div class="plaque">
+            <div class="ficha">
+              <span class="title">Fragmento original do Muro de Berlim</span>
+              <span class="owner">Acervo pessoal de Italo.</span>
+              <span class="foot">Autenticidade declarada pelo proprietário.</span>
+            </div>
+            <div class="vote" id="vote" aria-live="polite"></div>
+          </div>
         </div>
-        <div class="vote" id="vote" aria-live="polite"></div>
       </div>
     </div>
   </section>
