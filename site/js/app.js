@@ -422,11 +422,9 @@
     if (d && draft) draft.answers[d].diet = e.target.value;
   });
 
-  // ---------- presentes: lista com foto e valor, pago por Pix ----------
-  const GIFTS = (CFG.presentes || []).map((g) => ({ ...g, nome: g.nome || "" }));
-  const brl = (v) => (typeof v === "number" ? v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "R$ [valor]");
+  // ---------- presentes: a lista (link externo) e o Pix ----------
   const PIX = CFG.pix || {};
-  // Pix copia e cola (BR Code) com o valor do presente
+  // Pix copia e cola (BR Code) sem valor: quem paga escolhe quanto
   const crc16 = (str) => {
     let crc = 0xffff;
     for (let i = 0; i < str.length; i++) {
@@ -436,48 +434,30 @@
     return crc.toString(16).toUpperCase().padStart(4, "0");
   };
   const plain = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase();
-  const pixPayload = (valor) => {
+  const pixPayload = () => {
     const f = (id, v) => id + String(v.length).padStart(2, "0") + v;
     const p = f("00", "01") + f("26", f("00", "br.gov.bcb.pix") + f("01", PIX.chave))
-      + f("52", "0000") + f("53", "986") + (typeof valor === "number" ? f("54", valor.toFixed(2)) : "")
-      + f("58", "BR") + f("59", plain(PIX.titular).slice(0, 25)) + f("60", plain(PIX.cidade || "SABARA").slice(0, 15))
+      + f("52", "0000") + f("53", "986") + f("58", "BR")
+      + f("59", plain(PIX.titular).slice(0, 25)) + f("60", plain(PIX.cidade || "SABARA").slice(0, 15))
       + f("62", f("05", "***")) + "6304";
     return p + crc16(p);
   };
-  const hasPix = !!(PIX.chave && PIX.titular);
-  document.getElementById("gifts").innerHTML = GIFTS.map((g) =>
-    `<button class="gift" type="button" data-gift="${esc(g.id)}">${g.foto ? `<img class="gift-img" src="midia/${esc(g.foto)}" alt="">` : `<span class="ph">Foto · ${esc(g.nome)}</span>`}<span class="gift-name">${esc(g.nome)}</span><span class="gift-price">${brl(g.valor)}</span></button>`
-  ).join("");
-  document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-gift]");
-    if (!b) return;
-    const g = GIFTS.find((x) => x.id === b.dataset.gift);
-    const head = g ? `<p class="big">${esc(g.nome)}</p><p style="margin:0.2rem 0 0">${brl(g.valor)}</p>` : `<p class="big">O valor que você quiser</p>`;
-    const code = hasPix ? (g ? pixPayload(g.valor) : PIX.chave) : (g ? "[código Pix copia e cola, já com o valor]" : "[chave Pix]");
-    openModal({
-      title: "Presentear",
-      html: `${head}
-        <div class="pix">
-          ${g ? `<figure class="ph qr" id="pixQr">${hasPix ? "" : "QR Code do Pix"}</figure>` : `<p style="margin:0">Titular: ${hasPix ? esc(PIX.titular) : `<span class="todo">[nome do titular]</span>`}</p>`}
-          <span class="label">${g ? "Pix copia e cola" : "Chave Pix"}</span>
-          <div class="pix-code" id="pixCode">${esc(code)}</div>
-          <button class="btn primary" type="button" data-copy>Copiar</button>
-          <p class="foot">Obrigado pelo carinho. 🤎</p>
-        </div>`,
-    });
+  const listaBtn = document.getElementById("listaBtn");
+  if (CFG.listaPresentes) listaBtn.href = CFG.listaPresentes;
+  else { listaBtn.hidden = true; document.getElementById("listaSoon").hidden = false; }
+  const pixKey = document.getElementById("pixKey");
+  if (PIX.tipo) document.getElementById("pixType").textContent = "Chave " + PIX.tipo;
+  if (PIX.titular) { const n = document.getElementById("pixName"); n.textContent = PIX.titular; n.classList.remove("todo"); }
+  if (PIX.chave) {
+    pixKey.textContent = PIX.chave; pixKey.classList.remove("todo");
     const qr = document.getElementById("pixQr");
-    if (qr && hasPix && window.QRCode) {
-      qr.classList.remove("ph");
-      new window.QRCode(qr, { text: code, width: 176, height: 176, colorDark: "#3A2A1E", colorLight: "#F7F0E4" });
-    }
-  });
-  modalBody.addEventListener("click", (e) => {
-    const c = e.target.closest("[data-copy]");
-    if (!c) return;
-    const el = document.getElementById("pixCode");
-    const done = () => { c.textContent = "Copiado"; };
-    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = "Selecionado: copie com o menu"; };
-    try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch { fallback(); }
+    if (PIX.titular && window.QRCode) { qr.hidden = false; new window.QRCode(qr, { text: pixPayload(), width: 176, height: 176, colorDark: "#3A2A1E", colorLight: "#F7F0E4" }); }
+  }
+  document.getElementById("pixCopy").addEventListener("click", (e) => {
+    const c = e.currentTarget;
+    const done = () => { c.textContent = "Copiado"; setTimeout(() => (c.textContent = "Copiar"), 2000); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(pixKey); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = "Selecionado"; };
+    try { navigator.clipboard.writeText(pixKey.textContent.trim()).then(done, fallback); } catch { fallback(); }
   });
 
   // ---------- textos que vêm da configuração ----------

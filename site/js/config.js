@@ -11,16 +11,10 @@ window.SITE_CONFIG = {
   // Só números, com DDI e DDD: ex. "5531999999999"
   whatsapp: "",
 
-  // Pix para os presentes: chave, nome do titular e cidade (como no banco, sem acento)
-  pix: { chave: "", titular: "", cidade: "SABARA" },
+  // Link da lista de presentes (ex.: lista da Amazon). Vazio = aparece "em breve".
+  listaPresentes: "",
 
-  // Lista de presentes. valor em reais (número). foto: arquivo dentro de midia/ (opcional)
-  presentes: [
-    { id: "jantar", nome: "Um jantar a dois", valor: null, foto: "" },
-    { id: "mala", nome: "Uma mala nova", valor: null, foto: "" },
-    { id: "passagem", nome: "Passagem para o próximo destino", valor: null, foto: "" },
-    { id: "hotel", nome: "Uma noite de hotel na lua de mel", valor: null, foto: "" },
-    { id: "barco", nome: "Um passeio de barco", valor: null, foto: "" },
-    { id: "safari", nome: "Um safári (desta vez, sem leoas)", valor: null, foto: "" },
-  ],
+  // Pix para quem preferir dar dinheiro. tipo aparece como "Chave CPF", "Chave e-mail" etc.
+  // Sugestão: chave aleatória ou e-mail, para não deixar o CPF público no site.
+  pix: { tipo: "", chave: "", titular: "Helena Maciel Catão", cidade: "SABARA" },
 };

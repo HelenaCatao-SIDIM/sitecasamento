@@ -269,7 +269,7 @@
       </div>
       <div class="cta">
         <a class="btn primary big-btn" href="#confirmar" data-view="confirmar">Confirmar presença →</a>
-        <a class="text-link" href="#presentes" data-view="presentes">Ver a lista de presentes</a>
+        <a class="text-link" href="#presentes" data-view="presentes">Sobre presentes</a>
       </div>
     </div>
   </section>
@@ -352,18 +352,49 @@
   <section class="page" id="presentes">
     <div class="wrap">
       <div class="thanks" id="thanks" hidden></div>
-      <span class="label">Lista de presentes</span>
       <h1 class="page-title">Presentes</h1>
-      <p class="page-lede">A sua presença já é o presente. Mas, se quiser nos dar algo, escolha um item da lista: o valor vai por Pix, direto para a gente.</p>
-      <p class="foot" style="margin-top:0.4rem">Exemplos para mostrar o formato. A lista e os valores de verdade vêm de vocês.</p>
-
-      <div class="gifts" id="gifts"></div>
-
-      <div class="part">
-        <h3>Prefere outro valor?</h3>
-        <p>Use a chave Pix e escolha quanto quer dar.</p>
-        <button class="btn" type="button" data-gift="livre">Ver a chave Pix</button>
+      <p class="official lead" style="margin-top:1rem">A gente está começando a montar a nossa casa e quer que ela tenha coisas com história.</p>
+      <div class="gift-text">
+        <p>Por isso, antes de qualquer lista, fica um pedido: se um dia você olhar para alguma coisa e pensar <em>“isso é muito a cara deles”</em>, pode ser exatamente esse o presente.</p>
+        <p>Pode ser algo novo, antigo, garimpado, feito à mão, encontrado numa viagem ou até uma coisa que já fazia parte da sua casa e que você acha que combina com a nossa.</p>
+        <p class="gift-wish">A ideia é que, daqui a alguns anos, a gente olhe para aquilo e lembre de quem deu.</p>
       </div>
+
+      <hr class="divider">
+
+      <h3 class="gift-h">Se quiser uma ajudinha</h3>
+      <div class="gift-text">
+        <p>Também montamos uma lista com algumas coisas que estamos querendo para a casa.</p>
+        <p>Não precisa seguir à risca: ela serve mais como referência do que a gente gosta e do que ainda precisa.</p>
+      </div>
+      <a class="btn primary big-btn" id="listaBtn" href="#" target="_blank" rel="noopener">Ver dicas de presente</a>
+      <p class="hint" id="listaSoon" hidden>O link da lista entra aqui em breve.</p>
+
+      <hr class="divider">
+
+      <h3 class="gift-h">Se preferir contribuir de outro jeito</h3>
+      <div class="gift-text">
+        <p>Se for mais prático, você também pode mandar um presente em dinheiro.</p>
+      </div>
+      <div class="pix-card">
+        <span class="label">Pix</span>
+        <span class="pix-type" id="pixType">Chave</span>
+        <div class="pix-row">
+          <span class="pix-key todo" id="pixKey">[chave Pix]</span>
+          <button class="btn" type="button" id="pixCopy">Copiar</button>
+        </div>
+        <span class="pix-name">Nome: <span id="pixName" class="todo">[nome do titular]</span></span>
+        <div class="pix-qr" id="pixQr" hidden></div>
+      </div>
+
+      <hr class="divider">
+
+      <p class="official lead">E se você não quiser dar presente nenhum, também está tudo bem.</p>
+      <div class="gift-text">
+        <p>Sua presença no dia 23 já é presente suficiente.</p>
+        <p>Sem discurso pronto. Sem obrigação. Sem tabela de valores.</p>
+      </div>
+      <p class="gift-end">A gente só vai ficar feliz de ter você com a gente.</p>
     </div>
   </section>
 </div>
