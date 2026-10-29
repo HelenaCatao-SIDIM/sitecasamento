@@ -240,6 +240,7 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .collage .routes path { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-dasharray: 5 7; opacity: 0.45; vector-effect: non-scaling-stroke; }
 .hp { position: absolute; height: auto; opacity: 0.9; }
 .hp.svg { opacity: 0.75; }
+.hp.svg.m { opacity: 0.8; }
 .place-label { position: absolute; font-family: var(--script); font-size: clamp(1.8rem, 2.6vw, 2.7rem); color: var(--engrave); opacity: 0.85; transform: rotate(-6deg); white-space: nowrap; }
 .home .wrap { max-width: 36rem; }
 .names { font-family: var(--script); font-weight: 400; font-size: clamp(4.6rem, 17vw, 9rem); line-height: 0.95; margin: 0; color: var(--ink); }
@@ -264,9 +265,19 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .enter svg { animation: none; } }
 @media (max-width: 52rem) {
-  .hp.m-hide, .place-label.m-hide { display: none; }
+  /* celular: poucas peças, maiores, em faixas acima e abaixo do texto */
+  .home { padding-block: 10.5rem 12.5rem; min-height: 0; }
   .collage .routes { display: none; }
-  .hp { opacity: 0.55; }
+  .hp { display: none; }
+  .hp.m { display: block; opacity: 0.92; left: auto !important; right: auto !important; top: auto !important; bottom: auto !important; transform: none !important; }
+  .hp.m-olive { left: 0 !important; top: 0 !important; width: 30vw !important; }
+  .hp.m-malta { left: 50% !important; top: 3.2rem !important; width: 58vw !important; transform: translateX(-50%) !important; }
+  .hp.m-selo { right: 3vw !important; top: 0.8rem !important; width: 23vw !important; transform: rotate(8deg) !important; }
+  .hp.m-girafa { left: -7vw !important; top: 38% !important; width: 21vw !important; opacity: 0.35; }
+  .hp.m-olive-r { display: none; }
+  .hp.m-arrival { left: 3vw !important; bottom: 6.6rem !important; width: 34vw !important; transform: rotate(-8deg) !important; opacity: 0.8; }
+  .hp.m-bussola { right: 5vw !important; bottom: 6.4rem !important; width: 21vw !important; }
+  .hp.m-capetown { left: 50% !important; bottom: 1rem !important; width: 96vw !important; transform: translateX(-50%) !important; }
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img.hp { filter: invert(1) hue-rotate(180deg); } }
 :root[data-theme="dark"] img.hp { filter: invert(1) hue-rotate(180deg); }
@@ -513,30 +524,23 @@ details p { color: var(--muted); }
         <path d="M1240 70 C 1330 220, 1150 300, 1220 430 S 1130 600, 1180 690" />
         <path d="M430 60 C 620 20, 820 30, 1010 70" />
       </svg>
-      <img class="hp m-hide" src="midia/h-olive-tl.webp" alt="" style="left:0;top:0;width:min(13vw,13rem)">
+      <img class="hp m-hide m m-olive" src="midia/h-olive-tl.webp" alt="" style="left:0;top:0;width:min(13vw,13rem)">
       <svg class="hp svg m-hide" viewBox="0 0 120 70" style="left:23%;top:2%;width:6.5rem" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="30" cy="35" r="24"/><circle cx="30" cy="35" r="18" stroke-width=".8"/><path d="M58 22c10-6 20 6 30 0s20 6 30 0M58 32c10-6 20 6 30 0s20 6 30 0M58 42c10-6 20 6 30 0s20 6 30 0M58 52c10-6 20 6 30 0s20 6 30 0"/></svg>
-      <img class="hp" src="midia/h-malta.webp" alt="" style="left:8%;top:9%;width:min(27vw,28rem)">
-      <span class="place-label" style="left:2.5%;top:20%">Malta</span>
-      <svg class="hp svg m-hide" viewBox="0 0 240 140" style="left:5%;top:38%;width:min(13vw,12rem);transform:rotate(-8deg)"><g fill="none" stroke="currentColor"><rect x="6" y="6" width="228" height="128" rx="14" stroke-width="3" stroke-dasharray="2 3"/><rect x="16" y="16" width="208" height="108" rx="9" stroke-width="1.5"/></g><path d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.4v4.8l2.2 1.7v1.6L12 20.6l-3.5.9v-1.6l2.2-1.7v-4.8L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z" fill="currentColor" transform="translate(30 44) scale(2.3) rotate(-40 12 12)"/><text x="150" y="64" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="21" letter-spacing="5" fill="currentColor">ARRIVAL</text><text x="150" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="3" fill="currentColor">23 01 27</text></svg>
+      <img class="hp m m-malta" src="midia/h-malta.webp" alt="" style="left:8%;top:9%;width:min(27vw,28rem)">
+      <svg class="hp svg m-hide m m-arrival" viewBox="0 0 240 140" style="left:5%;top:38%;width:min(13vw,12rem);transform:rotate(-8deg)"><g fill="none" stroke="currentColor"><rect x="6" y="6" width="228" height="128" rx="14" stroke-width="3" stroke-dasharray="2 3"/><rect x="16" y="16" width="208" height="108" rx="9" stroke-width="1.5"/></g><path d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.4v4.8l2.2 1.7v1.6L12 20.6l-3.5.9v-1.6l2.2-1.7v-4.8L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z" fill="currentColor" transform="translate(30 44) scale(2.3) rotate(-40 12 12)"/><text x="150" y="64" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="21" letter-spacing="5" fill="currentColor">ARRIVAL</text><text x="150" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="3" fill="currentColor">23 01 27</text></svg>
       <img class="hp m-hide" src="midia/deco-elefante.webp" alt="" style="left:1%;top:50%;width:min(16vw,15rem);opacity:.55">
-      <img class="hp m-hide" src="midia/deco-girafa.webp" alt="" style="left:15%;top:28%;width:min(10vw,10rem)">
-      <span class="place-label m-hide" style="left:4%;top:69%">África do Sul</span>
+      <img class="hp m-hide m m-girafa" src="midia/deco-girafa.webp" alt="" style="left:15%;top:28%;width:min(10vw,10rem)">
       <img class="hp m-hide" src="midia/deco-coliseu.webp" alt="" style="left:-2%;top:74%;width:min(20vw,19rem)">
-      <span class="place-label m-hide" style="left:16%;top:77%">Roma</span>
       <img class="hp m-hide" src="midia/h-olive-bl.webp" alt="" style="left:19%;top:79%;width:min(10vw,9rem)">
-      <img class="hp" src="midia/h-selo-sabara.webp" alt="" style="right:1.5%;top:1.5%;width:min(9.5vw,8.5rem)">
+      <img class="hp m m-selo" src="midia/h-selo-sabara.webp" alt="" style="right:1.5%;top:1.5%;width:min(9.5vw,8.5rem)">
       <img class="hp m-hide" src="midia/deco-londres.webp" alt="" style="right:9%;top:3%;width:min(24vw,23rem)">
-      <span class="place-label m-hide" style="right:17%;top:26%">Londres</span>
-      <img class="hp m-hide" src="midia/h-olive-r.webp" alt="" style="right:0;top:27%;width:min(6vw,5.5rem)">
+      <img class="hp m-hide m m-olive-r" src="midia/h-olive-r.webp" alt="" style="right:0;top:27%;width:min(6vw,5.5rem)">
       <img class="hp m-hide" src="midia/deco-montenegro.webp" alt="" style="right:5%;top:31%;width:min(23vw,22rem)">
-      <span class="place-label m-hide" style="right:1.5%;top:51%">Montenegro</span>
       <img class="hp m-hide" src="midia/h-selo-trevo.webp" alt="" style="right:2%;top:57%;width:min(5vw,4.6rem);transform:rotate(6deg)">
       <img class="hp m-hide" src="midia/deco-atenas.webp" alt="" style="right:12%;top:54%;width:min(21vw,20rem)">
-      <span class="place-label m-hide" style="right:34%;top:63%">Atenas</span>
-      <img class="hp m-hide" src="midia/h-bussola.webp" alt="" style="right:2%;top:68%;width:min(8vw,7.5rem)">
+      <img class="hp m-hide m m-bussola" src="midia/h-bussola.webp" alt="" style="right:2%;top:68%;width:min(8vw,7.5rem)">
       <svg class="hp svg m-hide" viewBox="0 0 24 24" style="left:59%;top:84%;width:2.6rem;transform:rotate(70deg)"><path d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.4v4.8l2.2 1.7v1.6L12 20.6l-3.5.9v-1.6l2.2-1.7v-4.8L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z" fill="currentColor"/></svg>
-      <img class="hp" src="midia/deco-capetown.webp" alt="" style="right:1.5%;top:80%;width:min(36vw,34rem)">
-      <span class="place-label m-hide" style="right:3%;top:92%">Cape Town</span>
+      <img class="hp m m-capetown" src="midia/deco-capetown.webp" alt="" style="right:1.5%;top:80%;width:min(36vw,34rem)">
     </div>
     <div class="wrap">
       <h1 class="names">Helena <span>e</span> Italo</h1>
