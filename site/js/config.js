@@ -16,5 +16,5 @@ window.SITE_CONFIG = {
 
   // Pix para quem preferir dar dinheiro. tipo aparece como "Chave CPF", "Chave e-mail" etc.
   // Sugestão: chave aleatória ou e-mail, para não deixar o CPF público no site.
-  pix: { tipo: "", chave: "", titular: "Helena Maciel Catão", cidade: "SABARA" },
+  pix: { tipo: "aleatória", chave: "50e26b58-5a74-40d0-8c75-0068d7616c71", titular: "Helena Maciel Catão", cidade: "SABARA" },
 };
