@@ -574,7 +574,7 @@ details p { color: var(--muted); }
       <div class="entry">
         <span class="label">7 de janeiro de 2022</span>
         <button class="boat" type="button" data-open="pai" aria-label="Ver o vídeo do pai da Helena com a caixa de som">
-          <span class="ph vid">Vídeo · o pai e a caixa de som</span>
+          <video src="midia/pai.mp4" poster="midia/pai-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
           <span class="boat-tag">e o pai dela.</span>
         </button>
         <p class="official">Segundo encontro foi em Sabará.</p>
@@ -957,7 +957,7 @@ details p { color: var(--muted); }
     },
     pai: {
       title: "E o pai dela",
-      html: `<figure class="ph vid tall" style="margin-top:1rem">Vídeo · o pai da Helena e a caixa de som</figure>
+      html: `<video class="clip" src="midia/pai.mp4" poster="midia/pai-poster.jpg" controls playsinline autoplay preload="metadata" aria-label="Vídeo: o pai da Helena dança na rua com uma caixa de som"></video>
              <p class="foot" style="margin-top:0.6rem">Sabará, 7 de janeiro de 2022.</p>`,
     },
     romantico: {
