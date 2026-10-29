@@ -158,11 +158,12 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .romantic {
   position: relative; font-family: var(--hand); color: var(--pen); font-size: 1.3rem; cursor: pointer;
   background: var(--surface); border: 0; padding: 0.5rem 1.1rem; border-radius: 1.5rem;
-  transform: rotate(4deg); animation: bob 3.2s ease-in-out infinite;
+  transform: rotate(4deg); animation: bob 3.2s ease-in-out infinite, ringpulse 2s ease-out infinite;
 }
 .romantic::after { content: ""; position: absolute; left: 1.4rem; bottom: -0.55rem; border: 0.6rem solid transparent; border-top-color: var(--surface); border-bottom: 0; }
 .romantic[aria-expanded="true"] { animation: none; color: var(--muted); cursor: default; }
-@keyframes bob { 0%, 100% { transform: rotate(4deg) translateY(0); } 50% { transform: rotate(4deg) translateY(-6px); } }
+@keyframes bob { 0%, 100% { transform: rotate(4deg) translateY(0) scale(1); } 50% { transform: rotate(4deg) translateY(-6px) scale(1.07); } }
+@keyframes ringpulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--pen) 45%, transparent); } 100% { box-shadow: 0 0 0 0.9rem transparent; } }
 .balloon { position: relative; margin: 1.4rem 0 0 auto; width: min(18rem, 85%); background: var(--surface); padding: 0.8rem; border-radius: 1.2rem; transform: rotate(-2deg); animation: ink .6s ease both; }
 .balloon::before { content: ""; position: absolute; right: 2.4rem; top: -0.6rem; border: 0.6rem solid transparent; border-bottom-color: var(--surface); border-top: 0; }
 .balloon .foot { margin: 0.6rem 0 0; }
@@ -355,13 +356,18 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 @keyframes hintglow { 0%, 100% { background-color: color-mix(in srgb, var(--pen) 6%, transparent); } 50% { background-color: color-mix(in srgb, var(--pen) 22%, transparent); } }
 .rasura.soft:not(.open) .mark, .rasura.star:not(.open) .struck { display: inline-block; color: var(--pen); font-weight: 700; animation: hintpop 1.8s ease-in-out infinite; }
 .rasura.star:not(.open) .struck { font-size: 1.25em; line-height: 1; }
-@keyframes hintpop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+@keyframes hintpop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.6); } }
+.rasura.soft:not(.open) .mark { font-size: 1.3em; line-height: 1; margin-left: 0.04em; transform-origin: 50% 60%; text-shadow: 0 0 0.5em color-mix(in srgb, var(--pen) 45%, transparent); }
 .tap-note { display: inline-block; margin-left: 0.5rem; font-family: var(--hand); color: var(--pen); font-size: 0.85em; white-space: nowrap; animation: nudge-x 1.6s ease-in-out infinite; }
-.rasura.open + .tap-note { display: none; }
+.rasura.open + .tap-note, p:has(.rasura.open) .tap-note, #pandaPhoto.clear + .tap-note { display: none; }
+.tap-vote { font-size: 1.1rem; margin-left: 0.3rem; }
+.tap-up { display: block; width: fit-content; margin: 0.9rem 0 0 12%; animation: nudge-y 1.6s ease-in-out infinite; }
+@keyframes nudge-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 @keyframes nudge-x { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
 #pandaPhoto { position: relative; }
 .reveal-hint { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(3deg); padding: 0.35rem 0.9rem; border-radius: 1.2rem; background: var(--surface); font-family: var(--hand); color: var(--pen); font-size: 1.1rem; white-space: nowrap; pointer-events: none; }
 #pandaPhoto.clear .reveal-hint { display: none; }
+.blurred > .reveal-hint { filter: none; transform: translate(-50%, -50%) rotate(3deg); z-index: 1; }
 .boat::after { content: "▶"; position: absolute; left: 0.5rem; top: 0.5rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--paper) 85%, transparent); color: var(--ink); font-size: 0.7rem; }
 @media (prefers-reduced-motion: reduce) { .rasura .struck, .rasura .mark, .tap-note { animation: none !important; } }
 
@@ -426,7 +432,9 @@ main > section > .wrap, main > section > figure { position: relative; z-index: 1
 .pedido-text .date { margin-top: 0.4rem; }
 .pedido-text .here { font-family: var(--display); font-style: italic; font-size: clamp(2rem, 8vw, 3rem); margin: 3rem 0 0; }
 .pedido-text .foot { margin-top: 0.8rem; }
-.earlier-row { padding-block: 70vh 4rem; text-align: right; }
+.pedido-text .earlier { margin-top: 1.4rem; margin-bottom: 4.5rem; }
+.link-star { display: inline-block; margin-left: 0.15em; color: var(--pen); font-weight: 700; font-size: 1.5em; line-height: 0; vertical-align: -0.15em; animation: hintpop 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .link-star, .tap-up { animation: none; } }
 .earlier { background: none; border: 0; padding: 0.4rem 0; cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); }
 .earlier:hover { color: var(--ink); }
 
@@ -656,6 +664,7 @@ details p { color: var(--muted); }
       <div class="entry">
         <p class="official">Na Itália, Helena realiza o sonho de cruzar a Toscana de <span class="rasura" data-rasura="panda" data-panel="pandaNote"><button class="struck" type="button" aria-controls="pandaNote" aria-expanded="false">conversível</button><span class="hand">Panda</span></span>.</p>
         <figure class="photo blurred" id="pandaPhoto" role="button" tabindex="0" aria-label="Foto embaçada do carro na Toscana. Toque para ver."><img src="midia/panda.jpg" width="894" height="513" alt="Fiat Panda prata estacionado"><span class="reveal-hint" aria-hidden="true">toque para revelar</span></figure>
+        <span class="tap-note tap-up" aria-hidden="true">↑ toque aqui</span>
         <span id="pandaNote" hidden></span>
       </div>
 
@@ -723,37 +732,11 @@ details p { color: var(--muted); }
         </div>
       </div>
 
-      <!-- Achado: a ponte -->
-      <div class="egg-row">
-        <button class="egg" type="button" data-open="ponte" aria-label="Ponte: toque para ver o registro de viagem">
-          <svg class="egg-ring" viewBox="-100 -100 200 200" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <g class="ring-spin">
-              <path transform="rotate(0)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(36)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(72)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(108)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(144)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(180)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(216)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(252)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(288)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-              <path transform="rotate(324)" d="M0 -92 L0 -70 M-6 -77 L0 -69 L6 -77" />
-            </g>
-          </svg>
-          <svg class="egg-bridge" viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
-            <path d="M4 30 H116" />
-            <path d="M30 30 V8 M90 30 V8" />
-            <path d="M4 26 Q30 8 30 8 Q60 28 90 8 Q90 8 116 26" />
-            <path d="M40 30 V15 M50 30 V20 M60 30 V22 M70 30 V20 M80 30 V15 M16 30 V22 M104 30 V22" stroke-width="0.8" />
-            <path d="M2 36 Q12 33 22 36 T42 36 T62 36 T82 36 T102 36 T118 36" stroke-width="0.8" />
-          </svg>
-        </button>
-      </div>
       <div class="sub" id="anel">
         <span class="label">2 de setembro de 2026</span>
         <h3 style="margin-top:0.6rem">Todo pedido começa por um anel.</h3>
         <figure class="photo"><img src="midia/anel.jpg" width="1200" height="1600" alt="Helena mostra o anel de noivado no alto de uma montanha, com Cape Town ao fundo"></figure>
-        <p class="official ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.</p>
+        <p class="official ring-line">Foi <span class="rasura soft" data-rasura="anel" data-panel="omAnel"><button class="struck" type="button" data-label="Italo" aria-controls="omAnel" aria-expanded="false">Italo<span class="mark" aria-hidden="true">*</span></button><span class="hand">Helena</span></span> quem escolheu cuidadosamente o anel de noivado.<span class="tap-note" aria-hidden="true">↖ toque no nome</span></p>
         <p class="foot" style="margin-top:0.6rem">*Tocar no nome pode alterar sua percepção sobre o noivo.</p>
         <div id="omAnel" hidden>
           <figure class="photo"><img src="midia/prova.jpg" width="1100" height="325" alt="Print de conversa: Helena envia quatro opções de anel em 2 de setembro"><figcaption class="label">Anexo · mensagem enviada por Helena, 2 de setembro de 2026</figcaption></figure>
@@ -777,10 +760,7 @@ details p { color: var(--muted); }
     <div class="wrap pedido-text">
       <p class="place">Cape Town, África do Sul</p>
       <p class="here">Foi aqui.</p>
-      <p class="foot">Nada foi omitido desta versão.</p>
-    </div>
-    <div class="wrap earlier-row">
-      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local →</button>
+      <button class="earlier" type="button" data-open="macaco">registro anterior · mesmo local<span class="link-star" aria-hidden="true">*</span></button>
     </div>
   </section>
 
@@ -985,7 +965,7 @@ details p { color: var(--muted); }
   const renderVote = () => {
     const mine = state.voto;
     if (!mine) {
-      voteEl.innerHTML = `<h3>Você acredita?</h3><div class="choices">${
+      voteEl.innerHTML = `<h3>Você acredita? <span class="tap-note tap-vote" aria-hidden="true">vote ↓</span></h3><div class="choices">${
         OPTIONS.map((o) => `<button class="choice" type="button" data-vote="${o.id}">${o.label}</button>`).join("")
       }</div><div class="vote-err" id="voteErr" hidden>Não conseguimos registrar seu voto. Tente de novo.</div>`;
       return;
@@ -1024,7 +1004,6 @@ details p { color: var(--muted); }
                <li>uma palavra <span class="demo-struck">riscada</span></li>
                <li>um asterisco<span class="demo-star">*</span></li>
                <li>um vídeo ou uma etiqueta flutuando <span class="demo-play">▶</span></li>
-               <li>um desenho pulsando</li>
              </ul>
              <p style="margin:0.6rem 0 0"><strong>toque.</strong> Tem história escondida ali.</p>
              <button class="btn primary" type="button" data-close style="margin-top:1.4rem;width:100%">Entendi, vamos lá</button>`,
