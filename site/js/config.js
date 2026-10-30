@@ -3,7 +3,7 @@
 // votos de exemplo e nada é gravado fora do aparelho.
 window.SITE_CONFIG = {
   // URL do Apps Script publicado como app da Web (ver backend/apps-script/LEIAME.md)
-  apiUrl: "",
+  apiUrl: "https://script.google.com/macros/s/AKfycbxVjrPecOT8pUt0iQ5cBRm2eQipEC7Veuo0MCbg5hxTW6_Zd-x4MNBTl59P8AdAtxAe3g/exec",
 
   // Aparece em "Confirme até ..."
   prazoConfirmacao: "5 de janeiro",

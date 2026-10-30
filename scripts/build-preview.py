@@ -11,7 +11,8 @@ raiz = pathlib.Path(__file__).resolve().parent.parent
 site = raiz / "site"
 html = (site / "index.html").read_text(encoding="utf-8")
 css = (site / "css" / "style.css").read_text(encoding="utf-8")
-config = (site / "js" / "config.js").read_text(encoding="utf-8")
+# a prévia fica sempre em modo demonstração, sem gravar na planilha de verdade
+config = re.sub(r'apiUrl: "[^"]*"', 'apiUrl: ""', (site / "js" / "config.js").read_text(encoding="utf-8"))
 app = (site / "js" / "app.js").read_text(encoding="utf-8")
 
 fontes = re.search(r'<link rel="stylesheet" href="(https://fonts\.googleapis\.com[^"]+)">', html).group(1)
