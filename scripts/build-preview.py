@@ -16,7 +16,7 @@ config = re.sub(r'apiUrl: "[^"]*"', 'apiUrl: ""', (site / "js" / "config.js").re
 app = (site / "js" / "app.js").read_text(encoding="utf-8")
 
 fontes = re.search(r'<link rel="stylesheet" href="(https://fonts\.googleapis\.com[^"]+)">', html).group(1)
-corpo = html[html.index("<body>") + len("<body>"):html.index('<script src="js/config.js"')].strip()
+corpo = html[html.index("<body>") + len("<body>"):html.index('<script src="js/config.js')].strip()
 
 saida = f"""<title>Helena &amp; Italo</title>
 <meta name="claude:viewport-fit-sides" content="cover">

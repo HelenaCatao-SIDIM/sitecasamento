@@ -45,14 +45,14 @@ Sem `apiUrl` em `config.js`, o site roda em **modo demonstração**: convites fi
 
 ## Como colocar no ar
 
-Pacote pronto: `python3 scripts/build-preview.py` atualiza a prévia; `cd site && zip -r ../dist/site-helena-italo.zip .` gera o arquivo para subir no Netlify (a pasta `dist/` fica fora do Git).
+No ar em **https://helenaeitalo.com** (Hostinger). Pacote: `python3 scripts/build-preview.py` atualiza a prévia; `scripts/build-zip.sh` gera `dist/public_html.zip` (a pasta `dist/` fica fora do Git), que vai para a `public_html` com os arquivos soltos na raiz. O script carimba `?v=` no css e no js, porque a Hostinger manda o navegador guardar esses arquivos por 7 dias.
 
 
 1. **Planilha:** siga `backend/apps-script/LEIAME.md` e cole a URL em `site/js/config.js` (`apiUrl`).
 2. **Configuração:** em `site/js/config.js`, preencha `prazoConfirmacao`, `whatsapp`, `listaPresentes` (link da lista da Amazon) e `pix` (tipo, chave, titular, cidade). Com a chave preenchida, aparece o botão de copiar.
 3. **Hospedagem:** a pasta `site/` é um site estático, sem servidor próprio. O caminho mais simples é o **Netlify** (netlify.com → Add new site → Deploy manually → arrastar a pasta `site/` inteira, com a `midia/`). Cloudflare Pages e Vercel também servem. Os três são gratuitos para este tamanho.
 4. **Domínio:** compre o domínio (ex.: no Registro.br para `.com.br`) e aponte para o Netlify (Domain settings → Add custom domain). O HTTPS vem automático.
-5. **Prévia do link:** em `site/index.html`, troque `SEU-DOMINIO` pelo domínio final na linha `og:image`.
+5. **Prévia do link:** o `og:image` já aponta para `https://helenaeitalo.com/midia/og.jpg`.
 6. **Antes de mandar o link:** teste com 3 a 5 pessoas no celular.
 
 Se quiser que o site seja publicado sozinho a cada mudança, ligue o Netlify a este repositório (pasta de publicação: `site`). O repositório deve ficar **privado**, porque `site/midia/` tem fotos e vídeos pessoais.
@@ -69,4 +69,4 @@ Se quiser que o site seja publicado sozinho a cada mudança, ligue o Netlify a e
 - Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date.
 - Material pendente: foto do casal para a prévia do link; Malta, ramos de oliveira, selos e bússola em arquivos separados (hoje recortados da imagem de referência do Save the Date).
 - Lista de convidados: 65 convites, 136 pessoas, em `dist/planilha-convidados.xlsx` (fora do Git: nomes de terceiros não vão para o repositório). Crianças marcadas. Se quiser, sobrenomes em `apelidos`.
-- Técnico: criar a planilha e publicar o Apps Script; escolher a hospedagem (sugestão: Netlify) e o domínio; trocar SEU-DOMINIO no og:image.
+- Técnico: criar a planilha e publicar o Apps Script; escolher a hospedagem (sugestão: Netlify) e o domínio.
