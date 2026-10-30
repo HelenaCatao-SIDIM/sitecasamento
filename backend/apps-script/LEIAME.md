@@ -15,4 +15,4 @@ Pronto: o site sai do modo demonstração. As respostas aparecem na aba **Respos
 
 Para mudar o código depois, edite no Apps Script e use **Implantar → Gerenciar implantações → editar → Nova versão** (a URL continua a mesma).
 
-Busca: o site pede nome e sobrenome, mas como a lista tem muito apelido e primeiro nome, basta uma das palavras bater com o nome (ou os apelidos) de alguém do convite. Palavra igual pesa mais que começo de nome, e só aparecem os convites com mais palavras batendo: "Caio César" acha só Caio César e Gabi; "Caio Silva" mostra os três convites com Caio para a pessoa escolher o dela. Preencher `apelidos` com o sobrenome deixa a busca mais certeira.
+Busca: basta digitar o nome ("Eduardo", "Du", "Caio"); "tio", "tia" e "de" não contam. Basta uma das palavras bater com o nome (ou os apelidos) de alguém do convite. Palavra igual pesa mais que começo de nome, e só aparecem os convites com mais palavras batendo: "Caio César" acha só Caio César e Gabi; "Caio" mostra os três convites com Caio para a pessoa escolher o dela. Preencher `apelidos` com o sobrenome deixa a busca mais certeira.

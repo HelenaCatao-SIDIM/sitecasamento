@@ -340,8 +340,8 @@
     e.preventDefault();
     const q = nameInput.value;
     const words = norm(q).split(/\s+/).filter(Boolean);
-    if (norm(q).length < 3 || (!DEMO_MODE && words.length < 2)) {
-      out.innerHTML = `<p class="hint">Digite seu nome e sobrenome para buscarmos o convite.</p>`;
+    if (norm(q).replace(/\s/g, "").length < 2) {
+      out.innerHTML = `<p class="hint">Digite seu nome para buscarmos o convite.</p>`;
       return;
     }
     let found;
@@ -349,7 +349,8 @@
     else {
       out.innerHTML = `<p class="hint">Procurando o seu convite…</p>`;
       try {
-        const res = await api.get({ action: "buscar", nome: q });
+        // uma palavra só vai repetida: a versão anterior do Code.gs pedia duas
+        const res = await api.get({ action: "buscar", nome: words.length < 2 ? `${q} ${q}` : q });
         if (!res || !Array.isArray(res.convites)) throw new Error((res && res.erro) || "resposta inesperada");
         found = res.convites.map(fromApi);
       } catch (err) {

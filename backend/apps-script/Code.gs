@@ -48,9 +48,9 @@ function doPost(e) {
 
 function buscar(nome) {
   const palavras = normalizar(nome).split(/[^a-z0-9]+/).filter(function (w) { return w.length >= 2; });
-  // pede nome e sobrenome, para ninguém sair listando convites com uma palavra só
-  if (palavras.length < 2) return { convites: [] };
-  const buscadas = palavras.filter(function (w) { return IGNORAR.indexOf(w) < 0; });
+  // uma palavra basta ("Eduardo"); "tio", "tia", "de" e afins não contam
+  const buscadas = palavras.filter(function (w, i) { return IGNORAR.indexOf(w) < 0 && palavras.indexOf(w) === i; });
+  if (!buscadas.length) return { convites: [] };
 
   // A lista tem muito apelido e primeiro nome, então basta uma palavra bater:
   // igual vale 2 pontos, começo de nome (3+ letras) vale 1. Ficam só os convites com a maior nota.
