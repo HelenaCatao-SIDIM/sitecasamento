@@ -2,12 +2,13 @@
  * Backend do site Helena & Italo, numa planilha do Google.
  *
  * Abas (a primeira linha de cada uma é o cabeçalho, exatamente com estes nomes):
- *   Convidados: convite_id | convite_nome | convidado_por | pessoa_id | nome | crianca
+ *   Convidados: convite_id | convite_nome | convidado_por | pessoa_id | nome | crianca | apelidos
  *   Respostas:  data | convite_id | pessoa_id | nome | vai | restricao
  *   Votos:      data | opcao | dispositivo
  *
  * Uma linha por pessoa em Convidados; as pessoas do mesmo convite repetem convite_id,
- * convite_nome e convidado_por. crianca: "sim" ou vazio.
+ * convite_nome e convidado_por. crianca: "sim" ou vazio. apelidos (opcional): outros jeitos
+ * de a pessoa digitar o nome, como o sobrenome ou o nome de batismo ("Souza, Maria Geralda").
  * Respostas guarda cada envio (a última resposta de cada pessoa é a que vale).
  */
 
@@ -15,6 +16,7 @@ const ABA_CONVIDADOS = 'Convidados';
 const ABA_RESPOSTAS = 'Respostas';
 const ABA_VOTOS = 'Votos';
 const OPCOES_VOTO = ['muro', 'reboco', 'neutro'];
+const IGNORAR = ['de', 'da', 'do', 'das', 'dos', 'e', 'tio', 'tia', 'vo'];
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
@@ -45,17 +47,29 @@ function doPost(e) {
 // ---------- convites ----------
 
 function buscar(nome) {
-  const palavras = normalizar(nome).split(/\s+/).filter(function (w) { return w.length >= 2; });
-  // nome e sobrenome: ninguém vê o convite de outra família digitando só "Ana"
+  const palavras = normalizar(nome).split(/[^a-z0-9]+/).filter(function (w) { return w.length >= 2; });
+  // pede nome e sobrenome, para ninguém sair listando convites com uma palavra só
   if (palavras.length < 2) return { convites: [] };
+  const buscadas = palavras.filter(function (w) { return IGNORAR.indexOf(w) < 0; });
 
+  // A lista tem muito apelido e primeiro nome, então basta uma palavra bater:
+  // igual vale 2 pontos, começo de nome (3+ letras) vale 1. Ficam só os convites com a maior nota.
   const convites = lerConvites();
-  const encontrados = Object.keys(convites).map(function (id) { return convites[id]; }).filter(function (c) {
-    return c.pessoas.some(function (p) {
-      const termos = normalizar(p.nome).split(/\s+/);
-      return palavras.every(function (w) { return termos.some(function (t) { return t.indexOf(w) === 0; }); });
-    });
+  let melhor = 0;
+  const notas = Object.keys(convites).map(function (id) {
+    const c = convites[id];
+    const nota = Math.max.apply(null, c.pessoas.map(function (p) {
+      const termos = normalizar(p.nome + ' ' + p.apelidos).split(/[^a-z0-9]+/).filter(Boolean);
+      return buscadas.reduce(function (soma, w) {
+        if (termos.indexOf(w) >= 0) return soma + 2;
+        if (w.length >= 3 && termos.some(function (t) { return t.indexOf(w) === 0; })) return soma + 1;
+        return soma;
+      }, 0);
+    }));
+    melhor = Math.max(melhor, nota);
+    return { c: c, nota: nota };
   });
+  const encontrados = melhor ? notas.filter(function (n) { return n.nota === melhor; }).map(function (n) { return n.c; }).slice(0, 8) : [];
 
   const respostas = ultimasRespostas();
   encontrados.forEach(function (c) {
@@ -91,7 +105,7 @@ function lerConvites() {
     const id = String(l.convite_id || '').trim();
     if (!id || !l.nome) return;
     if (!convites[id]) convites[id] = { id: id, nome: String(l.convite_nome || l.nome), por: String(l.convidado_por || ''), pessoas: [] };
-    convites[id].pessoas.push({ id: String(l.pessoa_id), nome: String(l.nome), crianca: normalizar(String(l.crianca || '')) === 'sim' });
+    convites[id].pessoas.push({ id: String(l.pessoa_id), nome: String(l.nome), crianca: normalizar(String(l.crianca || '')) === 'sim', apelidos: String(l.apelidos || '') });
   });
   return convites;
 }
