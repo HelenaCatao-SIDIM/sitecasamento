@@ -45,6 +45,9 @@ Sem `apiUrl` em `config.js`, o site roda em **modo demonstração**: convites fi
 
 ## Como colocar no ar
 
+Pacote pronto: `python3 scripts/build-preview.py` atualiza a prévia; `cd site && zip -r ../dist/site-helena-italo.zip .` gera o arquivo para subir no Netlify (a pasta `dist/` fica fora do Git).
+
+
 1. **Planilha:** siga `backend/apps-script/LEIAME.md` e cole a URL em `site/js/config.js` (`apiUrl`).
 2. **Configuração:** em `site/js/config.js`, preencha `prazoConfirmacao`, `whatsapp`, `listaPresentes` (link da lista da Amazon) e `pix` (tipo, chave, titular, cidade). Com a chave preenchida, aparece o botão de copiar.
 3. **Hospedagem:** a pasta `site/` é um site estático, sem servidor próprio. O caminho mais simples é o **Netlify** (netlify.com → Add new site → Deploy manually → arrastar a pasta `site/` inteira, com a `midia/`). Cloudflare Pages e Vercel também servem. Os três são gratuitos para este tamanho.
@@ -61,7 +64,7 @@ Se quiser que o site seja publicado sozinho a cada mudança, ligue o Netlify a e
 ## Pendências
 
 - Evento fechado: sábado, 23/01/2027, 15h às 23h, Rua João Batista Campanha, 46, Terra Santa, Sabará. Sem cerimônia (casam na quarta, 20/01; o sábado é comemoração). Traje esporte fino e colorido. Crianças bem-vindas, estacionamento na rua, sem transporte, chuva mantém o local. Dúvidas: Helena.
-- Evento pendente: prazo da confirmação; link da lista de presentes (Amazon); dica de hotel (nome, onde fica, preço, como reservar).
+- Evento pendente: link da lista de presentes (hoje "Lista em breve"); dica de hotel (hoje "Em breve").
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
 - Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date.
 - Material pendente: foto do casal para a prévia do link; Malta, ramos de oliveira, selos e bússola em arquivos separados (hoje recortados da imagem de referência do Save the Date).

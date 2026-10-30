@@ -6,7 +6,7 @@ window.SITE_CONFIG = {
   apiUrl: "",
 
   // Aparece em "Confirme até ..."
-  prazoConfirmacao: "",
+  prazoConfirmacao: "5 de janeiro",
 
   // Só números, com DDI e DDD: ex. "5531999999999"
   whatsapp: "5531999493059",
