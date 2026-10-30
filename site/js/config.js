@@ -6,7 +6,7 @@ window.SITE_CONFIG = {
   apiUrl: "https://script.google.com/macros/s/AKfycbxVjrPecOT8pUt0iQ5cBRm2eQipEC7Veuo0MCbg5hxTW6_Zd-x4MNBTl59P8AdAtxAe3g/exec",
 
   // Aparece em "Confirme até ..."
-  prazoConfirmacao: "5 de janeiro",
+  prazoConfirmacao: "15 de dezembro",
 
   // Só números, com DDI e DDD: ex. "5531999999999"
   whatsapp: "5531999493059",
