@@ -68,5 +68,5 @@ Se quiser que o site seja publicado sozinho a cada mudança, ligue o Netlify a e
 - Pedido: Cape Town, 7/09/2026 (local exato a confirmar), foto a enviar. Macaco: 5/09/2026, mesmo local.
 - Material recebido: anel, print, ponte, pedido, macaco, Panda, vídeo do Italo no carro, roda, muro, fotos da noite de 19/12, vídeo do pai, balãozinho do dia 7, Helena e Italo bebês, vídeo do safári, ilustrações dos lugares, imagem de referência do Save the Date.
 - Material pendente: foto do casal para a prévia do link; Malta, ramos de oliveira, selos e bússola em arquivos separados (hoje recortados da imagem de referência do Save the Date).
-- Lista de convidados: 63 convites, 132 pessoas, em `dist/planilha-convidados.xlsx` (fora do Git: nomes de terceiros não vão para o repositório). Falta marcar as crianças e, se quiser, sobrenomes em `apelidos`.
+- Lista de convidados: 65 convites, 136 pessoas, em `dist/planilha-convidados.xlsx` (fora do Git: nomes de terceiros não vão para o repositório). Crianças marcadas. Se quiser, sobrenomes em `apelidos`.
 - Técnico: criar a planilha e publicar o Apps Script; escolher a hospedagem (sugestão: Netlify) e o domínio; trocar SEU-DOMINIO no og:image.
