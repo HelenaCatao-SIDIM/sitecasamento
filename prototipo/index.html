@@ -1429,9 +1429,11 @@ window.SITE_CONFIG = {
       out.innerHTML = `<p class="hint">Procurando o seu convite…</p>`;
       try {
         const res = await api.get({ action: "buscar", nome: q });
-        found = (res.convites || []).map(fromApi);
-      } catch {
-        out.innerHTML = `<p class="hint">Não conseguimos buscar agora. Tente de novo em instantes.</p>`;
+        if (!res || !Array.isArray(res.convites)) throw new Error((res && res.erro) || "resposta inesperada");
+        found = res.convites.map(fromApi);
+      } catch (err) {
+        console.error("Busca do convite:", err);
+        out.innerHTML = `<p class="hint">Não conseguimos buscar agora. Tente de novo em instantes ou fale com a Helena pelo WhatsApp (${esc(waText)}).</p>`;
         return;
       }
       cache = found;
