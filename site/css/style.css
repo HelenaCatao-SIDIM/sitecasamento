@@ -502,6 +502,8 @@ main { overflow-x: hidden; overflow-x: clip; }
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); }
 .date-main { font-family: var(--display); font-size: clamp(1.8rem, 7vw, 2.3rem); line-height: 1.15; }
 .date-sub { font-size: 1.05rem; color: var(--muted); margin-bottom: 0.7rem; }
+.date-sub .hand { font-size: 1.15em; }
+.after-note { font-family: var(--hand); color: var(--pen); margin: -0.3rem 0 0.8rem; }
 .big-btn { padding: 0.95rem 1.4rem; font-size: 0.8rem; }
 .text-link { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .text-link:hover { color: var(--pen); }

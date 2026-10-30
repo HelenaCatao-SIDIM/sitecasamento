@@ -282,7 +282,7 @@
     return inv;
   };
   const waDigits = (CFG.whatsapp || "").replace(/\D/g, "");
-  const CALENDAR = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&dates=20270123T150000/20270123T230000&ctz=America/Sao_Paulo&location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG";
+  const CALENDAR = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Comemora%C3%A7%C3%A3o%20Helena%20%26%20Italo&dates=20270123T150000/20270123T210000&ctz=America/Sao_Paulo&location=Rua%20Jo%C3%A3o%20Batista%20Campanha%2C%2046%2C%20Terra%20Santa%2C%20Sabar%C3%A1%2C%20MG";
   const waText = waDigits ? `+${waDigits.slice(0, 2)} (${waDigits.slice(2, 4)}) ${waDigits.slice(4, -4)}-${waDigits.slice(-4)}` : "[número a confirmar]";
   const byLine = (inv) => inv.by ? `${inv.by} ${inv.by.includes(" e ") ? "convidaram" : "convidou"}:` : "";
 
